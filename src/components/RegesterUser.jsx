@@ -19,8 +19,8 @@ const RegesterUser = () => {
        const documentId = ID.unique(); // Appwrite-generated unique ID
 console.log("Generated Document ID:", documentId);
     await databases.createDocument(
-      "6750024e001032a5e035",
-      "675713d00023b4077065",
+      import.meta.env.VITE_APPWRITE_DATABASE_ID,
+      import.meta.env.VITE_APPWRITE_COLLECTION_ID,
       documentId, // Pass the generated or custom document ID
   {
     userId: response?.$id || "fallback-user-id", // If response.$id is undefined, use a fallback
