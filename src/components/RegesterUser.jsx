@@ -29,8 +29,6 @@ console.log("Generated Document ID:", documentId);
     verificationToken: verificationToken,
   }
     );
-  
-
        // Send the verification email
      //  await account.createVerification("http://localhost:5173/verify");     
        await sendVerificationEmail(User.email, verificationToken);
