@@ -2,8 +2,16 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { FaFaceGrinHearts, FaBagShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {  useState } from "react";
 const Header = () => {
   const bag = useSelector((store) => store.bag);
+  const [SearchInput,setSearchInput]=useState();
+
+  const handleSearch=(e)=>{
+    const value=e.target.value;
+setSearchInput(value);
+console.log("setSearchInput",SearchInput);
+  }
   return (
     <header>
       <div className="logo_container">
@@ -30,6 +38,7 @@ const Header = () => {
         <input
           className="search_input"
           placeholder="Search for products, brands and more"
+          onChange={handleSearch}
         />
       </div>
       <div className="action_bar">
