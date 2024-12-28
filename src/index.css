@@ -51,16 +51,19 @@ header {
   width: 30%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .search_icon {
   box-sizing: content-box;
   height: 20px;
   padding: 10px;
-
-  background-color: #f5f5f6;
+  background-color: whitesmoke;
   color: #282c3f;
   font-weight: 300;
   border-radius: 4px 0 0 4px;
+}
+.search_icon:hover{
+  background-color: #8e8889;
 }
 .search_input {
   color: #696e79;
