@@ -3,14 +3,19 @@ import { FaFaceGrinHearts, FaBagShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {  useState } from "react";
+import Search from "../components/Search_Input";
+
 const Header = () => {
   const bag = useSelector((store) => store.bag);
   const [SearchInput,setSearchInput]=useState();
-
+  const [SearchIcon,setSearchIcon]=useState(false);
   const handleSearch=(e)=>{
-    const value=e.target.value;
-setSearchInput(value);
-console.log("setSearchInput",SearchInput);
+    setSearchInput(e.target.value);
+  }
+  const handleSearchIcon=()=>{
+    if(SearchInput.trim()!=""){
+      setSearchIcon(true);
+  }
   }
   return (
     <header>
@@ -34,12 +39,18 @@ console.log("setSearchInput",SearchInput);
         </a>
     - - </nav>
       <div className="search_bar">
-        <span className="material-symbols-outlined search_icon">search</span>
+     <div className="search_icon">  
+     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16" onClick={handleSearchIcon}>
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>
+     
+     </div>
         <input
           className="search_input"
           placeholder="Search for products, brands and more"
-          onChange={handleSearch}
+         value={SearchInput} onChange={handleSearch}
         />
+
       </div>
       <div className="action_bar">
         <div className="action_container">
@@ -59,6 +70,7 @@ console.log("setSearchInput",SearchInput);
      {bag && bag.length > 0 && <span className="bag-item-count">{bag.length}</span>} 
    </Link>
       </div>
+      {SearchIcon&&<Search searchQuery={SearchInput}/>}
     </header>
   );
 };
