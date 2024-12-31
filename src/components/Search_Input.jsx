@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { AIchatSession } from "../Config/Gemini-Ai";
-import { useSelector } from "react-redux";
-
+import User from "./UserSearch";
 const Search = ({ searchQuery }) => {
   const [aiResponse, setAiResponse] = useState(""); // State to store AI response
   const data = searchQuery?.value || searchQuery;
-const initialItems=useSelector((store)=>{store.item})
   // Function to call AI and get the response
   const fetchAIResponse = async () => {
     const PROMPT = `item_name:${data} Extract the main item name or keyword from the user's input. The input may include additional words, phrases, or descriptions, such as adjectives or context. Focus on identifying the most relevant term that represents the product or category. Ignore unrelated words or phrases.`;
@@ -33,15 +31,16 @@ const initialItems=useSelector((store)=>{store.item})
     }
   }, [data]);
 
- const result=initialItems.filter((item)=>{
-  return item.name.toLowerCase().includes(aiResponse.toLowerCase())
- })
+
  console.log("Search field is ", data)
- console.log("Results are",result)
+ console.log("aires",aiResponse)
   return (
     <>
-    
-
+    {aiResponse ? (
+      <User prop={aiResponse} />
+    ) : (
+      <div>Loading AI response...</div>
+    )}
     </>
   );
 };
