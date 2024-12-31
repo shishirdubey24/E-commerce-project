@@ -14,6 +14,7 @@ import Profile from './components/Profile.jsx'
 //import VerifyEmail from './components/verifyUser.jsx'
 import { Provider } from 'react-redux'
 import myntraStore from './store/index.js'
+
  const router= createBrowserRouter([
 {
   path: '/',
@@ -36,6 +37,7 @@ import myntraStore from './store/index.js'
       {path:"/Profile",element:<Profile/>},
      // {path:"/verify",element:<VerifyEmail/>},
      {path:"/adminPannel",element:<Admin/>},
+    
   ],
 },
  ])
