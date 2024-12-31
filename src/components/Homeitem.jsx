@@ -24,7 +24,7 @@ const Homeitem = ({ item }) => {
     return <div>No item available</div>; // Handle case where item is undefined
   }
 
-  const { image, rating, company, item_name, current_price, original_price, discount_percentage } = item;
+  const { image, rating, company,category, item_name, current_price, original_price, discount_percentage } = item;
 
   return (
     <div className="item-container">
@@ -34,6 +34,8 @@ const Homeitem = ({ item }) => {
       </div>
 
       <div className="company-name">{company}</div>
+      <div className="company-name">{category}</div>
+
       <div className="item-name">{item_name}</div>
       <div className="price">
         <span className="current-price">Rs {current_price}</span>
