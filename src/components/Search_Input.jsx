@@ -30,8 +30,6 @@ const Search = ({ searchQuery }) => {
       fetchAIResponse();
     }
   }, [data]);
-
-
  console.log("Search field is ", data)
  console.log("aires",aiResponse)
   return (
