@@ -25,10 +25,12 @@ console.log("Filtered are",filteredItems)
 
     return(
         <>
+         <div className="filtered-items-container">
          {filteredItems.map((filtereditem)=>
                 (<FilteredItem key={filtereditem.id} filtereditem={filtereditem} />
 
                ))}
+               </div>
         </>
     )
 }
