@@ -103,12 +103,24 @@ header {
   font-weight: 700;
 }
 
-.category-items, .items-container {
+ .items-container {
   width: 80%;
   margin: 50px 10%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+ 
+  gap: 16px; /* Add spacing between items */
+  justify-content: center; /* Align items horizontally */
+  padding: 16px; /* Add padding around the container */
+}
+.filtered-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 50px;
+  margin: 100px auto;
+  justify-content: center; /* Or space-between/space-around */
+  gap: 16px;
+  padding: 16px;
 }
 
 .sale_item {
@@ -146,18 +158,61 @@ header {
   padding: 15px;
 }
 .item-container {
-  width: 250px;
+  
   margin: 10px;
   display: flexbox;
+  width: 250px; /* Define a fixed or responsive width */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 8px; /* Add spacing between items */
+  text-align: center;
+}
+.filtered-item-container {
+  
+  margin: 10px;
+  display: flexbox;
+  width: 250px; /* Define a fixed or responsive width */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 8px; /* Add spacing between items */
+  text-align: center;
 }
 .item-image {
   width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+}
+.filtered-item-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px;
 }
 .rating {
   font-size: 12px;
   font-weight: 700;
 }
+.filtered-rating {
+  font-size: 12px;
+  font-weight: 700;
+}
 .company-name {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  color: #282c3f;
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.filtered-company-name {
   margin-top: 15px;
   font-size: 16px;
   font-weight: 700;
@@ -180,7 +235,26 @@ header {
   font-weight: 400;
   display: block;
 }
+.filtered-item-name {
+  color: #535766;
+  font-size: 14px;
+  line-height: 1;
+  margin-bottom: 0;
+  margin-top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+  display: block;
+}
 .price {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 15px;
+  color: #282c3f;
+  white-space: nowrap;
+}
+.filtered-price {
   margin-top: 10px;
   font-size: 14px;
   line-height: 15px;
@@ -192,7 +266,19 @@ header {
   font-weight: 700;
   color: #282c3f;
 }
+.filtered-current-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: #282c3f;
+}
 .original-price {
+  text-decoration: line-through;
+  color: #7e818c;
+  font-weight: 400;
+  margin-left: 5px;
+  font-size: 12px;
+}
+.filtered-original-price {
   text-decoration: line-through;
   color: #7e818c;
   font-weight: 400;
@@ -205,7 +291,23 @@ header {
   font-size: 12px;
   margin-left: 5px;
 }
+.filtered-discount {
+  color: #ff905a;
+  font-weight: 400;
+  font-size: 12px;
+  margin-left: 5px;
+}
 .btn-add-bag {
+  margin-top: 8px;
+  font-size: 18px;
+  width: 100%;
+  background-color: lightgreen;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.filtered-btn-add-bag {
   margin-top: 8px;
   font-size: 18px;
   width: 100%;
