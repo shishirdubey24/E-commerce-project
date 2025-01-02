@@ -41,25 +41,25 @@ const FilteredItem = ({ filtereditem }) => {
   } = filtereditem;
 
   return (
-    <div className="item-container">
-      <img className="item-image" src={image} alt="item image" />
-      <div className="rating">
+    <div className="filtered-item-container">
+      <img className="filtered-item-image" src={image} alt="item image" />
+      <div className="filtered-rating">
         {rating?.stars ?? "N/A"} ⭐ | {rating?.count ?? 0}
       </div>
 
-      <div className="company-name">{company}</div>
-      <div className="category">{category}</div>
+      <div className="filtered-company-name">{company}</div>
+      <div className="filtered-category">{category}</div>
 
-      <div className="item-name">{item_name}</div>
-      <div className="price">
-        <span className="current-price">Rs {current_price}</span>
-        <span className="original-price">Rs {original_price}</span>
-        <span className="discount">({discount_percentage}% OFF)</span>
+      <div className="filtered-item-name">{item_name}</div>
+      <div className="filtered-price">
+        <span className="filtered-current-price">Rs {current_price}</span>
+        <span className="filtered-original-price">Rs {original_price}</span>
+        <span className="filtered-discount">({discount_percentage}% OFF)</span>
       </div>
       {elementFound ? (
         <button
           type="button"
-          className="btn btn-add-bag btn-danger"
+          className="btn filtered-btn-add-bag btn-danger"
           onClick={handleRemove}
         >
           <AiFillDelete /> Remove
@@ -67,7 +67,7 @@ const FilteredItem = ({ filtereditem }) => {
       ) : (
         <button
           type="button"
-          className="btn btn-add-bag btn-success"
+          className="btn filtered-btn-add-bag btn-success"
           onClick={handleAddToBag}
         >
           <GrAddCircle /> Add to Bag
