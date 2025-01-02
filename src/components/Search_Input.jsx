@@ -37,8 +37,8 @@ const Search = ({ searchQuery }) => {
     {aiResponse ? (
       <User prop={aiResponse} />
     ) : (
-      <div>Loading AI response...</div>
-    )}
+      <div>Loading AI re</div>
+    )}  
     </>
   );
 };
