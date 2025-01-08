@@ -24,6 +24,7 @@ console.log("Filtered are",filteredItems)
 }
 
     return(
+      
         <>
          <div className="filtered-items-container">
          {filteredItems.map((filtereditem)=>
