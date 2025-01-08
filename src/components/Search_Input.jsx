@@ -1,13 +1,15 @@
-/* eslint-disable react/prop-types */
+
 import { useState, useEffect } from "react";
 import { AIchatSession } from "../Config/Gemini-Ai";
+import { useLocation } from "react-router-dom";
 import User from "./UserSearch";
-const Search = ({ searchQuery }) => {
+const Search = () => {
   const [aiResponse, setAiResponse] = useState(""); // State to store AI response
-  const data = searchQuery?.value || searchQuery;
+  const location = useLocation();
+  const searchQuery = location.state?.query || "";
   // Function to call AI and get the response
   const fetchAIResponse = async () => {
-    const PROMPT = `item_name:${data} Extract the main item name or keyword from the user's input. The input may include additional words, phrases, or descriptions, such as adjectives or context. Focus on identifying the most relevant term that represents the product or category. Ignore unrelated words or phrases.`;
+    const PROMPT = `item_name:${searchQuery} Extract the main item name or keyword from the user's input. The input may include additional words, phrases, or descriptions, such as adjectives or context. Focus on identifying the most relevant term that represents the product or category. Ignore unrelated words or phrases.`;
     try {
       const result = await AIchatSession.sendMessage(PROMPT);
 
@@ -26,11 +28,11 @@ const Search = ({ searchQuery }) => {
 
   // useEffect to fetch AI response when the component mounts or `data` changes
   useEffect(() => {
-    if (data) {
+    if (searchQuery) {
       fetchAIResponse();
     }
-  }, [data]);
- console.log("Search field is ", data)
+  }, [searchQuery]);
+ console.log("Search field is ", searchQuery)
  console.log("aires",aiResponse)
   return (
     <>
