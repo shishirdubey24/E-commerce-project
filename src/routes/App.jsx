@@ -11,9 +11,13 @@ function App() {
      <Header/>
      <FetchItems/>
        <MenProduct/>
-    <Outlet/>
+       <main className="main-content">
+        <Outlet /> {/* Dynamically loads route content, e.g., Home */}
+      </main>
+      <Footer />
+   
     
-    <Footer/>
+   
     </>
   )
 }
