@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 const BagSummary = () => {
   const bagItemIds = useSelector((state) => state.bag);
+  console.log("Received bag item IDs: ", bagItemIds)
  // const items = useSelector((state) => state.items);
   //const finalItems = items.filter((item) => {
     //const itemIndex = bagItemIds.indexOf(item.id);
@@ -16,7 +17,7 @@ const BagSummary = () => {
 
   bagItemIds.forEach((bagItem) => {
     totalMRP += bagItem.original_price||bagItem.price;
-    console.log("TotalMRP is",totalMRP);
+    
     totalDiscount += bagItem.original_price ||bagItem.price - bagItem.current_price||bagItem.price-10;
   });
 
