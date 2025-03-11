@@ -12,7 +12,7 @@ const FetchItems = () => {
    
 
     dispatch(fetchStatusActions.markFetchingStarted());
-    fetch("http://localhost:8080/items", )
+    fetch("/items.json", )
       .then((res) => res.json())
       .then(({ items }) => {
         dispatch(fetchStatusActions.markFetchDone());
