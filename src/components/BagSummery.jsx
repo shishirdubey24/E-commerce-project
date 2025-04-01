@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const BagSummary = () => {
+  const navigate=useNavigate();
   const bagItemIds = useSelector((state) => state.bag);
   console.log("Received bag item IDs: ", bagItemIds)
  // const items = useSelector((state) => state.items);
@@ -22,7 +24,10 @@ const BagSummary = () => {
   });
 
   let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
-
+     const handleOrder = () => {
+       
+        navigate('/User');
+      };
   return (
     <div className="bag-summary">
       <div className="bag-details-container">
@@ -47,7 +52,7 @@ const BagSummary = () => {
           <span className="price-item-value">₹{finalPayment}</span>
         </div>
       </div>
-      <button className="btn-place-order">
+      <button className="btn-place-order" onClick={handleOrder}>
         <div className="css-xjhrni">PLACE ORDER</div>
       </button>
     </div>
