@@ -10,11 +10,12 @@ import Men from './routes/Men.jsx'
 import Admin from './routes/Admin.jsx'
 //import RegesterUser from './components/RegesterUser.jsx'
 //import LoginUser from './components/LoginUser.jsx'
-import Profile from './components/Profile.jsx'
+//import Profile from './components/Profile.jsx'
 //import VerifyEmail from './components/verifyUser.jsx'
 import { Provider } from 'react-redux'
 import myntraStore from './store/index.js'
 import Search from './components/Search_Input.jsx'
+import RegisterUser from './components/RegesterUser.jsx'
  const router= createBrowserRouter([
 {
   path: '/',
@@ -34,7 +35,8 @@ import Search from './components/Search_Input.jsx'
      // },
     //  {path:"/LoginUser", element:<LoginUser/>,
      // },
-      {path:"/Profile",element:<Profile/>},
+     // {path:"/Profile",element:<Profile/>},
+      {path:"/User",element:<RegisterUser/>},
      // {path:"/verify",element:<VerifyEmail/>},
      {path:"/adminPannel",element:<Admin/>},
      {path: "Search",element:<Search/>}
