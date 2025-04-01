@@ -58,7 +58,7 @@ const navigate = useNavigate();
       <div className="action_bar">
         <div className="action_container">
           <BsFillPersonFill />
-         <Link to="/Profile"> <span className="action_name">Profile</span></Link> 
+         <Link to="/User"> <span className="action_name">User</span></Link> 
         </div>
 
         <div className="action_container">
