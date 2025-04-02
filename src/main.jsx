@@ -16,6 +16,7 @@ import { Provider } from 'react-redux'
 import myntraStore from './store/index.js'
 import Search from './components/Search_Input.jsx'
 import RegisterUser from './components/RegesterUser.jsx'
+import Checkout from './components/Checkout.jsx'
  const router= createBrowserRouter([
 {
   path: '/',
@@ -30,16 +31,11 @@ import RegisterUser from './components/RegesterUser.jsx'
     {path:"/menProduct",
       element:<Men/>,
       },
-     // {path:"/RegesterUser",
-      //  element:<RegesterUser/>,
-     // },
-    //  {path:"/LoginUser", element:<LoginUser/>,
-     // },
-     // {path:"/Profile",element:<Profile/>},
+     
       {path:"/User",element:<RegisterUser/>},
-     // {path:"/verify",element:<VerifyEmail/>},
      {path:"/adminPannel",element:<Admin/>},
-     {path: "Search",element:<Search/>}
+     {path: "Search",element:<Search/>},
+     {path:"/checkout",element:<Checkout/>}
   ],
 },
  ])
