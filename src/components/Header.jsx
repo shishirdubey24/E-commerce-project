@@ -3,12 +3,12 @@ import { FaFaceGrinHearts, FaBagShopping } from "react-icons/fa6";
 import { Link,useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {  useState } from "react";
-//import Search from "../components/Search_Input";
+
 
 const Header = () => {
   const bag = useSelector((store) => store.bag);
   const [SearchInput,setSearchInput]=useState();
-//  const [SearchIcon,setSearchIcon]=useState(false);
+
 const navigate = useNavigate();
 
   const handleSearch=(e)=>{
