@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { AIchatSession } from "../Config/GeminiAI";
+import { AIchatSession } from "../config/GeminiAI";
 import { useLocation } from "react-router-dom";
 import User from "./UserSearch";
 const Search = () => {
