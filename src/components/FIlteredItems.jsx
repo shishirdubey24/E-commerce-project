@@ -6,7 +6,7 @@ import { GrAddCircle } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 
 const FilteredItem = ({ filtereditem }) => {
-  console.log("Rendering FilteredItem for:", filtereditem); // Add this log
+ // Add this log
 
   // Hooks must always be called unconditionally
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ const FilteredItem = ({ filtereditem }) => {
   const elementFound = bagitems.indexOf(filtereditem.id) >= 0;
 
   const handleAddToBag = () => {
-    console.log("Add to Bag clicked for:", filtereditem.id); // Debugging log
+    // Debugging log
     dispatch(bagActions.addToBag(filtereditem));
   };
 
   const handleRemove = () => {
-    console.log("Remove button clicked for:", filtereditem.id); // Debugging log
+  // Debugging log
     dispatch(bagActions.removeFromBag(filtereditem.id));
   };
 
