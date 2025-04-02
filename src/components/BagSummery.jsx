@@ -2,36 +2,41 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 const BagSummary = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  
+  // Get bag items and authentication state
   const bagItemIds = useSelector((state) => state.bag);
-  console.log("Received bag item IDs: ", bagItemIds)
- // const items = useSelector((state) => state.items);
-  //const finalItems = items.filter((item) => {
-    //const itemIndex = bagItemIds.indexOf(item.id);
-   // return itemIndex >= 0;
-  //});
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); 
+  console.log("Received bag item IDs: ", bagItemIds);
 
   const CONVENIENCE_FEES = 99;
   let totalItem = bagItemIds.length;
-  console.log("Totalitem is ",totalItem)
+  console.log("Total items:", totalItem);
+
   let totalMRP = 0;
   let totalDiscount = 0;
 
   bagItemIds.forEach((bagItem) => {
-    totalMRP += bagItem.original_price||bagItem.price;
-    
-    totalDiscount += bagItem.original_price ||bagItem.price - bagItem.current_price||bagItem.price-10;
+    totalMRP += bagItem.original_price || bagItem.price;
+    totalDiscount += (bagItem.original_price || bagItem.price) - (bagItem.current_price || bagItem.price - 10);
   });
 
   let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
-     const handleOrder = () => {
-       
-        navigate('/User');
-      };
+
+  const handleOrder = () => {
+    if (!isAuthenticated) {
+      // Redirect to login page if not logged in
+      navigate("/User");
+    } else {
+      // Proceed to checkout or order placement page
+      navigate("/checkout");
+    }
+  };
+
   return (
     <div className="bag-summary">
       <div className="bag-details-container">
-        <div className="price-header">PRICE DETAILS ({totalItem} Items) </div>
+        <div className="price-header">PRICE DETAILS ({totalItem} Items)</div>
         <div className="price-item">
           <span className="price-item-tag">Total MRP</span>
           <span className="price-item-value">₹{totalMRP}</span>
