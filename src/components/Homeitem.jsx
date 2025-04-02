@@ -16,7 +16,7 @@ const Homeitem = ({ item }) => {
   };
 
   const handleRemove = () => {
-    console.log("Remove button clicked for item ID:", item.id);
+  
     dispatch(bagActions.removeFromBag(item.id));
   };
 
