@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { account, ID, databases } from "../lib/appwrite";
 import { useNavigate } from "react-router";
-import { sendVerificationEmail } from "../lib/emailservice";
-
+import { useDispatch } from "react-redux";
+//import { sendVerificationEmail } from "../lib/emailservice";
+import { loginSuccess,logout } from "../store/authSlice";
 const RegisterUser = () => {
   const navigate = useNavigate();
   const [isSignedIn, setSignedIn] = useState(true);
   const [errormsg, setErrormsg] = useState(null);
   const [user, setUser] = useState(null); // Stores logged-in user session
-
+    const dispatch = useDispatch();
   // Refs for input fields
   const nameRef = useRef(null);
   const phoneRef = useRef(null);
@@ -22,6 +23,7 @@ const RegisterUser = () => {
         const session = await account.get(); // Fetch current user session
         console.log("User session:", session);
         setUser(session); // Store user if logged in
+        dispatch(loginSuccess(session)); // Update Redux store when user is already logged in
       } catch (error) {
         console.log("No active session found",error);
         setUser(null);
@@ -29,7 +31,7 @@ const RegisterUser = () => {
     };
 
     checkSession();
-  }, []);
+  }, [dispatch]);
 
   const handleSignupToggle = () => {
     setSignedIn(!isSignedIn);
@@ -74,10 +76,7 @@ const RegisterUser = () => {
           }
         );
 
-        // Send verification email
-        await sendVerificationEmail(email, verificationToken);
-        alert("A verification email has been sent. Please verify your email before logging in.");
-
+        alert("User Signup Successful Now SignIn")
       } catch (error) {
         console.error("Signup Error:", error);
         setErrormsg(error.message || "Signup failed. Please try again.");
@@ -90,6 +89,7 @@ const RegisterUser = () => {
 
         const userSession = await account.get(); // Fetch user data
         setUser(userSession); // Store user in state
+        dispatch(loginSuccess(userSession)); // Update Redux store when user is logged in
         navigate("/");
       } catch (error) {
         console.error("Login Error:", error);
@@ -103,6 +103,7 @@ const RegisterUser = () => {
       await account.deleteSession("current"); // Logout the user
       console.log("Logout successful");
       setUser(null); // Clear user state
+      dispatch(logout()); // Update Redux store
       localStorage.clear(); // Optional: clear any stored session data
       navigate("/User");
     } catch (error) {
