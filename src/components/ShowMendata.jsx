@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { bagActions } from "../store/bagSlice";
 const ShowMendata = ({ mendata }) => {
   const dispatch = useDispatch();
-//console.log({mendata: mendata.id,title: mendata.title});
   if (!mendata || !mendata.id) {
     return <div>No item available or item ID is undefined</div>;
   }
