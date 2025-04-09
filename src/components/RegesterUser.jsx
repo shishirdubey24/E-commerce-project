@@ -2,30 +2,29 @@ import { useState, useRef, useEffect } from "react";
 import { account, ID, databases } from "../lib/appwrite";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-//import { sendVerificationEmail } from "../lib/emailservice";
-import { loginSuccess,logout } from "../store/authSlice";
+import { loginSuccess, logout } from "../store/authSlice";
+
 const RegisterUser = () => {
   const navigate = useNavigate();
   const [isSignedIn, setSignedIn] = useState(true);
   const [errormsg, setErrormsg] = useState(null);
-  const [user, setUser] = useState(null); // Stores logged-in user session
-    const dispatch = useDispatch();
-  // Refs for input fields
+  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+
   const nameRef = useRef(null);
   const phoneRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  // Check if user is already logged in
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const session = await account.get(); // Fetch current user session
+        const session = await account.get();
         console.log("User session:", session);
-        setUser(session); // Store user if logged in
-        dispatch(loginSuccess(session)); // Update Redux store when user is already logged in
+        setUser(session);
+        dispatch(loginSuccess(session));
       } catch (error) {
-        console.log("No active session found",error);
+        console.log("No active session found", error);
         setUser(null);
       }
     };
@@ -35,12 +34,12 @@ const RegisterUser = () => {
 
   const handleSignupToggle = () => {
     setSignedIn(!isSignedIn);
-    setErrormsg(null); // Clear error when toggling
+    setErrormsg(null);
   };
 
   const handleBtnClick = async (e) => {
     e.preventDefault();
-    setErrormsg(null); // Reset error before new request
+    setErrormsg(null);
 
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
@@ -58,11 +57,8 @@ const RegisterUser = () => {
         const response = await account.create(ID.unique(), email, password, name);
         console.log("User created:", response);
 
-        // Generate a verification token
         const verificationToken = Math.random().toString(36).substr(2, 10);
         const documentId = ID.unique();
-
-        console.log("Generated Document ID:", documentId);
 
         await databases.createDocument(
           import.meta.env.VITE_APPWRITE_DATABASE_ID,
@@ -76,7 +72,10 @@ const RegisterUser = () => {
           }
         );
 
-        alert("User Signup Successful Now SignIn")
+        // Switch to Sign In mode after successful sign-up
+        setSignedIn(true);
+        setErrormsg("Signup successful. Please sign in now.");
+
       } catch (error) {
         console.error("Signup Error:", error);
         setErrormsg(error.message || "Signup failed. Please try again.");
@@ -87,9 +86,9 @@ const RegisterUser = () => {
         const response = await account.createEmailPasswordSession(email, password);
         console.log("Login successful:", response);
 
-        const userSession = await account.get(); // Fetch user data
-        setUser(userSession); // Store user in state
-        dispatch(loginSuccess(userSession)); // Update Redux store when user is logged in
+        const userSession = await account.get();
+        setUser(userSession);
+        dispatch(loginSuccess(userSession));
         navigate("/");
       } catch (error) {
         console.error("Login Error:", error);
@@ -100,11 +99,11 @@ const RegisterUser = () => {
 
   const handleLogoutUser = async () => {
     try {
-      await account.deleteSession("current"); // Logout the user
+      await account.deleteSession("current");
       console.log("Logout successful");
-      setUser(null); // Clear user state
-      dispatch(logout()); // Update Redux store
-      localStorage.clear(); // Optional: clear any stored session data
+      setUser(null);
+      dispatch(logout());
+      localStorage.clear();
       navigate("/User");
     } catch (error) {
       console.error("Logout error:", error);
@@ -137,7 +136,7 @@ const RegisterUser = () => {
           {isSignedIn ? "New here? Sign up now!" : "Already registered? Sign in now!"}
         </p>
 
-        {user && ( // Only show Logout button if user is logged in
+        {user && (
           <button style={styles.logoutBtn} type="button" onClick={handleLogoutUser}>
             Logout
           </button>
@@ -147,7 +146,6 @@ const RegisterUser = () => {
   );
 };
 
-// Inline CSS styles
 const styles = {
   loginContainer: {
     display: "flex",
