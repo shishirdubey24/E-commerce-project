@@ -10,7 +10,7 @@ const FetchItems = () => {
   
     const fetchData=async()=>{
      try {
-       await new Promise(resolve => setTimeout(resolve, 1000));
+       await new Promise(resolve => setTimeout(resolve, 500));
       const res= await  fetch("/items.json" )
        const data= await res.json();
        return data;
