@@ -1,29 +1,36 @@
-import { useEffect  } from "react";
-import axios from 'axios';
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-//import MendataSlice from "../store/Mendata";
-import {mendataActions} from "../store/MendataSlice"
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { mendataActions } from "../store/MendataSlice";
+import ShimmerUI from "./ShimmerUI";
 
-const MenProduct=()=>{
-   const dispatch=useDispatch();
-   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-      
-        dispatch(mendataActions.addMendata(response.data));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+const fetchMenProducts = async () => {
+  const res = await axios.get("https://fakestoreapi.com/products");
+  await new Promise(resolve => setTimeout(resolve, 2000)); // optional delay for shimmer testing
+  return res.data;
+};
 
-    fetchData();
-  }, [dispatch]);
+const MenProduct = () => {
+  const dispatch = useDispatch();
 
-  return(
-        <>
-           
-        </>
-    )
-}
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["men-products"],
+    queryFn: fetchMenProducts,
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(mendataActions.addMendata(data));
+    }
+  }, [data, dispatch]);
+
+  if (isLoading) return <ShimmerUI/>;
+
+  if (error)
+    return <p style={{ color: "red", textAlign: "center" }}>Error fetching mens data.</p>;
+
+  return <></>; // You can map through data if needed
+};
+
 export default MenProduct;
