@@ -1,29 +1,35 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { itemsActions } from "../store/itemsSlice";
-import { fetchStatusActions } from "../store/fetchStatusSlice";
+//import { fetchStatusActions } from "../store/fetchStatusSlice";
+import {useQuery} from "@tanstack/react-query"
+import ShimmerUI from "./ShimmerUI";
 const FetchItems = () => {
-  const fetchStatus = useSelector((store) => store.fetchStatus);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (fetchStatus.fetchDone) return;
-
+  
+    const fetchData=async()=>{
+     try {
+       await new Promise(resolve => setTimeout(resolve, 2000));
+      const res= await  fetch("/items.json" )
+       const data= await res.json();
+       return data;
+     } catch (error) {
+     throw new Error("Failed to fetch product data: " + error.message);
+     }
+    }
+     const { data,isLoading,error}= useQuery({
+        queryKey:['products'],
+        queryFn: fetchData,
+      })
    
+       useEffect(()=>{
+        if(data)  dispatch(itemsActions.addInitialItems(data.items[0]));
+      },[data,dispatch])
+     if(isLoading) return <ShimmerUI/>;
 
-    dispatch(fetchStatusActions.markFetchingStarted());
-    fetch("/items.json", )
-      .then((res) => res.json())
-      .then(({ items }) => {
-        dispatch(fetchStatusActions.markFetchDone());
-        dispatch(fetchStatusActions.markFetchingFinished());
-        dispatch(itemsActions.addInitialItems(items[0]));
-      });
-
-    return () => {
-     
-    };
-  }, [dispatch, fetchStatus]);
+if (error) return (<p >
+   Error: Failed to fetch product data.</p>)
 
   return <></>;
 };
