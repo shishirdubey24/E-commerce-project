@@ -17,6 +17,7 @@ import myntraStore from './store/index.js'
 import Search from './components/Search_Input.jsx'
 import RegisterUser from './components/RegesterUser.jsx'
 import Checkout from './components/Checkout.jsx'
+import { QueryClient,QueryClientProvider } from '@tanstack/react-query'
  const router= createBrowserRouter([
 {
   path: '/',
@@ -39,11 +40,14 @@ import Checkout from './components/Checkout.jsx'
   ],
 },
  ])
+ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <QueryClientProvider client={queryClient}>
     <Provider store={myntraStore}>
    <RouterProvider router={router}
    />
    </Provider>
+   </QueryClientProvider>
   </StrictMode>,
 )
