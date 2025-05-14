@@ -1,4 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
+{
+  /*import {createSlice} from "@reduxjs/toolkit";
 
 const fetchStatusSlice = createSlice({
   name: 'fetchStatus',
@@ -22,3 +23,5 @@ const fetchStatusSlice = createSlice({
 export const fetchStatusActions = fetchStatusSlice.actions;
 
 export default fetchStatusSlice;
+*/
+}
