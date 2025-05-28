@@ -43,8 +43,8 @@ self.addEventListener("fetch", (evt) => {
             new Response(
               `<!DOCTYPE html>
              <html><body style="text-align:center">
-               <h1>🛜No internet</h1>
-               <h2>⚠️ You’re Offline! Please check your connection!</h2>
+               <h1>No internet</h1>
+               <h2> You are Offline! Please check your connection!</h2>
                
              </body></html>`,
               { headers: { "Content-Type": "text/html" } }
