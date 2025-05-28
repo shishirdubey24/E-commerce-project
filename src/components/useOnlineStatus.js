@@ -1,4 +1,3 @@
-// src/hooks/useOnlineStatus.js
 import { useState, useEffect } from "react";
 
 export default function useOnlineStatus() {
