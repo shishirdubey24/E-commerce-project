@@ -1,18 +1,18 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const itemsSlice = createSlice({
-  name: 'items',
+  name: "items",
   initialState: [],
   reducers: {
     addInitialItems: (state, action) => {
       return action.payload;
     },
-    ADD_PRODUCT:(state, action) => {
-     console.log("Form added product is",action.payload)
+    addProduct: (state, action) => {
+      console.log("Form added product is", action.payload);
       state.push(action.payload);
+    },
   },
-  
-}});
+});
 
 export const itemsActions = itemsSlice.actions;
 export default itemsSlice;
