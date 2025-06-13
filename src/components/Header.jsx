@@ -63,7 +63,7 @@ const navigate = useNavigate();
 
         <div className="action_container">
           <FaFaceGrinHearts />
-         <Link to="/adminPannel">  <span className="action_name">Admin </span> </Link>    
+         <Link to="/admin">  <span className="action_name">Admin </span> </Link>    
         </div>
 
        
