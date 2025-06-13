@@ -14,6 +14,9 @@ import RegisterUser from './components/RegesterUser.jsx'
 import Checkout from './components/Checkout.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import useOnlineStatus from './components/useOnlineStatus.js' // 👈 Import the hook
+import Topbar from './routes/Topbar.jsx'
+import Sidebar from './routes/Sidebar.jsx'
+import Dashboard from './routes/Dashboard.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,9 +27,13 @@ const router = createBrowserRouter([
       { path: '/bag', element: <Bag /> },
       { path: '/menProduct', element: <Men /> },
       { path: '/User', element: <RegisterUser /> },
-      { path: '/adminPannel', element: <Admin /> },
+      { path: '/admin', element: <Admin /> },
       { path: 'Search', element: <Search /> },
       { path: '/checkout', element: <Checkout /> },
+       {path:'/topbar',element:<Topbar/> },
+       {path:'/sidebar',element:<Sidebar/>},
+       {path:'/dashboard',element:<Dashboard/>}
+
     ],
   },
 ])
