@@ -85,11 +85,18 @@ const RegisterUser = () => {
       try {
         const response = await account.createEmailPasswordSession(email, password);
         console.log("Login successful:", response);
-
-        const userSession = await account.get();
-        setUser(userSession);
+               
+       const userSession = await account.get();
+       setUser(userSession);
         dispatch(loginSuccess(userSession));
-        navigate("/");
+
+       if (userSession.prefs?.role === 'admin') {
+           navigate("/admin");
+         } else {
+           navigate("/");
+}
+  
+        
       } catch (error) {
         console.error("Login Error:", error);
         setErrormsg("Invalid email or password.");
