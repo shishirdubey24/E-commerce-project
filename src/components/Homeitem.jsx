@@ -1,20 +1,16 @@
 /* eslint-disable react/prop-types */
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bagActions } from "../store/bagSlice";
 import { GrAddCircle } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
    
-const Homeitem = ({ item }) => {
+const Homeitem = ({ item,isInBag }) => {
   const dispatch = useDispatch();
-  const bagitems = useSelector(store => store.bag) || []; // Fallback to an empty array
-  const elementFound = bagitems.indexOf(item.id) >= 0;
-
   const handleAddToBag = () => {
-   
     dispatch(bagActions.addToBag(item));
   };
-
+ 
   const handleRemove = () => {
   
     dispatch(bagActions.removeFromBag(item.id));
@@ -28,7 +24,7 @@ const Homeitem = ({ item }) => {
 
   return (
     <div className="item-container">
-      <img className="item-image" src={image} alt="item image" />
+      <img className="item-image" src={image} alt="item image" loading="lazy" />
       <div className="rating">
         {rating?.stars ?? 'N/A'} ⭐ | {rating?.count ?? 0}
       </div>
@@ -42,7 +38,7 @@ const Homeitem = ({ item }) => {
         <span className="original-price">Rs {original_price}</span>
         <span className="discount">({discount_percentage}% OFF)</span>
       </div>
-      {elementFound ? (
+      {isInBag ? (
         <button
           type="button"
           className="btn btn-add-bag btn-danger"
