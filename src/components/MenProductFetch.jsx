@@ -7,7 +7,7 @@ import ShimmerUI from "./ShimmerUI";
 
 const fetchMenProducts = async () => {
   const res = await axios.get("https://fakestoreapi.com/products");
-  await new Promise(resolve => setTimeout(resolve, 100)); // optional delay for shimmer testing
+ 
   return res.data;
 };
 
