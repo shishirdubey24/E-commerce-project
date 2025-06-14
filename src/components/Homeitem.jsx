@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-
+import React from "react";
 import { useDispatch } from "react-redux";
 import { bagActions } from "../store/bagSlice";
 import { GrAddCircle } from "react-icons/gr";
@@ -60,4 +60,4 @@ const Homeitem = ({ item,isInBag }) => {
 };
 
 
-export default Homeitem;
+export default React.memo(Homeitem);
