@@ -3,7 +3,7 @@
     [
       {
         "id": "001",
-        "image": "images/1.jpg",
+        "image": "/newImages/1.webp",
         "company": "Carlton London",
         "category": "Art",
         "item_name": "Rhodium-Plated CZ Floral Studs",
@@ -19,7 +19,7 @@
       },
       {
         "id": "002",
-        "image": "images/2.jpg",
+        "image": "/newImages/2.webp",
         "company": "CUKOO",
         "category": "Women ",
         "item_name": "Women Padded Halter Neck Swimming Dress",
@@ -35,7 +35,7 @@
       },
       {
         "id": "003",
-        "image": "images/3.jpg",
+        "image": "/newImages/3.webp",
         "company": "NUEVOSDAMAS",
         "category": "Women",
         "item_name": "Women Red & White Printed A-Line Knee-Length Skirts",
@@ -43,7 +43,6 @@
         "current_price": 495,
         " discount_percentage": 69,
         " return_period": 14,
-
         " delivery_date": "10 Oct 2023",
         " rating": {
           "stars": 4.1,
@@ -52,7 +51,7 @@
       },
       {
         "id": "004",
-        "image": "images/4.jpg",
+        "image": "/newImages/4.webp",
         "company": "ADidAS",
         "category": "Sports",
         "item_name": "Indian Cricket ODI Jersey",
@@ -62,13 +61,13 @@
         " return_period": 14,
         " delivery_date": "10 Oct 2023",
         " rating": {
-          "stars": 5.0,
+          "stars": 5,
           "count": 10
         }
       },
       {
         "id": "005",
-        "image": "images/5.jpg",
+        "image": "/newImages/5.webp",
         "company": "Roadster",
         "category": "T-Shirt",
         "item_name": "Pure Cotton T-shirt",
@@ -84,7 +83,7 @@
       },
       {
         "id": "006",
-        "image": "images/6.jpg",
+        "image": "/newImages/6.webp",
         "company": "Nike",
         "category": "Sports",
         "item_name": "Men ReactX Running Shoes",
@@ -94,13 +93,13 @@
         " return_period": 14,
         " delivery_date": "10 Oct 2023",
         " rating": {
-          "stars": 0.0,
+          "stars": 0,
           "count": 0
         }
       },
       {
         "id": "007",
-        "image": "images/7.jpg",
+        "image": "/newImages/7.webp",
         "company": "The Indian Garage Co",
         "category": "Jeans",
         "item_name": "Men Slim Fit Regular Shorts",
@@ -114,7 +113,7 @@
       },
       {
         "id": "008",
-        "image": "images/8.jpg",
+        "image": "/newImages/8.webp",
         "company": "Nivea",
         "category": "Art",
         "item_name": "Men Fresh Deodrant 150ml",
@@ -128,10 +127,9 @@
           "count": 5200
         }
       },
-
       {
         "id": "009",
-        "image": "images/9.webp",
+        "image": "/newImages/9.webp",
         "company": "Roadster",
         "category": "Shirt",
         "item_name": "Men Solid Casual Shirt",
@@ -147,7 +145,7 @@
       },
       {
         "id": "010",
-        "image": "images/10.webp",
+        "image": "/newImages/10.webp",
         "company": "Allen Solly",
         "category": "Shirt",
         "item_name": "Men Printed Slim Fit Shirt",
@@ -163,7 +161,7 @@
       },
       {
         "id": "011",
-        "image": "images/11.webp",
+        "image": "/newImages/11.webp",
         "company": "U.S. Polo Assn.",
         "category": "Shirt",
         "item_name": "Men Striped Cotton Shirt",
@@ -179,7 +177,7 @@
       },
       {
         "id": "012",
-        "image": "images/12.webp",
+        "image": "/newImages/12.webp",
         "company": "Levi's",
         "category": "Shirt",
         "item_name": "Men Denim Casual Shirt",
@@ -195,7 +193,7 @@
       },
       {
         "id": "013",
-        "image": "images/13.webp",
+        "image": "/newImages/13.webp",
         "company": "Peter England",
         "category": "Shirt",
         "item_name": "Men Checked Slim Fit Shirt",
@@ -211,7 +209,7 @@
       },
       {
         "id": "014",
-        "image": "images/14.webp",
+        "image": "/newImages/14.webp",
         "company": "Van Heusen",
         "category": "Shirt",
         "item_name": "Men Formal Shirt",
@@ -227,7 +225,7 @@
       },
       {
         "id": "015",
-        "image": "images/15.webp",
+        "image": "/newImages/15.webp",
         "company": "H&M",
         "category": "Shirt",
         "item_name": "Men Linen Blend Shirt",
@@ -243,7 +241,7 @@
       },
       {
         "id": "016",
-        "image": "images/16.webp",
+        "image": "/newImages/16.webp",
         "company": "Jack & Jones",
         "category": "Shirt",
         "item_name": "Men Oversized Fit Shirt",
@@ -257,10 +255,9 @@
           "count": 2000
         }
       },
-
       {
         "id": "017",
-        "image": "images/17.webp",
+        "image": "/newImages/17.webp",
         "company": "Puma",
         "category": "T-Shirt",
         "item_name": "Men's Sporty Cotton T-Shirt",
@@ -276,10 +273,9 @@
       },
       {
         "id": "018",
-        "image": "images/18.webp",
+        "image": "/newImages/18.webp",
         "company": "Adidas",
         "category": "T-Shirt",
-
         "item_name": "Men's Classic Fit Tee",
         "original_price": 1199,
         "current_price": 699,
@@ -293,10 +289,9 @@
       },
       {
         "id": "019",
-        "image": "images/19.webp",
+        "image": "/newImages/19.webp",
         "company": "Nike",
         "category": "T-Shirt",
-
         "item_name": "Dry-Fit Performance T-Shirt",
         "original_price": 1399,
         "current_price": 899,
@@ -310,10 +305,9 @@
       },
       {
         "id": "020",
-        "image": "images/20.webp",
+        "image": "/newImages/20.webp",
         "company": "Reebok",
         "category": "T-Shirt",
-
         "item_name": "Men's Graphic Print T-Shirt",
         "original_price": 899,
         "current_price": 499,
@@ -327,10 +321,9 @@
       },
       {
         "id": "021",
-        "image": "images/21.webp",
+        "image": "/newImages/21.webp",
         "company": "Under Armour",
         "category": "T-Shirt",
-
         "item_name": "Charged Cotton T-Shirt",
         "original_price": 1599,
         "current_price": 1099,
@@ -344,10 +337,9 @@
       },
       {
         "id": "022",
-        "image": "images/22.webp",
+        "image": "/newImages/22.webp",
         "company": "Levi's",
         "category": "T-Shirt",
-
         "item_name": "Men's Slim Fit T-Shirt",
         "original_price": 1299,
         "current_price": 899,
@@ -361,10 +353,9 @@
       },
       {
         "id": "023",
-        "image": "images/23.webp",
+        "image": "/newImages/23.webp",
         "company": "Tommy Hilfiger",
         "category": "T-Shirt",
-
         "item_name": "Crew Neck Cotton T-Shirt",
         "original_price": 1999,
         "current_price": 1399,
@@ -378,10 +369,9 @@
       },
       {
         "id": "024",
-        "image": "images/24.webp",
+        "image": "/newImages/24.webp",
         "company": "Jack & Jones",
         "category": "T-Shirt",
-
         "item_name": "Printed Casual T-Shirt",
         "original_price": 1099,
         "current_price": 699,
@@ -395,10 +385,9 @@
       },
       {
         "id": "025",
-        "image": "images/25.webp",
+        "image": "/newImages/25.webp",
         "company": "Roadster",
         "category": "T-Shirt",
-
         "item_name": "Men's Solid Polo T-Shirt",
         "original_price": 899,
         "current_price": 449,
@@ -412,10 +401,9 @@
       },
       {
         "id": "026",
-        "image": "images/26.webp",
+        "image": "/newImages/26.webp",
         "company": "H&M",
         "category": "T-Shirt",
-
         "item_name": "Men's Relaxed Fit Tee",
         "original_price": 1299,
         "current_price": 899,
@@ -429,10 +417,9 @@
       },
       {
         "id": "027",
-        "image": "images/27.webp",
+        "image": "/newImages/27.webp",
         "company": "Louis Philippe",
         "category": "T-Shirt",
-
         "item_name": "Men's Slim Fit Polo T-Shirt",
         "original_price": 1699,
         "current_price": 1199,
@@ -446,10 +433,9 @@
       },
       {
         "id": "029",
-        "image": "images/29.webp",
+        "image": "/newImages/29.webp",
         "company": "Allen Solly",
         "category": "Chinos",
-
         "item_name": "Men's Slim Fit Chinos",
         "original_price": 1999,
         "current_price": 1199,
@@ -463,10 +449,9 @@
       },
       {
         "id": "030",
-        "image": "images/30.webp",
+        "image": "/newImages/30.webp",
         "company": "Van Heusen",
         "category": "Chinos",
-
         "item_name": "Men's Tapered Fit Chinos",
         "original_price": 2499,
         "current_price": 1749,
@@ -480,10 +465,9 @@
       },
       {
         "id": "031",
-        "image": "images/31.webp",
+        "image": "/newImages/31.webp",
         "company": "Peter England",
         "category": "Chinos",
-
         "item_name": "Men's Regular Fit Chinos",
         "original_price": 1799,
         "current_price": 1259,
@@ -497,10 +481,9 @@
       },
       {
         "id": "032",
-        "image": "images/32.webp",
+        "image": "/newImages/32.webp",
         "company": "Blackberrys",
         "category": "Chinos",
-
         "item_name": "Men's Formal Chinos",
         "original_price": 2299,
         "current_price": 1499,
@@ -514,10 +497,9 @@
       },
       {
         "id": "033",
-        "image": "images/33.webp",
+        "image": "/newImages/33.webp",
         "company": "Louis Philippe",
         "category": "Chinos",
-
         "item_name": "Men's Stretchable Chinos",
         "original_price": 2699,
         "current_price": 1999,
@@ -531,10 +513,9 @@
       },
       {
         "id": "034",
-        "image": "images/34.webp",
+        "image": "/newImages/34.webp",
         "company": "Marks & Spencer",
         "category": "Chinos",
-
         "item_name": "Men's Tailored Chinos",
         "original_price": 3199,
         "current_price": 2399,
@@ -548,10 +529,9 @@
       },
       {
         "id": "035",
-        "image": "images/35.webp",
+        "image": "/newImages/35.webp",
         "company": "Jack & Jones",
         "category": "Chinos",
-
         "item_name": "Men's Slim Tapered Chinos",
         "original_price": 2799,
         "current_price": 1999,
@@ -565,10 +545,9 @@
       },
       {
         "id": "037",
-        "image": "images/37.webp",
+        "image": "/newImages/37.webp",
         "company": "U.S. Polo Assn.",
         "category": "Chinos",
-
         "item_name": "Men's Cotton Chinos",
         "original_price": 1899,
         "current_price": 1399,
@@ -582,10 +561,9 @@
       },
       {
         "id": "038",
-        "image": "images/38.webp",
+        "image": "/newImages/38.webp",
         "company": "Levi's",
         "category": "Jeans",
-
         "item_name": "Men's Slim Fit Jeans",
         "original_price": 2999,
         "current_price": 2499,
@@ -599,10 +577,9 @@
       },
       {
         "id": "039",
-        "image": "images/39.webp",
+        "image": "/newImages/39.webp",
         "company": "Wrangler",
         "category": "Jeans",
-
         "item_name": "Men's Regular Fit Jeans",
         "original_price": 2499,
         "current_price": 1899,
@@ -616,10 +593,9 @@
       },
       {
         "id": "040",
-        "image": "images/40.webp",
+        "image": "/newImages/40.webp",
         "company": "Pepe Jeans",
         "category": "Jeans",
-
         "item_name": "Men's Skinny Fit Jeans",
         "original_price": 3299,
         "current_price": 2599,
@@ -633,10 +609,9 @@
       },
       {
         "id": "041",
-        "image": "images/41.webp",
+        "image": "/newImages/41.webp",
         "company": "Diesel",
         "category": "Jeans",
-
         "item_name": "Men's Tapered Fit Jeans",
         "original_price": 4999,
         "current_price": 4299,
@@ -650,10 +625,9 @@
       },
       {
         "id": "042",
-        "image": "images/42.webp",
+        "image": "/newImages/42.webp",
         "company": "Flying Machine",
         "category": "Jeans",
-
         "item_name": "Men's Slim Fit Stretchable Jeans",
         "original_price": 1999,
         "current_price": 1599,
@@ -667,10 +641,9 @@
       },
       {
         "id": "043",
-        "image": "images/43.webp",
+        "image": "/newImages/43.webp",
         "company": "Spykar",
         "category": "Jeans",
-
         "item_name": "Men's Distressed Jeans",
         "original_price": 2799,
         "current_price": 2199,
@@ -684,10 +657,9 @@
       },
       {
         "id": "044",
-        "image": "images/44.webp",
+        "image": "/newImages/44.webp",
         "company": "Biba",
         "category": "Ethnic",
-
         "item_name": "Men Ethnic Waistcoat",
         "original_price": 2500,
         "current_price": 1250,
@@ -701,10 +673,9 @@
       },
       {
         "id": "045",
-        "image": "images/45.webp",
+        "image": "/newImages/45.webp",
         "company": "Manyavar",
         "category": "Ethnic",
-
         "item_name": "Men Silk Kurta",
         "original_price": 2000,
         "current_price": 1000,
@@ -718,10 +689,9 @@
       },
       {
         "id": "046",
-        "image": "images/46.webp",
+        "image": "/newImages/46.webp",
         "company": "FabIndia",
         "category": "Ethnic",
-
         "item_name": "Men Cotton Ethnic Wear",
         "original_price": 1800,
         "current_price": 900,
@@ -735,10 +705,9 @@
       },
       {
         "id": "047",
-        "image": "images/47.webp",
+        "image": "/newImages/47.webp",
         "company": "Peter England",
         "category": "Ethnic",
-
         "item_name": "Men Ethnic Bandhgala",
         "original_price": 3000,
         "current_price": 1500,
@@ -752,10 +721,9 @@
       },
       {
         "id": "048",
-        "image": "images/48.webp",
+        "image": "/newImages/48.webp",
         "company": "Pantaloons",
         "category": "Ethnic",
-
         "item_name": "Men Traditional Dhoti Set",
         "original_price": 1600,
         "current_price": 800,
@@ -769,10 +737,9 @@
       },
       {
         "id": "049",
-        "image": "images/49.webp",
+        "image": "/newImages/49.webp",
         "company": "Nivea",
         "category": "Deodrant",
-
         "item_name": "Men Fresh Deodrant 150ml",
         "original_price": 285,
         "current_price": 142,
@@ -786,10 +753,9 @@
       },
       {
         "id": "050",
-        "image": "images/50.webp",
+        "image": "/newImages/50.webp",
         "company": "Nivea",
         "category": "Deodrant",
-
         "item_name": "Men Fresh Deodrant 150ml",
         "original_price": 285,
         "current_price": 142,
@@ -803,10 +769,9 @@
       },
       {
         "id": "051",
-        "image": "images/51.webp",
+        "image": "/newImages/51.webp",
         "company": "D'Decor",
         "category": "Bedsheet",
-
         "item_name": "Floral Pattern Bedsheet",
         "original_price": 1999,
         "current_price": 999,
@@ -820,10 +785,9 @@
       },
       {
         "id": "052",
-        "image": "images/52.webp",
+        "image": "/newImages/52.webp",
         "company": "Raymond Home",
         "category": "Bedsheet",
-
         "item_name": "Cotton Blend Bedsheet",
         "original_price": 1599,
         "current_price": 799,
@@ -837,10 +801,9 @@
       },
       {
         "id": "053",
-        "image": "images/53.webp",
+        "image": "/newImages/53.webp",
         "company": "Spaces",
         "category": "Bedsheet",
-
         "item_name": "Geometric Print Bedsheet",
         "original_price": 1699,
         "current_price": 849,
@@ -854,10 +817,9 @@
       },
       {
         "id": "054",
-        "image": "images/54.webp",
+        "image": "/newImages/54.webp",
         "company": "Story@Home",
         "category": "Bedsheet",
-
         "item_name": "Luxury Double Bedsheet",
         "original_price": 1899,
         "current_price": 949,
@@ -871,10 +833,9 @@
       },
       {
         "id": "055",
-        "image": "images/55.webp",
+        "image": "/newImages/55.webp",
         "company": "Welspun",
         "category": "Bedsheet",
-
         "item_name": "Abstract Design Bedsheet",
         "original_price": 1399,
         "current_price": 699,
@@ -888,10 +849,9 @@
       },
       {
         "id": "056",
-        "image": "images/56.webp",
+        "image": "/newImages/56.webp",
         "company": "Swayam",
         "category": "Bedsheet",
-
         "item_name": "Reversible Bedsheet Set",
         "original_price": 2099,
         "current_price": 1049,
@@ -905,10 +865,9 @@
       },
       {
         "id": "057",
-        "image": "images/57.webp",
+        "image": "/newImages/57.webp",
         "company": "Trident",
         "category": "Bedsheet",
-
         "item_name": "Soft Cotton Bedsheet",
         "original_price": 1499,
         "current_price": 749,
@@ -922,10 +881,9 @@
       },
       {
         "id": "058",
-        "image": "images/58.webp",
+        "image": "/newImages/58.webp",
         "company": "Portico",
         "category": "Bedsheet",
-
         "item_name": "Premium Double Bedsheet",
         "original_price": 1999,
         "current_price": 999,
@@ -937,13 +895,11 @@
           "count": 3300
         }
       },
-
       {
         "id": "059",
-        "image": "images/59.webp",
+        "image": "/newImages/59.webp",
         "company": "SoftCozy",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1200,
         "current_price": 899,
@@ -957,10 +913,9 @@
       },
       {
         "id": "060",
-        "image": "images/60.webp",
+        "image": "/newImages/60.webp",
         "company": "WarmNest",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1500,
         "current_price": 1050,
@@ -968,16 +923,15 @@
         "return_period": 7,
         "delivery_date": "18 Dec 2023",
         "rating": {
-          "stars": 4.0,
+          "stars": 4,
           "count": 1500
         }
       },
       {
         "id": "061",
-        "image": "images/61.webp",
+        "image": "/newImages/61.webp",
         "company": "WinterComfort",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1000,
         "current_price": 750,
@@ -991,10 +945,9 @@
       },
       {
         "id": "062",
-        "image": "images/62.webp",
+        "image": "/newImages/62.webp",
         "company": "SleepWell",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 900,
         "current_price": 720,
@@ -1008,10 +961,9 @@
       },
       {
         "id": "063",
-        "image": "images/63.webp",
+        "image": "/newImages/63.webp",
         "company": "CozyNest",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1100,
         "current_price": 880,
@@ -1025,10 +977,9 @@
       },
       {
         "id": "064",
-        "image": "images/64.webp",
+        "image": "/newImages/64.webp",
         "company": "ComfortHaven",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1300,
         "current_price": 975,
@@ -1042,10 +993,9 @@
       },
       {
         "id": "065",
-        "image": "images/65.webp",
+        "image": "/newImages/65.webp",
         "company": "SnugLife",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1400,
         "current_price": 1120,
@@ -1059,10 +1009,9 @@
       },
       {
         "id": "066",
-        "image": "images/66.webp",
+        "image": "/newImages/66.webp",
         "company": "WinterWarm",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1600,
         "current_price": 1280,
@@ -1076,10 +1025,9 @@
       },
       {
         "id": "067",
-        "image": "images/67.webp",
+        "image": "/newImages/67.webp",
         "company": "CozyDreams",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1150,
         "current_price": 920,
@@ -1093,10 +1041,9 @@
       },
       {
         "id": "068",
-        "image": "images/68.webp",
+        "image": "/newImages/68.webp",
         "company": "SoftNest",
         "category": "Blanket",
-
         "item_name": "Blanket",
         "original_price": 1250,
         "current_price": 1000,
@@ -1110,10 +1057,9 @@
       },
       {
         "id": "069",
-        "image": "images/69.webp",
+        "image": "/newImages/69.webp",
         "company": "SS",
         "category": "Sports",
-
         "item_name": "Cricket Bat",
         "original_price": 4000,
         "current_price": 3500,
@@ -1127,10 +1073,9 @@
       },
       {
         "id": "070",
-        "image": "images/70.webp",
+        "image": "/newImages/70.webp",
         "company": "Kookaburra",
         "category": "Sports",
-
         "item_name": "Cricket Ball",
         "original_price": 800,
         "current_price": 650,
@@ -1144,10 +1089,9 @@
       },
       {
         "id": "071",
-        "image": "images/71.webp",
+        "image": "/newImages/71.webp",
         "company": "MRF",
         "category": "Sports",
-
         "item_name": "Cricket Batting Gloves",
         "original_price": 1200,
         "current_price": 950,
@@ -1161,10 +1105,9 @@
       },
       {
         "id": "072",
-        "image": "images/72.webp",
+        "image": "/newImages/72.webp",
         "company": "Adidas",
         "category": "Sports",
-
         "item_name": "Cricket Shoes",
         "original_price": 3000,
         "current_price": 2500,
@@ -1178,10 +1121,9 @@
       },
       {
         "id": "073",
-        "image": "images/73.webp",
+        "image": "/newImages/73.webp",
         "company": "SG",
         "category": "Sports",
-
         "item_name": "Cricket Kit Bag",
         "original_price": 5000,
         "current_price": 4000,
@@ -1195,10 +1137,9 @@
       },
       {
         "id": "074",
-        "image": "images/74.webp",
+        "image": "/newImages/74.webp",
         "company": "Gray-Nicolls",
         "category": "Sports",
-
         "item_name": "Cricket Helmet",
         "original_price": 2500,
         "current_price": 2200,
@@ -1212,10 +1153,9 @@
       },
       {
         "id": "075",
-        "image": "images/75.webp",
+        "image": "/newImages/75.webp",
         "company": "Puma",
         "category": "Sports",
-
         "item_name": "Cricket Jersey",
         "original_price": 1200,
         "current_price": 1000,
@@ -1229,10 +1169,9 @@
       },
       {
         "id": "076",
-        "image": "images/76.webp",
+        "image": "/newImages/76.webp",
         "company": "ArtMasters",
         "category": "Sports",
-
         "item_name": "Starry Night",
         "original_price": 5000,
         "current_price": 4500,
@@ -1246,10 +1185,9 @@
       },
       {
         "id": "077",
-        "image": "images/77.webp",
+        "image": "/newImages/77.webp",
         "company": "CanvasWorks",
         "category": "Art",
-
         "item_name": "Mona Lisa",
         "original_price": 8000,
         "current_price": 7500,
@@ -1263,10 +1201,9 @@
       },
       {
         "id": "078",
-        "image": "images/78.webp",
+        "image": "/newImages/78.webp",
         "company": "Gallery Express",
         "category": "Art",
-
         "item_name": "The Persistence of Memory",
         "original_price": 7000,
         "current_price": 6500,
@@ -1280,10 +1217,9 @@
       },
       {
         "id": "079",
-        "image": "images/79.webp",
+        "image": "/newImages/79.webp",
         "company": "ArtisticVision",
         "category": "Art",
-
         "item_name": "The Scream",
         "original_price": 6000,
         "current_price": 5500,
@@ -1297,10 +1233,9 @@
       },
       {
         "id": "080",
-        "image": "images/81.webp",
+        "image": "/newImages/81.webp",
         "company": "SareeWorld",
         "category": "Art",
-
         "item_name": "Elegant Banarasi Silk Saree",
         "original_price": 3500,
         "current_price": 2800,
@@ -1314,10 +1249,9 @@
       },
       {
         "id": "082",
-        "image": "images/82.webp",
+        "image": "/newImages/82.webp",
         "company": "SareeFactory",
         "category": "Saree",
-
         "item_name": "Designer Kanjivaram Saree",
         "original_price": 4500,
         "current_price": 3600,
@@ -1331,10 +1265,9 @@
       },
       {
         "id": "083",
-        "image": "images/83.webp",
+        "image": "/newImages/83.webp",
         "company": "EthnicGlam",
         "category": "Saree",
-
         "item_name": "Traditional Chiffon Saree",
         "original_price": 3800,
         "current_price": 3040,
@@ -1348,10 +1281,9 @@
       },
       {
         "id": "084",
-        "image": "images/84.webp",
+        "image": "/newImages/84.webp",
         "company": "LuxeWeaves",
         "category": "Saree",
-
         "item_name": "Handloom Cotton Saree",
         "original_price": 2200,
         "current_price": 1760,
@@ -1365,10 +1297,9 @@
       },
       {
         "id": "085",
-        "image": "images/85.webp",
+        "image": "/newImages/85.webp",
         "company": "RoyalThreads",
         "category": "Saree",
-
         "item_name": "Embroidered Georgette Saree",
         "original_price": 5000,
         "current_price": 4000,
@@ -1382,10 +1313,9 @@
       },
       {
         "id": "086",
-        "image": "images/86.webp",
+        "image": "/newImages/86.webp",
         "company": "SareePalace",
         "category": "Saree",
-
         "item_name": "Festive Crepe Saree",
         "original_price": 3100,
         "current_price": 2480,
@@ -1399,10 +1329,9 @@
       },
       {
         "id": "087",
-        "image": "images/87.webp",
+        "image": "/newImages/87.webp",
         "company": "VibrantVogue",
         "category": "Saree",
-
         "item_name": "Silk Satin Saree",
         "original_price": 5500,
         "current_price": 4400,
@@ -1416,10 +1345,9 @@
       },
       {
         "id": "088",
-        "image": "images/88.webp",
+        "image": "/newImages/88.webp",
         "company": "GlamourWeaves",
         "category": "Saree",
-
         "item_name": "Luxury Velvet Saree",
         "original_price": 6200,
         "current_price": 4960,
@@ -1433,10 +1361,9 @@
       },
       {
         "id": "089",
-        "image": "images/89.webp",
+        "image": "/newImages/89.webp",
         "company": "Rolex",
         "category": "Watch",
-
         "item_name": "Rolex Submariner Men's Watch",
         "original_price": 85000,
         "current_price": 76500,
@@ -1450,10 +1377,9 @@
       },
       {
         "id": "090",
-        "image": "images/90.webp",
+        "image": "/newImages/90.webp",
         "company": "Tag Heuer",
         "category": "Watch",
-
         "item_name": "Tag Heuer Carrera Men's Watch",
         "original_price": 60000,
         "current_price": 54000,
@@ -1467,10 +1393,9 @@
       },
       {
         "id": "091",
-        "image": "images/91.webp",
+        "image": "/newImages/91.webp",
         "company": "Omega",
         "category": "Watch",
-
         "item_name": "Omega Seamaster Men's Watch",
         "original_price": 72000,
         "current_price": 64800,
@@ -1484,10 +1409,9 @@
       },
       {
         "id": "092",
-        "image": "images/92.webp",
+        "image": "/newImages/92.webp",
         "company": "Patek Philippe",
         "category": "Watch",
-
         "item_name": "Patek Philippe Nautilus Men's Watch",
         "original_price": 150000,
         "current_price": 135000,
@@ -1495,16 +1419,15 @@
         "return_period": 30,
         "delivery_date": "25 Jan 2024",
         "rating": {
-          "stars": 5.0,
+          "stars": 5,
           "count": 2000
         }
       },
       {
         "id": "093",
-        "image": "images/93.webp",
+        "image": "/newImages/93.webp",
         "company": "Patek Philippe",
         "category": "Watch",
-
         "item_name": "Patek Philippe Nautilus Men's Watch",
         "original_price": 150000,
         "current_price": 135000,
@@ -1512,16 +1435,15 @@
         "return_period": 30,
         "delivery_date": "25 Jan 2024",
         "rating": {
-          "stars": 5.0,
+          "stars": 5,
           "count": 2000
         }
       },
       {
         "id": "094",
-        "image": "images/94.webp",
+        "image": "/newImages/94.webp",
         "company": "Patek Philippe",
         "category": "Watch",
-
         "item_name": "Patek Philippe Nautilus Men's Watch",
         "original_price": 150000,
         "current_price": 135000,
@@ -1529,16 +1451,15 @@
         "return_period": 30,
         "delivery_date": "25 Jan 2024",
         "rating": {
-          "stars": 5.0,
+          "stars": 5,
           "count": 2000
         }
       },
       {
         "id": "095",
-        "image": "images/95.webp",
+        "image": "/newImages/95.webp",
         "company": "Bosch",
         "category": "Tools",
-
         "item_name": "Bosch Car Battery 12V",
         "original_price": 6000,
         "current_price": 5400,
@@ -1552,10 +1473,9 @@
       },
       {
         "id": "096",
-        "image": "images/96.webp",
+        "image": "/newImages/96.webp",
         "company": "Philips",
         "category": "Tools",
-
         "item_name": "Philips LED Car Headlights",
         "original_price": 8000,
         "current_price": 7200,
@@ -1569,10 +1489,9 @@
       },
       {
         "id": "097",
-        "image": "images/97.webp",
+        "image": "/newImages/97.webp",
         "company": "K&N",
         "category": "Tools",
-
         "item_name": "K&N High-Flow Air Filter",
         "original_price": 4000,
         "current_price": 3600,
@@ -1586,10 +1505,9 @@
       },
       {
         "id": "098",
-        "image": "images/98.webp",
+        "image": "/newImages/98.webp",
         "company": "Rain-X",
         "category": "Tools",
-
         "item_name": "Rain-X Car Windshield Wipers",
         "original_price": 1200,
         "current_price": 1080,
@@ -1603,10 +1521,9 @@
       },
       {
         "id": "099",
-        "image": "images/99.webp",
+        "image": "/newImages/99.webp",
         "company": "Goodyear",
         "category": "Tools",
-
         "item_name": "Goodyear Car Tire 215/65R16",
         "original_price": 5000,
         "current_price": 4500,
@@ -1620,10 +1537,9 @@
       },
       {
         "id": "100",
-        "image": "images/100.webp",
+        "image": "/newImages/100.webp",
         "company": "Sony",
         "category": "Tools",
-
         "item_name": "Sony Car Audio System",
         "original_price": 15000,
         "current_price": 13500,
