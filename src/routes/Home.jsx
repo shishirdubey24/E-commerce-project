@@ -4,15 +4,17 @@ import Homeitem from "../components/Homeitem";
 
 const Home = () => {
     const items = useSelector((store) => store.items);
+     const bagitems = useSelector(store => store.bag) || []; // Fallback to an empty array
+ // const elementFound = bagitems.indexOf(item.id) >= 0;
     return (
-        <main>
-            <div className="items-container">
-                {items.map((item)=>
-                (<Homeitem key={item.id}item={item} />
-               ))}
-                  
-            </div>
-        </main>
+       <main>
+  <div className="items-container">
+    {items.map((item) => {
+      const isInBag = bagitems.includes(item.id); // or whatever logic
+      return <Homeitem key={item.id} item={item} isInBag={isInBag} />;
+    })}
+  </div>
+</main>
     );
 }
 
