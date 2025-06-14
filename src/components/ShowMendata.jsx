@@ -33,11 +33,12 @@ const ShowMendata = ({ mendata }) => {
       <img
         src={image}
         alt={title}
+         loading="lazy"
         style={{
-          width: "50%", // Ensure the image takes the full width of its container
-          height: "50vh", // Maintain aspect ratio if height is dynamic
-          objectFit: "cover", // Ensures the image fills the container while maintaining aspect ratio
-          borderRadius: "5px", // Optional, to round corners
+          width: "50%", 
+          height: "50vh", 
+          objectFit: "cover", 
+          borderRadius: "5px", 
         }}
       />
       <div style={{ fontWeight: "bold", fontSize: "16px", margin: "10px 0" }}>
