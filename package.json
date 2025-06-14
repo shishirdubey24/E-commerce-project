@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "convert:webp": "node convertToWebp.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
@@ -27,7 +28,8 @@
     "react-router": "^6.27.0",
     "react-router-dom": "^6.28.0",
     "react-shimmer": "^3.2.0",
-    "recharts": "^2.15.3"
+    "recharts": "^2.15.3",
+    "sharp": "^0.34.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
