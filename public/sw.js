@@ -53,4 +53,21 @@ self.addEventListener("fetch", (evt) => {
     );
     return;
   }
+
+  // === NEW: Cache-first strategy for images ===
+  if (req.destination === "image") {
+    evt.respondWith(
+      caches.match(req).then((cachedRes) => {
+        if (cachedRes) return cachedRes;
+
+        return fetch(req).then((fetchRes) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(req, fetchRes.clone());
+            return fetchRes;
+          });
+        });
+      })
+    );
+    return;
+  }
 });
