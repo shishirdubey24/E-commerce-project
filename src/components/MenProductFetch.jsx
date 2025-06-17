@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+{/*import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -34,3 +34,4 @@ const MenProduct = () => {
 };
 
 export default MenProduct;
+*/}

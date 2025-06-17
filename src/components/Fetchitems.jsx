@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+{ /*import { useEffect } from "react";
 import {  useDispatch } from "react-redux";
 import { itemsActions } from "../store/itemsSlice";
 //import { fetchStatusActions } from "../store/fetchStatusSlice";
@@ -35,3 +35,4 @@ if (error) return (<p >
 };
 
 export default FetchItems;
+*/}

@@ -38,3 +38,28 @@ p@::> then what it does it protect APP from crashing (404 error) it loads cached
 
 summery ;; SW prevents from crashing loads the page + Status File shows message on UI
 both works together but dont communicate to each other or not dependent
+
+09-06-2025
+today i ma going to explore the Role based Access System inside our project .i want to build Admin dashboard
+step1::--> somehow i need label of user which can verify that its admin
+1:: added AUTH preference inside AUTH
+2:: just checked pref key and role in the browser
+
+- point:: make another collection and then add attributes of user profile lets say role ,user type etc. etc.
+
+step2::--> Now we have to develpoe the admin dashboard from UI Perspective
+
+10-06-2025::--> admin dashboard design
+it has been completed on structer level but needs 1 more day
+1:: while creating specific css file i think vs code dont suggest you the css file nmae so import it and then try to enter from jsx file to enter into css fle
+
+2:: while connecting routes always cross check if you have given a tab for it,give same /url there also otherwise 404 error
+
+NEXT goal::-> admin dashboard Css is not working as intented
+so will improve it but dont know actual pain point i mean why its looking so ugly ,but will figure out
+
+date 17-06-2025
+i have fetched data inside the new file under hokks folder,now i ma thinking that 1:: where we will show <shimmerUI/> compo.??
+2:: agar hamne isi file me shimmer UI dikhaya to kya ye file apna sole purpose loose nahi kar degi ?? kyuki hum 1 file me sirf 1 kaam hi karana sikh rahe hain..??
+
+2::-> UI folder ke andar maine 1 file bnayi.
