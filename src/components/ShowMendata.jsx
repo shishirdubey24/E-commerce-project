@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-//import { GrAddCircle } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { bagActions } from "../store/bagSlice";
+import "./ShowMendata.css"
 const ShowMendata = ({ mendata }) => {
   const dispatch = useDispatch();
+
   if (!mendata || !mendata.id) {
     return <div>No item available or item ID is undefined</div>;
   }
+
   const handleData = () => {
     const normalizedItem = {
       id: mendata.id,
@@ -20,49 +22,20 @@ const ShowMendata = ({ mendata }) => {
   const { title, price, category, image, rating } = mendata;
 
   return (
-    <div
-    style={{
-      flex: "1 1 calc(25% - 20px)", // 4 items in a row with spacing
-      margin: "10px",
-      border: "1px solid #ddd",
-      borderRadius: "5px",
-      textAlign: "center",
-      boxSizing: "border-box",
-    }}
-    >
+    <div className="show-mendata-card">
       <img
         src={image}
         alt={title}
-         loading="lazy"
-        style={{
-          width: "50%", 
-          height: "50vh", 
-          objectFit: "cover", 
-          borderRadius: "5px", 
-        }}
+        loading="lazy"
+        className="show-mendata-image"
       />
-      <div style={{ fontWeight: "bold", fontSize: "16px", margin: "10px 0" }}>
-        {title}
+      <div className="show-mendata-title">{title}</div>
+      <div className="show-mendata-price">${price}</div>
+      <div className="show-mendata-category">{category}</div>
+      <div className="show-mendata-rating">
+        Rating: {rating?.rate ?? "N/A"} ({rating?.count ?? 0} reviews)
       </div>
-      <div style={{ color: "#555", fontSize: "14px" }}>${price}</div>
-      <div style={{ fontSize: "12px", color: "#888", margin: "5px 0" }}>
-        {category}
-      </div>
-      <div style={{ fontSize: "12px", color: "#888" }}>
-        Rating: {rating.rate} ({rating.count} reviews)
-      </div>
-      <button
-        onClick={handleData}
-        style={{
-          marginTop: "10px",
-          padding: "8px 12px",
-          backgroundColor: "#28a745",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
+      <button className="show-mendata-button" onClick={handleData}>
         Add to Bag
       </button>
     </div>
