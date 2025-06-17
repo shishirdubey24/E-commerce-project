@@ -13,13 +13,12 @@ const Search = () => {
     try {
       const result = await AIchatSession.sendMessage(PROMPT);
 
-      // Log the full response to inspect the structure
-      console.log("Message Object:", result);
+     
 
       // Access the generated summary from the correct path
       const summary = result.response?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
       setAiResponse(summary); // Update state with AI response
-      console.log("Extracted search", summary);
+     
     } catch (error) {
       console.error("Error generating summary:", error);
       setAiResponse("Error generating response"); // Handle error state
@@ -32,8 +31,7 @@ const Search = () => {
       fetchAIResponse();
     }
   }, [searchQuery]);
- console.log("Search field is ", searchQuery)
- console.log("aires",aiResponse)
+
   return (
     <>
     {aiResponse ? (
