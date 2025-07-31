@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react';
-import './admin.css';
+import "../components/Admin/admin.css"
+import Topbar from '../components/Admin/Topbar';
+import Sidebar from '../components/Admin/Sidebar';
 
-import Topbar from './Topbar';
-import Sidebar from './Sidebar';
-import Dashboard from './Dashboard';
-
+import Dashboard from '../components/Admin/Dashboard/Dashboard';
 function Admin() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = useCallback(() => {
