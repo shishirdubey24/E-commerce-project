@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import ShowMendata from "../components/ShowMendata";
+import ShowMendata from "../components/pages/NavPage/ShowMendata";
 
 const Men = () => {
   const mendata = useSelector((store) => store.mendata);
