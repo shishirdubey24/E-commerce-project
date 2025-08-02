@@ -1,41 +1,62 @@
-import express from 'express';
-import bodyParser from 'body-parser'; // Importing the entire body-parser module
-const { json } = bodyParser; // Extracting the json function from the module
-
-import { getStoredItems, storeItems } from './data/items.js';
+{
+  /*
+import express from "express";
+import bodyParser from "body-parser";
+import { getStoredItems, storeItems } from "./data/items.js";
+import cors from "cors";
 
 const app = express();
 
-app.use(json()); // Using the json middleware
+app.use(cors()); // Automatically handles all Access-Control headers
+app.use(bodyParser.json()); // Parse JSON bodies
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
+// Routes
+
+app.get("/items", async (req, res) => {
+  try {
+    const storedItems = await getStoredItems();
+    res.json({ items: storedItems });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch items." });
+  }
 });
 
-app.get('/items', async (req, res) => {
-  const storedItems = await getStoredItems();
-  res.json({ items: storedItems });
+app.get("/items/:id", async (req, res) => {
+  try {
+    const storedItems = await getStoredItems();
+    const item = storedItems.find((item) => item.id === req.params.id);
+    if (!item) {
+      return res.status(404).json({ error: "Item not found." });
+    }
+    res.json({ item });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch item." });
+  }
 });
 
-app.get('/items/:id', async (req, res) => {
-  const storedItems = await getStoredItems();
-  const item = storedItems.find((item) => item.id === req.params.id);
-  res.json({ item });
+app.post("/items", async (req, res) => {
+  try {
+    const existingItems = await getStoredItems();
+    const itemData = req.body;
+    const newItem = {
+      ...itemData,
+      id: Math.random().toString(),
+    };
+    const updatedItems = [newItem, ...existingItems];
+    await storeItems(updatedItems);
+    res.status(201).json({ message: "Stored new item.", item: newItem });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to store item." });
+  }
 });
 
-app.post('/items', async (req, res) => {
-  const existingItems = await getStoredItems();
-  const itemData = req.body;
-  const newItem = {
-    ...itemData,
-    id: Math.random().toString(),
-  };
-  const updatedItems = [newItem, ...existingItems];
-  await storeItems(updatedItems);
-  res.status(201).json({ message: 'Stored new item.', item: newItem });
+// Start server
+app.listen(8080, () => {
+  console.log("Server is running on http://localhost:8080");
 });
 
-app.listen(8080);
+ */
+}
