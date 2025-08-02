@@ -37,5 +37,8 @@ app.post("/create-order", async (req, res) => {
     res.status(500).json({ error: "Order creation failed" });
   }
 });
+app.get("/", (req, res) => {
+  res.send("Cashfree Payment Backend is Live ");
+});
 
 app.listen(5000, () => console.log("Server running on port 5000"));
