@@ -23,9 +23,18 @@ const RegisterUser = () => {
         console.log("User session:", session);
         setUser(session);
         dispatch(loginSuccess(session));
+        
+        // ✅ Store authentication data properly
+        localStorage.setItem("userData", JSON.stringify(session));
+        localStorage.setItem("userEmail", session?.email);
+        localStorage.setItem("isAuthenticated", "true");
       } catch (error) {
         console.log("No active session found", error);
         setUser(null);
+        // Clear any stale authentication data
+        localStorage.removeItem("userData");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("isAuthenticated");
       }
     };
 
@@ -85,23 +94,20 @@ const RegisterUser = () => {
       try {
         const response = await account.createEmailPasswordSession(email, password);
         console.log("Login successful:", response);
-       const userSession = await account.get();
-       setUser(userSession);
+        const userSession = await account.get();
+        setUser(userSession);
         dispatch(loginSuccess(userSession));
-         
-         
-      // Local Storage.setItem(email:"",password:"") send hoga then on CHeck out page we will check that if the email and password field is filled or not..
-       
-      localStorage.setItem("UserData",userSession)
-      localStorage.setItem("Email is",userSession?.email);
-      
+        
+        // ✅ Properly store authentication data
+        localStorage.setItem("userData", JSON.stringify(userSession));
+        localStorage.setItem("userEmail", userSession?.email);
+        localStorage.setItem("isAuthenticated", "true");
 
-       if (userSession.prefs?.role === 'admin') {
-           navigate("/admin");
-         } else {
-           navigate("/");
-}
-  
+        if (userSession.prefs?.role === 'admin') {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
         
       } catch (error) {
         console.error("Login Error:", error);
@@ -116,7 +122,12 @@ const RegisterUser = () => {
       console.log("Logout successful");
       setUser(null);
       dispatch(logout());
-      localStorage.clear();
+      
+      // ✅ Clear all authentication data
+      localStorage.removeItem("userData");
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("isAuthenticated");
+      
       navigate("/User");
     } catch (error) {
       console.error("Logout error:", error);

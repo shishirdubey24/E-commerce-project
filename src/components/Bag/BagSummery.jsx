@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 const BagSummary = () => {
   const navigate = useNavigate();
   
+  // ✅ Get authentication state from Redux
+  const user = useSelector((state) => state.auth.user);
   const bagItemIds = useSelector((state) => state.bag);
   console.log("Received bag item IDs: ", bagItemIds);
 
@@ -22,13 +24,19 @@ const BagSummary = () => {
   let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
 
   const handleOrder = () => {
-     const isAuthenticated=localStorage.getItem("Email is") 
-     console.log("Email is ",isAuthenticated)
-    if (isAuthenticated==null) {
-      
+    // ✅ Improved authentication check
+    const isAuthenticated = user || localStorage.getItem("isAuthenticated") === "true";
+    const userEmail = localStorage.getItem("userEmail");
+    
+    console.log("User authenticated:", isAuthenticated);
+    console.log("User email:", userEmail);
+    console.log("Redux user state:", user);
+    
+    if (!isAuthenticated || !userEmail) {
+      console.log("User not authenticated, redirecting to login");
       navigate("/User");
     } else {
-      
+      console.log("User authenticated, proceeding to checkout");
       navigate("/checkout");
     }
   };

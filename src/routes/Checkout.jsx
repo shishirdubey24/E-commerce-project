@@ -1,9 +1,14 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const bagItems = useSelector((state) => state.bag);
+  
+  // ✅ Get authentication state from Redux
+  const user = useSelector((state) => state.auth.user);
+  
   const CONVENIENCE_FEES = 99;
   let totalMRP = 0;
   let totalDiscount = 0;
@@ -16,13 +21,57 @@ const Checkout = () => {
 
   let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
 
+  // ✅ Authentication check on component mount
+  useEffect(() => {
+    const isAuthenticated = user || localStorage.getItem("isAuthenticated") === "true";
+    const userEmail = localStorage.getItem("userEmail");
+    
+    console.log("Checkout - User authenticated:", isAuthenticated);
+    console.log("Checkout - User email:", userEmail);
+    console.log("Checkout - Redux user state:", user);
+    
+    if (!isAuthenticated || !userEmail) {
+      console.log("User not authenticated on checkout, redirecting to login");
+      navigate("/User");
+    }
+  }, [user, navigate]);
+
   const handlePayment = () => {
-    navigate("/payment");
+    // ✅ Additional check before proceeding to payment
+    const isAuthenticated = user || localStorage.getItem("isAuthenticated") === "true";
+    
+    if (!isAuthenticated) {
+      navigate("/User");
+    } else {
+      navigate("/payment");
+    }
   };
+
+  // ✅ Get user data for display
+  const getUserData = () => {
+    try {
+      const userData = localStorage.getItem("userData");
+      return userData ? JSON.parse(userData) : null;
+    } catch (error) {
+      console.error("Error parsing user data:", error);
+      return null;
+    }
+  };
+
+  const userData = getUserData();
 
   return (
     <div style={styles.checkoutContainer}>
       <h2 style={styles.heading}>Checkout</h2>
+
+      {/* ✅ Display user info if available */}
+      {userData && (
+        <div style={styles.userInfo}>
+          <h3 style={styles.sectionTitle}>User Information</h3>
+          <p><strong>Name:</strong> {userData.name}</p>
+          <p><strong>Email:</strong> {userData.email}</p>
+        </div>
+      )}
 
       <div style={styles.itemList}>
         {bagItems.length > 0 ? (
@@ -53,7 +102,8 @@ const Checkout = () => {
     </div>
   );
 };
-// Inline styles
+
+// Updated styles with user info section
 const styles = {
   checkoutContainer: {
     maxWidth: "500px",
@@ -120,6 +170,7 @@ const styles = {
     borderRadius: "8px",
     marginBottom: "15px",
     boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1)",
+    textAlign: "left",
   },
   loginMessage: {
     color: "red",

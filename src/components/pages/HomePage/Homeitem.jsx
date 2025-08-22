@@ -5,14 +5,18 @@ import { bagActions } from "../../../store/bagSlice";
 import { GrAddCircle } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
    
-const Homeitem = ({ item,isInBag }) => {
+const Homeitem = ({ item, isInBag }) => {
   const dispatch = useDispatch();
+  
   const handleAddToBag = () => {
+    // ✅ Add debug logging
+    console.log("Adding item to bag:", item);
     dispatch(bagActions.addToBag(item));
   };
  
   const handleRemove = () => {
-  
+    // ✅ Add debug logging
+    console.log("Removing item from bag:", item.id);
     dispatch(bagActions.removeFromBag(item.id));
   };
 
@@ -20,24 +24,39 @@ const Homeitem = ({ item,isInBag }) => {
     return <div>No item available</div>; 
   }
 
-  const { image, rating, company,category, item_name, current_price, original_price, discount_percentage } = item;
+  const { 
+    image, 
+    rating, 
+    company, 
+    category, 
+    item_name, 
+    current_price, 
+    original_price, 
+    discount_percentage 
+  } = item;
 
   return (
     <div className="item-container">
-      <img className="item-image" src={image} alt="item image" loading="lazy" />
+      <img 
+        className="item-image" 
+        src={image} 
+        alt={item_name || "Product image"} 
+        loading="lazy" 
+      />
       <div className="rating">
         {rating?.stars ?? 'N/A'} ⭐ | {rating?.count ?? 0}
       </div>
 
       <div className="company-name">{company}</div>
       <div className="company-name">{category}</div>
-
       <div className="item-name">{item_name}</div>
+      
       <div className="price">
-        <span className="current-price">Rs {current_price}</span>
-        <span className="original-price">Rs {original_price}</span>
+        <span className="current-price">₹{current_price}</span>
+        <span className="original-price">₹{original_price}</span>
         <span className="discount">({discount_percentage}% OFF)</span>
       </div>
+      
       {isInBag ? (
         <button
           type="button"
@@ -58,6 +77,5 @@ const Homeitem = ({ item,isInBag }) => {
     </div>
   );
 };
-
 
 export default React.memo(Homeitem);

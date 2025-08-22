@@ -1,16 +1,24 @@
-import {createSlice} from "@reduxjs/toolkit";
+// store/bagSlice.js - SIMPLE AND CLEAN
+import { createSlice } from "@reduxjs/toolkit";
 
 const bagSlice = createSlice({
-  name: 'bag',
+  name: "bag",
   initialState: [],
   reducers: {
     addToBag: (state, action) => {
-      state.push(action.payload); // Add the item if it doesn't already exist     
+      const existingItem = state.find((item) => item.id === action.payload.id);
+      if (!existingItem) {
+        state.push(action.payload);
+      }
     },
-    removeFromBag: (state, action) => { 
-     return state.filter(item => item.id !== action.payload);
-    }, 
-  }
+    removeFromBag: (state, action) => {
+      return state.filter((item) => item.id !== action.payload);
+    },
+    clearBag: () => {
+      return [];
+    },
+  },
 });
+
 export const bagActions = bagSlice.actions;
 export default bagSlice.reducer;

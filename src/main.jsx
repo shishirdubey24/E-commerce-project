@@ -1,3 +1,4 @@
+// main.jsx - Remove PersistGate
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
@@ -8,15 +9,13 @@ import Home from './routes/Home.jsx'
 import Men from './routes/Men.jsx'
 import Admin from './routes/Admin.jsx'
 import { Provider } from 'react-redux'
-import myntraStore from './store/index.js'
-import Search from './components/Search_Input.jsx'
-import RegisterUser from './components/RegesterUser.jsx'
-import Checkout from './components/Checkout.jsx'
+import myntraStore from './store/index.js' // Remove persistor import
+import Search from './components/SearchBar/Search_Input.jsx'
+import RegisterUser from './components/AUTH/User/RegesterUser.jsx'
+import Checkout from './routes/Checkout.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import useOnlineStatus from './components/useOnlineStatus.js' // 👈 Import the hook
-import Topbar from './routes/Topbar.jsx'
-import Sidebar from './routes/Sidebar.jsx'
-import Dashboard from './routes/Dashboard.jsx'
+import useOnlineStatus from './components/useOnlineStatus.js' 
+import PaymentBtn from './components/Payment/PaymentBtn.jsx'
 
 const router = createBrowserRouter([
   {
@@ -30,9 +29,7 @@ const router = createBrowserRouter([
       { path: '/admin', element: <Admin /> },
       { path: 'Search', element: <Search /> },
       { path: '/checkout', element: <Checkout /> },
-       {path:'/topbar',element:<Topbar/> },
-       {path:'/sidebar',element:<Sidebar/>},
-       {path:'/dashboard',element:<Dashboard/>}
+      { path: '/payment', element: <PaymentBtn /> },
     ],
   },
 ])
@@ -52,7 +49,7 @@ function RootApp() {
         alignItems: 'center',
         fontFamily: 'sans-serif',
       }}>
-        <h1>🛜 You’re Offline</h1>
+        <h1>🛜 You re Offline</h1>
         <p>Please check your internet connection.</p>
       </div>
     )
@@ -61,6 +58,7 @@ function RootApp() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={myntraStore}>
+        {/* ✅ Remove PersistGate - just use RouterProvider directly */}
         <RouterProvider router={router} />
       </Provider>
     </QueryClientProvider>

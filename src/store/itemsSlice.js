@@ -1,3 +1,4 @@
+// store/itemsSlice.js - SIMPLE AND CLEAN
 import { createSlice } from "@reduxjs/toolkit";
 
 const itemsSlice = createSlice({
@@ -5,11 +6,13 @@ const itemsSlice = createSlice({
   initialState: [],
   reducers: {
     addInitialItems: (state, action) => {
-      return action.payload;
+      return Array.isArray(action.payload) ? action.payload : [];
     },
     addProduct: (state, action) => {
-      console.log("Form added product is", action.payload);
       state.push(action.payload);
+    },
+    clearItems: () => {
+      return [];
     },
   },
 });
