@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Enhanced CORS configuration for localhost
+//  Enhanced CORS configuration for localhost
 const corsOptions = {
   origin: [
     "http://localhost:3000",
@@ -17,7 +17,7 @@ const corsOptions = {
     "http://localhost:8080",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
-    "https://dev-by-shishir.netlify.app", // Your production URL
+    "https://trendwired.netlify.app",
   ],
   credentials: true,
   optionsSuccessStatus: 200,
