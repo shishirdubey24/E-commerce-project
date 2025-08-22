@@ -9,21 +9,23 @@ dotenv.config();
 
 const app = express();
 
-//  Enhanced CORS configuration for localhost
 const corsOptions = {
   origin: [
     "http://localhost:3000",
-    "http://localhost:5173", // Vite default port
+    "http://localhost:5173",
     "http://localhost:8080",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
-    "https://trendwired.netlify.app",
+    "https://trendwired.netlify.app", // ✅ live frontend
   ],
   credentials: true,
-  optionsSuccessStatus: 200,
+  methods: ["GET", "POST", "OPTIONS"], // ✅ explicitly allow OPTIONS
+  allowedHeaders: ["Content-Type", "Authorization"], // ✅ allow headers
 };
 
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // ✅ handle preflight requests
+
 app.use(express.json());
 
 const clientId = process.env.CASHFREE_API_KEY;
@@ -33,7 +35,7 @@ const cashfree = new Cashfree(CFEnvironment.SANDBOX, clientId, secret);
 
 app.post("/create-order", async (req, res) => {
   try {
-    console.log("Received order request:", req.body); // ✅ Add logging
+    console.log("Received order request:", req.body);
 
     const response = await cashfree.PGCreateOrder({
       order_amount: "1",
@@ -48,7 +50,7 @@ app.post("/create-order", async (req, res) => {
       },
     });
 
-    console.log("Order created successfully"); // ✅ Add logging
+    console.log("Order created successfully");
     res.json({ paymentSessionId: response.data.payment_session_id });
   } catch (err) {
     console.log("Order creation error:", err.response?.data || err);
@@ -60,7 +62,6 @@ app.get("/", (req, res) => {
   res.send("Cashfree Payment Backend is Live");
 });
 
-// ✅ Add health check endpoint
 app.get("/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
@@ -68,7 +69,5 @@ app.get("/health", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
-  // ✅ Listen on all interfaces
   console.log(`Server running on port ${PORT}`);
-  console.log(`Test URL: http://localhost:${PORT}`);
 });
