@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { account, ID, databases } from "../lib/appwrite";
-import { useNavigate } from "react-router";
+import { useNavigate,useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { loginSuccess, logout } from "../../../store/authSlice";
 
 const RegisterUser = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isSignedIn, setSignedIn] = useState(true);
   const [errormsg, setErrormsg] = useState(null);
   const [user, setUser] = useState(null);
@@ -20,24 +21,19 @@ const RegisterUser = () => {
     const checkSession = async () => {
       try {
         const session = await account.get();
-        console.log("User session:", session);
         setUser(session);
         dispatch(loginSuccess(session));
-        
-        // ✅ Store authentication data properly
         localStorage.setItem("userData", JSON.stringify(session));
         localStorage.setItem("userEmail", session?.email);
         localStorage.setItem("isAuthenticated", "true");
       } catch (error) {
-        console.log("No active session found", error);
+         console.log(error)
         setUser(null);
-        // Clear any stale authentication data
         localStorage.removeItem("userData");
         localStorage.removeItem("userEmail");
         localStorage.removeItem("isAuthenticated");
       }
     };
-
     checkSession();
   }, [dispatch]);
 
@@ -61,11 +57,9 @@ const RegisterUser = () => {
     }
 
     if (!isSignedIn) {
-      // Signup Process
+      // Signup
       try {
         const response = await account.create(ID.unique(), email, password, name);
-        console.log("User created:", response);
-
         const verificationToken = Math.random().toString(36).substr(2, 10);
         const documentId = ID.unique();
 
@@ -81,36 +75,30 @@ const RegisterUser = () => {
           }
         );
 
-        // Switch to Sign In mode after successful sign-up
         setSignedIn(true);
         setErrormsg("Signup successful. Please sign in now.");
-
       } catch (error) {
-        console.error("Signup Error:", error);
         setErrormsg(error.message || "Signup failed. Please try again.");
       }
     } else {
-      // Login Process
+      // Login
       try {
-        const response = await account.createEmailPasswordSession(email, password);
-        console.log("Login successful:", response);
+        await account.createEmailPasswordSession(email, password);
         const userSession = await account.get();
         setUser(userSession);
         dispatch(loginSuccess(userSession));
-        
-        // ✅ Properly store authentication data
+
         localStorage.setItem("userData", JSON.stringify(userSession));
         localStorage.setItem("userEmail", userSession?.email);
         localStorage.setItem("isAuthenticated", "true");
 
-        if (userSession.prefs?.role === 'admin') {
-          navigate("/admin");
-        } else {
-          navigate("/");
-        }
-        
+        // ✅ Redirect to intended page or home
+        const redirectPath = location.state?.from || "/";
+        navigate(redirectPath);
+
       } catch (error) {
-        console.error("Login Error:", error);
+         console.log(error)
+
         setErrormsg("Invalid email or password.");
       }
     }
@@ -119,15 +107,11 @@ const RegisterUser = () => {
   const handleLogoutUser = async () => {
     try {
       await account.deleteSession("current");
-      console.log("Logout successful");
       setUser(null);
       dispatch(logout());
-      
-      // ✅ Clear all authentication data
       localStorage.removeItem("userData");
       localStorage.removeItem("userEmail");
       localStorage.removeItem("isAuthenticated");
-      
       navigate("/User");
     } catch (error) {
       console.error("Logout error:", error);
@@ -171,73 +155,15 @@ const RegisterUser = () => {
 };
 
 const styles = {
-  loginContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "50px",
-  },
-  heading: {
-    fontSize: "24px",
-    fontWeight: "bold",
-  },
-  formContainer: {
-    width: "350px",
-    padding: "20px",
-    backgroundColor: "black",
-    color: "white",
-    borderRadius: "8px",
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-  },
-  formTitle: {
-    fontSize: "22px",
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: "15px",
-  },
-  inputField: {
-    width: "100%",
-    padding: "10px",
-    margin: "8px 0",
-    backgroundColor: "#333",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-  },
-  errorText: {
-    color: "red",
-    fontSize: "14px",
-    textAlign: "center",
-    margin: "5px 0",
-  },
-  submitBtn: {
-    width: "100%",
-    padding: "10px",
-    backgroundColor: "#ff4b5c",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontWeight: "bold",
-    marginTop: "10px",
-  },
-  toggleText: {
-    textAlign: "center",
-    color: "white",
-    cursor: "pointer",
-    marginTop: "15px",
-  },
-  logoutBtn: {
-    width: "100%",
-    padding: "10px",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontWeight: "bold",
-    marginTop: "10px",
-  },
+  loginContainer: { display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" },
+  heading: { fontSize: "24px", fontWeight: "bold" },
+  formContainer: { width: "350px", padding: "20px", backgroundColor: "black", color: "white", borderRadius: "8px" },
+  formTitle: { fontSize: "22px", fontWeight: "bold", textAlign: "center", marginBottom: "15px" },
+  inputField: { width: "100%", padding: "10px", margin: "8px 0", backgroundColor: "#333", color: "white", border: "none", borderRadius: "5px" },
+  errorText: { color: "red", fontSize: "14px", textAlign: "center", margin: "5px 0" },
+  submitBtn: { width: "100%", padding: "10px", backgroundColor: "#ff4b5c", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontWeight: "bold", marginTop: "10px" },
+  toggleText: { textAlign: "center", color: "white", cursor: "pointer", marginTop: "15px" },
+  logoutBtn: { width: "100%", padding: "10px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontWeight: "bold", marginTop: "10px" },
 };
 
 export default RegisterUser;
