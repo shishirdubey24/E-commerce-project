@@ -16,11 +16,11 @@ const corsOptions = {
     "http://localhost:8080",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
-    "https://trendwired.netlify.app", // ✅ live frontend
+    "https://trendwired.netlify.app",
   ],
   credentials: true,
-  methods: ["GET", "POST", "OPTIONS"], // ✅ explicitly allow OPTIONS
-  allowedHeaders: ["Content-Type", "Authorization"], // ✅ allow headers
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
@@ -46,7 +46,7 @@ app.post("/create-order", async (req, res) => {
         customer_phone: "9999999999",
       },
       order_meta: {
-        return_url: "https://dev-by-shishir.netlify.app/success",
+        return_url: "https://trendwired.netlify.app/success",
       },
     });
 
