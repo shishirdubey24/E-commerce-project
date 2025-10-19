@@ -4,11 +4,15 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { Cashfree, CFEnvironment } from "cashfree-pg";
-
+import fetchRouter from "../Router/FetchRouter.js";
+import path from "path";
+import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
-
+// Generate __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const corsOptions = {
   origin: [
     "http://localhost:3000",
@@ -57,6 +61,23 @@ app.post("/create-order", async (req, res) => {
     res.status(500).json({ error: "Order creation failed" });
   }
 });
+
+app.use("/fetch", fetchRouter);
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "../images"), {
+    maxAge: "30d", // Cache for 30 days
+    immutable: true, // Tells browser: "These files won't change"
+    etag: true, // Allows cache validation if file ever changes
+    lastModified: true, // Sends 'Last-Modified' header for conditional requests
+    setHeaders: (res) => {
+      // ✅ Explicitly add Cache-Control header
+      res.setHeader("Cache-Control", "public, max-age=2592000, immutable");
+      // Optional: Slight security hardening
+      res.setHeader("X-Content-Type-Options", "nosniff");
+    },
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Cashfree Payment Backend is Live");

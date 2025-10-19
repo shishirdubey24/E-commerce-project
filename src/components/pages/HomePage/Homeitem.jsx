@@ -10,13 +10,11 @@ const Homeitem = ({ item, isInBag }) => {
   
   const handleAddToBag = () => {
     // ✅ Add debug logging
-    console.log("Adding item to bag:", item);
     dispatch(bagActions.addToBag(item));
   };
  
   const handleRemove = () => {
     // ✅ Add debug logging
-    console.log("Removing item from bag:", item.id);
     dispatch(bagActions.removeFromBag(item.id));
   };
 
@@ -39,7 +37,8 @@ const Homeitem = ({ item, isInBag }) => {
     <div className="item-container">
       <img 
         className="item-image" 
-        src={image} 
+       src={image}
+       
         alt={item_name || "Product image"} 
         loading="lazy" 
       />
@@ -77,5 +76,6 @@ const Homeitem = ({ item, isInBag }) => {
     </div>
   );
 };
-
-export default React.memo(Homeitem);
+export default React.memo(Homeitem, (prev, next) => {
+  return prev.item.id === next.item.id && prev.isInBag === next.isInBag;
+});

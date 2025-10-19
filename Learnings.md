@@ -63,3 +63,22 @@ i have fetched data inside the new file under hokks folder,now i ma thinking tha
 2:: agar hamne isi file me shimmer UI dikhaya to kya ye file apna sole purpose loose nahi kar degi ?? kyuki hum 1 file me sirf 1 kaam hi karana sikh rahe hain..??
 
 2::-> UI folder ke andar maine 1 file bnayi.
+
+date 29/08/2025
+working with index.html file of hte project . today i had added the favicon or i would say ,today i have added the icon into my project and changed its title name also. what i learn new about it is this is the file where we write metadata as export for SEO relted stuff
+
+date 12/10/2025
+1.data fetching with page and items limit , have stopped the defult behaviour of react query 2. 2. app.post("/fetch",fetchRouter)//its wrong app.use is correct reason pta karna hai ?? 3.
+
+3. Error: ENOENT: no such file or directory, open 'C:\vite-project\myntra-react-project\actual-backend\Controller\items.json'
+   at Object.readFileSync (node:fs:442:20)
+   at getData (file:///C:/vite-project/myntra-react-project/actual-backend/Controller/Data/GetData.js:16:21)
+
+Date==>19-10-2025
+
+1. Performace improvment,it has many parts in frontend ,backend,network,browser
+2. in frontend part, we have paggination so that browser does not get overvhlemed with products..
+3. we also have lazy loading technique which loads the content as per scroll.
+4. now there comes the backend part issue can be
+   1. express is slow,2. images are being served one by one . 3. caching headers are missing.
+5. now we will move to the backend part issues
