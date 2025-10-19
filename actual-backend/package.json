@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node Server/Server.js",
     "dev": " nodemon ./Server/Server.js"
   },
   "keywords": [],
