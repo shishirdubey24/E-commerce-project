@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const items = useSelector((store) => store.items);
-console.log("Paginated items re", items.map(i => i.image));
 
   const bagItems = useSelector(store => store.bag);
   const[CurrentPage,setCurrentPage]=useState(1);
@@ -22,7 +21,6 @@ console.log("Paginated items re", items.map(i => i.image));
   if (page >= 1 && page <= TotalPages) setCurrentPage(page);
 };
 useEffect(()=>{
-  console.log("the current page is",CurrentPage)
 },[CurrentPage])
   return (
     <main>
