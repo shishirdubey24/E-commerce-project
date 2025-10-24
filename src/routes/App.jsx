@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {HomeDataMap} from "../components/hooks/HomeDataMap";
 import {NavbarFetch} from "../components/hooks/NavbarFetch";
 function App() {
-   console.log(import.meta.env.VITE_APPWRITE_URL)
   return (
     <>
      <Header/>
