@@ -3,9 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 export const Fetchdata = ({ currentPage, itemsPerPage }) => {
   const page = currentPage;
   const limit = itemsPerPage;
-  console.log(page);
-  console.log(limit);
-
   return useQuery({
     queryKey: ["products", page, limit],
     queryFn: async () => {
