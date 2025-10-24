@@ -7,8 +7,7 @@ import { itemsActions } from "../../store/itemsSlice";
 
 import ShimmerUI from "../UI/ShimmerUI";
 export const HomeDataMap = ({currentPage,itemsPerPage}) => {
-  console.log(currentPage)
-  console.log(itemsPerPage)
+
 
   const { data, isLoading, error } = Fetchdata({currentPage,itemsPerPage});
   const dispatch = useDispatch();
