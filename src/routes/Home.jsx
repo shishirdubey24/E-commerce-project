@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 import Homeitem from "../components/pages/HomePage/Homeitem";
 import { HomeDataMap } from "../components/hooks/HomeDataMap";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const Home = () => {
   const items = useSelector((store) => store.items);
@@ -12,16 +12,15 @@ const Home = () => {
   const TotalPages=5;
   const itemsPerPage=20;
   
-  //handle page logic
+ 
   const handlePage = (e) => {
   e.preventDefault();
   const li = e.target.closest(".page-item");
-  if (!li || !li.id) return; // guard condition
+  if (!li || !li.id) return; 
   const page = Number(li.id);
   if (page >= 1 && page <= TotalPages) setCurrentPage(page);
 };
-useEffect(()=>{
-},[CurrentPage])
+
   return (
     <main>
       <HomeDataMap currentPage={CurrentPage} itemsPerPage={itemsPerPage}/> 
