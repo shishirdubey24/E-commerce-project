@@ -7,7 +7,7 @@ export const Fetchdata = ({ currentPage, itemsPerPage }) => {
     queryKey: ["products", page, limit],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/fetch/data?page=${page}&limit=${limit}`
+        `https://e-commerce-project-76em.onrender.com/fetch/data?page=${page}&limit=${limit}`
       );
       if (!res.ok) throw new Error("Failed to fetch data from server");
       const data = await res.json();
