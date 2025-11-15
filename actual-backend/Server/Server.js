@@ -3,13 +3,17 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { Cashfree, CFEnvironment } from "cashfree-pg";
-import fetchRouter from "../Router/FetchRouter.js";
+import ConnectDb from "../Model/MongoDB.js";
+
+import FetchRouter from "../Router/FetchRouter.js";
+import AuthRouter from "../Router/AuthRouter.js";
+import PaymentRouter from "../Router/PaymentRouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
+ConnectDb();
 // Generate __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,41 +32,13 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ✅ handle preflight requests
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
-const clientId = process.env.CASHFREE_API_KEY;
-const secret = process.env.CASHFREE_SECRET_KEY;
-
-const cashfree = new Cashfree(CFEnvironment.SANDBOX, clientId, secret);
-
-app.post("/create-order", async (req, res) => {
-  try {
-    console.log("Received order request:", req.body);
-
-    const response = await cashfree.PGCreateOrder({
-      order_amount: "1",
-      order_currency: "INR",
-      customer_details: {
-        customer_id: "testuser001",
-        customer_email: "test@gmail.com",
-        customer_phone: "9999999999",
-      },
-      order_meta: {
-        return_url: "https://trendwired.netlify.app/success",
-      },
-    });
-
-    console.log("Order created successfully");
-    res.json({ paymentSessionId: response.data.payment_session_id });
-  } catch (err) {
-    console.log("Order creation error:", err.response?.data || err);
-    res.status(500).json({ error: "Order creation failed" });
-  }
-});
-
-app.use("/fetch", fetchRouter);
+app.use("/fetch", FetchRouter);
+app.use("/payment", PaymentRouter);
+app.use("/auth", AuthRouter);
 app.use(
   "/images",
   express.static(path.join(__dirname, "../images"), {
@@ -78,15 +54,6 @@ app.use(
     },
   })
 );
-
-app.get("/", (req, res) => {
-  res.send("Cashfree Payment Backend is Live");
-});
-
-app.get("/health", (req, res) => {
-  res.json({ status: "OK", timestamp: new Date().toISOString() });
-});
-
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
