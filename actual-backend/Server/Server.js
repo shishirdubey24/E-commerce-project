@@ -35,7 +35,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
-
+app.use("/webhooks/cashfree", express.raw({ type: "*/*" }));
 app.use(express.json());
 
 app.use("/fetch", FetchRouter);
