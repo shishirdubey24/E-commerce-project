@@ -49,8 +49,10 @@ router.post("/create-order", async (req, res) => {
       status: "pending",
     });
 
-    // HARD-CODED FRONTEND SUCCESS URL
     const FRONTEND_SUCCESS_URL = "https://trendwired.netlify.app/success";
+    const BACKEND_BASE =
+      process.env.BACKEND_BASE_URL ||
+      "https://e-commerce-project-76em.onrender.com";
 
     const response = await cashfree.PGCreateOrder({
       order_id: orderId,
@@ -64,6 +66,7 @@ router.post("/create-order", async (req, res) => {
       },
       order_meta: {
         return_url: `${FRONTEND_SUCCESS_URL}?orderId=${orderId}`,
+        notify_url: `${BACKEND_BASE}/webhooks/cashfree`,
       },
     });
 
