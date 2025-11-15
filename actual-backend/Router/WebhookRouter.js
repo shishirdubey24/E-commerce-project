@@ -1,43 +1,68 @@
-// backend Router/WebhookRouter.js
+// actual-backend/Router/WebhookRouter.js
 import express from "express";
 import Order from "../Model/Order.js";
-
+import { Buffer } from "buffer";
 const router = express.Router();
 
-// Accept raw body so we can log & parse exactly what Cashfree sends
+// Handle Cashfree webhook - accept raw body + handle cases where body is already parsed
 router.post("/cashfree", express.raw({ type: "*/*" }), async (req, res) => {
   try {
-    // Log headers and raw body for debugging
-    console.log("Incoming Cashfree webhook headers:", req.headers);
+    console.log("Incoming Cashfree webhook headers:", req.headers || {});
 
-    let payload;
-    try {
-      payload = JSON.parse(req.body.toString());
-    } catch (e) {
-      console.warn("Webhook: failed to parse JSON from raw body", e);
-      payload = {};
+    let payload = {};
+
+    // CASE 1: Raw Buffer (correct scenario for webhooks)
+    if (Buffer.isBuffer(req.body)) {
+      const rawText = req.body.toString();
+      try {
+        payload = JSON.parse(rawText);
+      } catch {
+        console.warn("Webhook: Could not parse raw body as JSON");
+      }
     }
+
+    // CASE 2: Body is already parsed into an object
+    if (
+      typeof req.body === "object" &&
+      req.body !== null &&
+      !Buffer.isBuffer(req.body) &&
+      Object.keys(req.body).length > 0
+    ) {
+      payload = req.body;
+    }
+
+    // CASE 3: Body is a string
+    if (typeof req.body === "string") {
+      try {
+        payload = JSON.parse(req.body);
+      } catch {
+        console.warn("Webhook: req.body was string but not valid JSON");
+      }
+    }
+
     console.log("Incoming Cashfree webhook payload:", payload);
 
-    // Try multiple possible keys (Cashfree payload fields may vary)
+    // Extract orderId & status from multiple possible Cashfree formats
     const orderId =
       payload.order_id ||
-      payload.reference_id ||
       payload.orderId ||
-      payload.orderid ||
-      payload.referenceId;
+      payload.reference_id ||
+      payload.referenceId ||
+      payload.data?.order_id ||
+      payload.data?.orderId;
+
     const order_status =
       payload.order_status ||
-      payload.txStatus ||
       payload.status ||
-      payload.orderStatus;
+      payload.txStatus ||
+      payload.data?.order_status ||
+      payload.data?.status;
 
     if (!orderId) {
       console.warn("Webhook missing order id, payload:", payload);
       return res.status(400).send("missing order id");
     }
 
-    // Normalize status to lower-case string for DB
     const normalizedStatus = (order_status || "unknown")
       .toString()
       .toLowerCase();
