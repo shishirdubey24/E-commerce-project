@@ -26,14 +26,24 @@ const Checkout = () => {
     }
   }, [navigate]);
 
-  const handlePayment = () => {
-    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-    if (!isAuthenticated) {
-      navigate("/User", { state: { from: "/checkout" } });
-    } else {
-      navigate("/payment");
-    }
-  };
+const handlePayment = () => {
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  if (!isAuthenticated) {
+    navigate("/User", { state: { from: "/checkout" } });
+  } else {
+    // Pass payment details to payment page
+    navigate("/payment", {
+      state: {
+        amount: finalPayment,
+        items: bagItems,
+        userData: userData,
+        totalItems: totalItems,
+        totalMRP: totalMRP,
+        discount: totalDiscount,
+      }
+    });
+  }
+};
 
   const getUserData = () => {
     try {
