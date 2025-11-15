@@ -8,6 +8,8 @@ import ConnectDb from "../Model/MongoDB.js";
 import FetchRouter from "../Router/FetchRouter.js";
 import AuthRouter from "../Router/AuthRouter.js";
 import PaymentRouter from "../Router/PaymentRouter.js";
+import OrderRouter from "../Router/OrderRouter.js";
+import WebhookRouter from "../Router/WebhookRouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
 dotenv.config();
@@ -39,6 +41,8 @@ app.use(express.json());
 app.use("/fetch", FetchRouter);
 app.use("/payment", PaymentRouter);
 app.use("/auth", AuthRouter);
+app.use("/orders", OrderRouter);
+app.use("/webhooks", WebhookRouter);
 app.use(
   "/images",
   express.static(path.join(__dirname, "../images"), {
