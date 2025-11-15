@@ -1,27 +1,54 @@
-// src/routes/Success.jsx
-import { useSearchParams } from "react-router-dom";
+// frontend/src/pages/Success.jsx
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Success() {
-  const [searchParams] = useSearchParams();
-  const orderId = searchParams.get("order_id"); 
+  const [order, setOrder] = useState(null);
+  const loc = useLocation();
+  const params = new URLSearchParams(loc.search);
+  const orderId = params.get("orderId");
+
+  useEffect(() => {
+    if (!orderId) return;
+
+    (async () => {
+      try {
+        const res = await fetch(
+          `https://e-commerce-project-76em.onrender.com/orders/${orderId}`
+        );
+
+        if (!res.ok) throw new Error("Failed to fetch order");
+
+        const json = await res.json();
+        setOrder(json.order);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, [orderId]);
+
+  if (!order) return <div>Loading order details...</div>;
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
-      <h1 className="text-3xl font-bold text-green-600">🎉 Payment Successful!</h1>
-      <p className="mt-4 text-lg text-gray-700">
-        Thank you for your purchase.
-      </p>
-      {orderId && (
-        <p className="mt-2 text-gray-500">
-          Your Order ID: <span className="font-mono">{orderId}</span>
-        </p>
-      )}
-      <a
-        href="/"
-        className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition"
-      >
-        Go back to Home
-      </a>
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: 20 }}>
+      <h2>Order {order.orderId}</h2>
+      <p>Status: {order.status}</p>
+
+      <h3>Customer</h3>
+      <p>{order.customer.name}</p>
+      <p>{order.customer.email}</p>
+      <p>{order.customer.phone}</p>
+
+      <h3>Items</h3>
+      <ul>
+        {order.items.map((it, idx) => (
+          <li key={idx}>
+            {it.name} — {it.qty} × ₹{it.price}
+          </li>
+        ))}
+      </ul>
+
+      <h3>Total: ₹{order.amount}</h3>
     </div>
   );
 }
