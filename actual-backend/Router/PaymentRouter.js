@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import express from "express";
 import { Cashfree, CFEnvironment } from "cashfree-pg";
-import Order from "../Model/Order.js"; // <- ADD THIS
+import Order from "../Model/Order.js";
 
 const router = express.Router();
 
@@ -49,8 +49,9 @@ router.post("/create-order", async (req, res) => {
       status: "pending",
     });
 
-    const FRONTEND_SUCCESS_URL =
-      process.env.FRONTEND_SUCCESS_URL || "http://localhost:3000/success";
+    // HARD-CODED FRONTEND SUCCESS URL
+    const FRONTEND_SUCCESS_URL = "https://trendwired.netlify.app/success";
+
     const response = await cashfree.PGCreateOrder({
       order_id: orderId,
       order_amount: amountNum.toString(),
