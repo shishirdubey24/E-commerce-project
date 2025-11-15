@@ -32,7 +32,14 @@ router.post("/create-order", async (req, res) => {
       order_amount: order_amount.toString(), //  Use dynamic amount
       order_currency: "INR",
       customer_details: {
-        customer_id: customer_id || "testuser001",
+        customer_id: (
+          customer_id ||
+          (customer_email || "").split("@")[0] ||
+          `user_${Date.now()}`
+        )
+          .toString()
+          .replace(/[^A-Za-z0-9_-]/g, "_")
+          .slice(0, 64),
         customer_email: customer_email || "test@gmail.com",
         customer_phone: customer_phone || "9999999999",
         customer_name: customer_name || "Guest User",
