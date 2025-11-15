@@ -2,16 +2,16 @@
 import express from "express";
 import Order from "../Model/Order.js";
 import { Buffer } from "buffer";
+
 const router = express.Router();
 
-// Handle Cashfree webhook - accept raw body + handle cases where body is already parsed
 router.post("/cashfree", express.raw({ type: "*/*" }), async (req, res) => {
   try {
     console.log("Incoming Cashfree webhook headers:", req.headers || {});
 
     let payload = {};
 
-    // CASE 1: Raw Buffer (correct scenario for webhooks)
+    // Raw buffer (preferred)
     if (Buffer.isBuffer(req.body)) {
       const rawText = req.body.toString();
       try {
@@ -21,7 +21,7 @@ router.post("/cashfree", express.raw({ type: "*/*" }), async (req, res) => {
       }
     }
 
-    // CASE 2: Body is already parsed into an object
+    // Already-parsed object
     if (
       typeof req.body === "object" &&
       req.body !== null &&
@@ -31,7 +31,7 @@ router.post("/cashfree", express.raw({ type: "*/*" }), async (req, res) => {
       payload = req.body;
     }
 
-    // CASE 3: Body is a string
+    // String body
     if (typeof req.body === "string") {
       try {
         payload = JSON.parse(req.body);
@@ -42,21 +42,25 @@ router.post("/cashfree", express.raw({ type: "*/*" }), async (req, res) => {
 
     console.log("Incoming Cashfree webhook payload:", payload);
 
-    // Extract orderId & status from multiple possible Cashfree formats
+    // *** Important: check the deeply nested path seen in your logs ***
     const orderId =
-      payload.order_id ||
-      payload.orderId ||
-      payload.reference_id ||
-      payload.referenceId ||
-      payload.data?.order_id ||
-      payload.data?.orderId;
+      payload?.data?.order?.order_id || // <--- required for your payload
+      payload?.data?.order_id ||
+      payload?.data?.orderId ||
+      payload?.order_id ||
+      payload?.orderId ||
+      payload?.reference_id ||
+      payload?.referenceId ||
+      payload?.data?.reference_id;
 
     const order_status =
-      payload.order_status ||
-      payload.status ||
-      payload.txStatus ||
-      payload.data?.order_status ||
-      payload.data?.status;
+      payload?.data?.payment?.payment_status || // e.g. PAYMENT_SUCCESS_WEBHOOK -> data.payment.payment_status
+      payload?.data?.order_status ||
+      payload?.order_status ||
+      payload?.status ||
+      payload?.txStatus ||
+      payload?.data?.txStatus ||
+      payload?.data?.payment?.status;
 
     if (!orderId) {
       console.warn("Webhook missing order id, payload:", payload);
