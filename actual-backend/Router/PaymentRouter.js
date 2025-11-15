@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import express from "express";
 import { Cashfree, CFEnvironment } from "cashfree-pg";
+import Order from "../Model/Order.js"; // <- ADD THIS
 
 const router = express.Router();
 
@@ -23,7 +24,7 @@ router.post("/create-order", async (req, res) => {
       customer_email,
       customer_phone,
       customer_name,
-      items = [], // send items from frontend
+      items = [],
     } = req.body;
 
     const amountNum = Number(order_amount);
@@ -33,7 +34,6 @@ router.post("/create-order", async (req, res) => {
 
     const orderId = `ORDER_${Date.now()}`;
 
-    // create and save order (status = pending)
     const orderDoc = await Order.create({
       orderId,
       amount: amountNum,
@@ -49,7 +49,6 @@ router.post("/create-order", async (req, res) => {
       status: "pending",
     });
 
-    // create Cashfree order; replace the return_url with your frontend URL
     const FRONTEND_SUCCESS_URL =
       process.env.FRONTEND_SUCCESS_URL || "http://localhost:3000/success";
     const response = await cashfree.PGCreateOrder({
@@ -64,7 +63,6 @@ router.post("/create-order", async (req, res) => {
       },
       order_meta: {
         return_url: `${FRONTEND_SUCCESS_URL}?orderId=${orderId}`,
-        // optional: notify_url: `https://your-backend.com/webhook/cashfree`
       },
     });
 
