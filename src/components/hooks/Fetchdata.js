@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 
 const BASE_URL = "https://e-commerce-project-76em.onrender.com";
-export const Fetchdata = () => {
-  const category = useSelector(
+export const Fetchdata = ({ categoryOverride } = {}) => {
+  const reduxCategory = useSelector(
     (state) => state.category?.selected || "featured"
   );
-
+  const category = categoryOverride ?? reduxCategory;
   return useQuery({
     queryKey: ["products", category],
     queryFn: async () => {
@@ -16,9 +16,6 @@ export const Fetchdata = () => {
       const url = params.toString()
         ? `${BASE_URL}/fetch/data?${params.toString()}`
         : `${BASE_URL}/fetch/data`;
-
-      // client-side debug
-      // (remove or guard with env flag later)
 
       console.log("[Fetchdata] requesting:", url, "category:", category);
 
