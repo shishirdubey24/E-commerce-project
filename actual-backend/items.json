@@ -4,6 +4,7 @@
       "id": "001",
       "image": "1.webp",
       "company": "Carlton London",
+      "category": "Featured",
       "item_name": "Rhodium-Plated CZ Floral Studs",
       "original_price": 1045,
       "current_price": 606,
@@ -19,6 +20,7 @@
       "id": "002",
       "image": "2.webp",
       "company": "CUKOO",
+      "category": "Featured",
       "item_name": "Women Padded Halter Neck Swimming Dress",
       "original_price": 2599,
       "current_price": 1507,
@@ -34,6 +36,7 @@
       "id": "003",
       "image": "3.webp",
       "company": "NUEVOSDAMAS",
+      "category": "Featured",
       "item_name": "Women Red & White Printed A-Line Knee-Length Skirts",
       "original_price": 1599,
       "current_price": 495,
@@ -49,6 +52,7 @@
       "id": "004",
       "image": "4.webp",
       "company": "ADidAS",
+      "category": "Featured",
       "item_name": "Indian Cricket ODI Jersey",
       "original_price": 999,
       "current_price": 999,
@@ -64,6 +68,7 @@
       "id": "005",
       "image": "5.webp",
       "company": "Roadster",
+      "category": "Featured",
       "item_name": "Pure Cotton T-shirt",
       "original_price": 1399,
       "current_price": 489,
@@ -79,6 +84,7 @@
       "id": "006",
       "image": "6.webp",
       "company": "Nike",
+      "category": "Featured",
       "item_name": "Men ReactX Running Shoes",
       "original_price": 14995,
       "current_price": 14995,
@@ -94,6 +100,7 @@
       "id": "007",
       "image": "7.webp",
       "company": "The Indian Garage Co",
+      "category": "Featured",
       "item_name": "Men Slim Fit Regular Shorts",
       "original_price": 1599,
       "current_price": 639,
@@ -107,6 +114,7 @@
       "id": "008",
       "image": "8.webp",
       "company": "Nivea",
+      "category": "Featured",
       "item_name": "Men Fresh Deodrant 150ml",
       "original_price": 285,
       "current_price": 142,
@@ -554,6 +562,23 @@
       }
     },
     {
+      "id": "036",
+      "image": "36.webp",
+      "company": "H&M",
+      "category": "Chinos",
+
+      "item_name": "Men's Slim Tapered Chinos",
+      "original_price": 2699,
+      "current_price": 999,
+      "discount_percentage": 28,
+      "return_period": 30,
+      "delivery_date": "09 Oct 2023",
+      "rating": {
+        "stars": 4.5,
+        "count": 1500
+      }
+    },
+    {
       "id": "037",
       "image": "37.webp",
       "company": "U.S. Polo Assn.",
@@ -572,7 +597,7 @@
     },
     {
       "id": "038",
-      "image": "38.webp",
+      "image": "37.webp",
       "company": "Levi's",
       "category": "Jeans",
 
@@ -589,7 +614,7 @@
     },
     {
       "id": "039",
-      "image": "39.webp",
+      "image": "37.webp",
       "company": "Wrangler",
       "category": "Jeans",
 
