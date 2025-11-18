@@ -12,13 +12,17 @@ import OrderRouter from "../Router/OrderRouter.js";
 import WebhookRouter from "../Router/WebhookRouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
+
 dotenv.config();
 
 const app = express();
 ConnectDb();
+
 // Generate __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+//  1. CORS - Must be first for preflight requests
 const corsOptions = {
   origin: [
     "http://localhost:3000",
@@ -35,29 +39,67 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
-app.use("/webhooks/cashfree", express.raw({ type: "*/*" }));
-app.use(express.json());
 
-app.use("/fetch", FetchRouter);
-app.use("/payment", PaymentRouter);
-app.use("/auth", AuthRouter);
-app.use("/orders", OrderRouter);
-app.use("/webhooks", WebhookRouter);
+//  2. Logging middleware - Before body parsing to see raw requests
+app.use((req, res, next) => {
+  console.log(
+    "[REQ]",
+    new Date().toISOString(),
+    req.method,
+    req.originalUrl,
+    "Origin:",
+    req.get("origin")
+  );
+  next();
+});
+
+//  3. Webhook routes with raw body parser - MUST come before express.json()
+app.use("/webhooks", express.raw({ type: "application/json" }), WebhookRouter);
+
+//  4. Body parsing for all other routes
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Add this for form data
+
+//  5. Static files middleware
 app.use(
   "/images",
   express.static(path.join(__dirname, "../images"), {
-    maxAge: "30d", // Cache for 30 days
-    immutable: true, // Tells browser: "These files won't change"
-    etag: true, // Allows cache validation if file ever changes
-    lastModified: true, // Sends 'Last-Modified' header for conditional requests
+    maxAge: "30d",
+    immutable: true,
+    etag: true,
+    lastModified: true,
     setHeaders: (res) => {
-      // ✅ Explicitly add Cache-Control header
       res.setHeader("Cache-Control", "public, max-age=2592000, immutable");
-      // Optional: Slight security hardening
       res.setHeader("X-Content-Type-Options", "nosniff");
     },
   })
 );
+
+// ✅ 6. Application routes - After body parsing
+app.use("/fetch", FetchRouter);
+app.use("/payment", PaymentRouter);
+app.use("/auth", AuthRouter);
+app.use("/orders", OrderRouter);
+
+// ✅ 7. 404 handler - Should come after all routes
+app.use((req, res) => {
+  console.log("404 - Route not found:", req.method, req.path);
+  res.status(404).json({
+    error: "Route not found",
+    path: req.path,
+    method: req.method,
+  });
+});
+
+// ✅ 8. Error handling middleware - Must be last
+app.use((err, req, res) => {
+  console.error("Server error:", err);
+  res.status(500).json({
+    error: "Internal server error",
+    message: err.message,
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
