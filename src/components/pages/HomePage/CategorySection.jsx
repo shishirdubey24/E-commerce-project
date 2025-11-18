@@ -1,28 +1,35 @@
 import Saree from "../../../assets/Category/Saree.jpg";
-import Jwellary from "../../../assets/Category/jwellary.jpeg";
+import Shirt from "../../../assets/Category/Shirt.webp"
+import Bedsheet from "../../../assets/Category/Bedsheet.webp";
+import Blanket from "../../../assets/Category/Blanket.webp"
 import Sports from "../../../assets/Category/Sports.webp";
 import Tshirt from "../../../assets/Category/Tshirt.webp";
+import Chinos from "../../../assets/Category/Chnos.webp"
+import Ethnic from "../../../assets/Category/Ehenic.webp"
 import { useDispatch, useSelector } from "react-redux";
 import {setCategory} from "../../../store/categorySlice"
+import { useNavigate } from "react-router-dom";
 const categories = [
   { name: "Saree", image: Saree },
-  { name: "Bedsheet", image: Jwellary },
+  { name: "Bedsheet", image: Bedsheet },
   { name: "Sports", image: Sports },
   { name: "T-Shirt", image: Tshirt },
-    { name: "Shirt", image: Saree },
-  { name: "Blanket", image: Jwellary },
-  { name: "chinos", image: Sports },
-  { name: "Ethnic", image: Tshirt },
+    { name: "Shirt", image: Shirt },
+  { name: "Blanket", image: Blanket },
+  { name: "chinos", image: Chinos },
+  { name: "Ethnic", image: Ethnic },
 ];
 
 const CategorySection = () => {
   const dispatch = useDispatch();
+   const navigate = useNavigate();
   const selected = useSelector((state) => state.category.selected);
 
   const handleSelect = (name) => {
     // debug log so you can see the click in console
     console.log("Category clicked:", name);
     dispatch(setCategory(name));
+      navigate(`/category/${encodeURIComponent(name)}`); 
   };
 
   return (
