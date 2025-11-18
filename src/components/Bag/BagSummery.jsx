@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 const BagSummary = () => {
   const navigate = useNavigate();
   
-  // ✅ Get authentication state from Redux
+  //  Get authentication state from Redux
   const user = useSelector((state) => state.auth.user);
   const bagItemIds = useSelector((state) => state.bag);
   console.log("Received bag item IDs: ", bagItemIds);
@@ -24,7 +24,7 @@ const BagSummary = () => {
   let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
 
   const handleOrder = () => {
-    // ✅ Improved authentication check
+    //  Improved authentication check
     const isAuthenticated = user || localStorage.getItem("isAuthenticated") === "true";
     const userEmail = localStorage.getItem("userEmail");
     
