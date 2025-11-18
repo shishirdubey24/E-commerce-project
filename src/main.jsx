@@ -6,7 +6,7 @@ import './index.css'
 import App from './routes/App.jsx'
 import Bag from './routes/Bag.jsx'
 import Home from './routes/Home.jsx'
-import Men from './routes/Men.jsx'
+//import Men from './routes/Men.jsx'
 import Admin from './routes/Admin.jsx'
 import { Provider } from 'react-redux'
 import myntraStore from './store/index.js' // Remove persistor import
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: '/bag', element: <Bag /> },
-      { path: '/menProduct', element: <Men /> },
+     // { path: '/menProduct', element: <Men /> },
       { path: '/User', element: <RegisterUser /> },
       { path: '/admin', element: <Admin /> },
       { path: 'Search', element: <Search /> },
