@@ -2,28 +2,36 @@
 import { useSelector } from "react-redux";
 import Homeitem from "../components/pages/HomePage/Homeitem";
 import { HomeDataMap } from "../components/hooks/HomeDataMap";
-import {  useState } from "react";
-
+//import {  useState } from "react";
+import HeroSection from "../components/pages/HomePage/HeroSection";
+import CategorySection from "../components/pages/HomePage/CategorySection";
+import BrandSection from "../components/pages/HomePage/BrandSection";
 const Home = () => {
   const items = useSelector((store) => store.items);
-
   const bagItems = useSelector(store => store.bag);
-  const[CurrentPage,setCurrentPage]=useState(1);
-  const TotalPages=5;
-  const itemsPerPage=20;
+
+    
+ // const[CurrentPage,setCurrentPage]=useState(1);
+ // const TotalPages=5;
+//  const itemsPerPage=20;
   
- 
-  const handlePage = (e) => {
+ {/* const handlePage = (e) => {
   e.preventDefault();
   const li = e.target.closest(".page-item");
   if (!li || !li.id) return; 
   const page = Number(li.id);
   if (page >= 1 && page <= TotalPages) setCurrentPage(page);
-};
+}; */}
+ 
 
   return (
     <main>
-      <HomeDataMap currentPage={CurrentPage} itemsPerPage={itemsPerPage}/> 
+      <HeroSection/>
+      <BrandSection/>
+
+      <CategorySection />
+
+      <HomeDataMap   /> 
       
       <div className="items-container">
         {items.length > 0 ? (
@@ -38,7 +46,7 @@ const Home = () => {
           </div>
         )}
       </div>
-      {/* Added pagination feature */}
+      {/* Added pagination feature
       <nav aria-label="Page navigation example " onClick={handlePage}>
   <ul className="pagination">
     <li className="page-item">
@@ -56,6 +64,7 @@ const Home = () => {
     </li>
   </ul>
 </nav>
+ */}
     </main>
   );
 };
