@@ -9,12 +9,10 @@ const Homeitem = ({ item, isInBag }) => {
   const dispatch = useDispatch();
   
   const handleAddToBag = () => {
-    // ✅ Add debug logging
-    dispatch(bagActions.addToBag(item));
+   dispatch(bagActions.addToBag(item));
   };
  
   const handleRemove = () => {
-    // ✅ Add debug logging
     dispatch(bagActions.removeFromBag(item.id));
   };
 
