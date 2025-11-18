@@ -1,40 +1,56 @@
-// actual-backend/Controller/Data/GetData.js
-import path from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
+import Product from "../../Model/ProductSchema.js";
 
-export const getData = (req, res) => {
+// Hard-coded production backend URL
+const HOST_BASE = "https://e-commerce-project-76em.onrender.com";
+
+export const getData = async (req, res) => {
   try {
-    const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 20;
+    const { category, page, limit } = req.query;
 
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    // Convert filename → full public Render URL
+    const toPublicImageUrl = (img) => {
+      if (!img) return "";
+      const s = String(img).trim();
+      if (s.startsWith("http://") || s.startsWith("https://")) return s;
+      return `${HOST_BASE}/images/${encodeURIComponent(s)}`;
+    };
 
-    const filePath = path.join(__dirname, "../../items.json");
+    // FEATURED PRODUCTS (home page default)
+    if (!category || category.toLowerCase() === "featured") {
+      const featured = await Product.find({
+        $or: [{ category: { $exists: false } }, { category: "Featured" }],
+      })
+        .sort({ _id: 1 })
+        .limit(8)
+        .lean();
 
-    const data = fs.readFileSync(filePath, "utf-8");
-    const parsedData = JSON.parse(data);
-    const items = parsedData.items;
+      const mapped = featured.map((it) => ({
+        ...it,
+        image: toPublicImageUrl(it.image),
+      }));
 
-    const start = (page - 1) * limit;
-    const paginatedItems = items.slice(start, start + limit);
-    //now get the actual images for each item:
-    const host = `${req.protocol}://${req.get("host")}`;
+      return res.json({ items: mapped, totalCount: mapped.length });
+    }
 
-    const updatedItems = paginatedItems.map((item) => ({
-      ...item,
-      image: `${host}/images/${path.basename(item.image)}`,
+    // CATEGORY FILTER
+    const pageNum = Math.max(1, Number(page) || 1);
+    const lim = Math.max(1, Number(limit) || 100);
+    const skip = (pageNum - 1) * lim;
+    const categoryRegex = new RegExp(`^${category.trim()}$`, "i");
+
+    const [items, totalCount] = await Promise.all([
+      Product.find({ category: categoryRegex }).skip(skip).limit(lim).lean(),
+      Product.countDocuments({ category: categoryRegex }),
+    ]);
+
+    const mapped = items.map((it) => ({
+      ...it,
+      image: toPublicImageUrl(it.image),
     }));
-    // send paginated response with total count
-    res.json({
-      items: updatedItems,
-      totalItems: items.length,
-      currentPage: page,
-      totalPages: Math.ceil(items.length / limit),
-    });
+
+    return res.json({ items: mapped, totalCount });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch items" });
+    console.error("getData error:", err);
+    return res.status(500).json({ error: "Failed to fetch data" });
   }
 };
