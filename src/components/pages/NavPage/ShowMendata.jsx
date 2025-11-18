@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+{/*
 import { useDispatch } from "react-redux";
 import { bagActions } from "../../../store/bagSlice";
 import "./ShowMendata.css"
@@ -43,3 +44,4 @@ const ShowMendata = ({ mendata }) => {
 };
 
 export default ShowMendata;
+ */}
