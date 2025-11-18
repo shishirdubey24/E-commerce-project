@@ -1,3 +1,4 @@
+{/*
 import { useSelector } from "react-redux";
 import ShowMendata from "../components/pages/NavPage/ShowMendata";
 
@@ -23,3 +24,4 @@ const Men = () => {
 };
 
 export default Men;
+ */}
