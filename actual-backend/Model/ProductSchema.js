@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const Schema = mongoose;
+const { Schema } = mongoose;
 const ProductSchema = new Schema({
   id: {
     type: String,
@@ -7,11 +7,12 @@ const ProductSchema = new Schema({
   },
   image: {
     type: String,
-    required: true,
   },
   company: {
     type: String,
-    required: true,
+  },
+  category: {
+    type: String,
   },
   item_name: { type: String },
   original_price: { type: Number },
