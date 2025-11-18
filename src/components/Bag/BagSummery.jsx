@@ -3,72 +3,95 @@ import { useNavigate } from "react-router";
 
 const BagSummary = () => {
   const navigate = useNavigate();
-  
-  //  Get authentication state from Redux
-  const user = useSelector((state) => state.auth.user);
-  const bagItemIds = useSelector((state) => state.bag);
-  console.log("Received bag item IDs: ", bagItemIds);
+
+  // Get authentication state from Redux
+  const user = useSelector((state) => state.auth?.user);
+  const bagItems = useSelector((state) => state.bag || []);
 
   const CONVENIENCE_FEES = 99;
-  let totalItem = bagItemIds.length;
-  console.log("Total items:", totalItem);
+  const totalItem = bagItems.length;
 
+  // compute totals (safely)
   let totalMRP = 0;
   let totalDiscount = 0;
 
-  bagItemIds.forEach((bagItem) => {
-    totalMRP += bagItem.original_price || bagItem.price;
-    totalDiscount += (bagItem.original_price || bagItem.price) - (bagItem.current_price || bagItem.price - 10);
+  bagItems.forEach((bagItem) => {
+    const mrp = Number(bagItem?.original_price ?? bagItem?.price ?? 0);
+    const current = Number(bagItem?.current_price ?? bagItem?.price ?? 0);
+    totalMRP += mrp;
+    totalDiscount += Math.max(0, mrp - current);
   });
 
-  let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
+  const finalPayment = Math.max(0, Math.round(totalMRP - totalDiscount + CONVENIENCE_FEES));
+
+  const fmt = (n) => n.toLocaleString("en-IN");
 
   const handleOrder = () => {
-    //  Improved authentication check
-    const isAuthenticated = user || localStorage.getItem("isAuthenticated") === "true";
+    const isAuthenticated = Boolean(user) || localStorage.getItem("isAuthenticated") === "true";
     const userEmail = localStorage.getItem("userEmail");
-    
-    console.log("User authenticated:", isAuthenticated);
-    console.log("User email:", userEmail);
-    console.log("Redux user state:", user);
-    
+
     if (!isAuthenticated || !userEmail) {
-      console.log("User not authenticated, redirecting to login");
       navigate("/User");
     } else {
-      console.log("User authenticated, proceeding to checkout");
       navigate("/checkout");
     }
   };
 
   return (
-    <div className="bag-summary">
-      <div className="bag-details-container">
-        <div className="price-header">PRICE DETAILS ({totalItem} Items)</div>
-        <div className="price-item">
-          <span className="price-item-tag">Total MRP</span>
-          <span className="price-item-value">₹{totalMRP}</span>
+    <aside
+      aria-label="Price summary"
+      className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 w-full"
+    >
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold text-gray-900">Price Details</h3>
+        <p className="text-xs text-gray-500 mt-1">Summary for {totalItem} item{totalItem !== 1 ? "s" : ""}</p>
+      </div>
+
+      <div className="space-y-3 text-sm text-gray-700">
+        <div className="flex justify-between">
+          <div className="text-gray-600">Total MRP</div>
+          <div className="font-medium text-gray-900">₹{fmt(totalMRP)}</div>
         </div>
-        <div className="price-item">
-          <span className="price-item-tag">Discount on MRP</span>
-          <span className="price-item-value priceDetail-base-discount">
-            -₹{totalDiscount}
-          </span>
+
+        <div className="flex justify-between">
+          <div className="text-gray-600">Discount on MRP</div>
+          <div className="text-amber-600 font-medium">-₹{fmt(totalDiscount)}</div>
         </div>
-        <div className="price-item">
-          <span className="price-item-tag">Convenience Fee</span>
-          <span className="price-item-value">₹99</span>
-        </div>
-        <hr />
-        <div className="price-footer">
-          <span className="price-item-tag">Total Amount</span>
-          <span className="price-item-value">₹{finalPayment}</span>
+
+        <div className="flex justify-between">
+          <div className="text-gray-600">Convenience Fee</div>
+          <div className="font-medium text-gray-900">₹{fmt(CONVENIENCE_FEES)}</div>
         </div>
       </div>
-      <button className="btn-place-order" onClick={handleOrder}>
-        <div className="css-xjhrni">PLACE ORDER</div>
+
+      <div className="border-t border-gray-100 my-4" />
+
+      <div className="flex items-center justify-between">
+        <div className="text-sm text-gray-600">Total Amount</div>
+        <div className="text-xl font-bold text-gray-900">₹{fmt(finalPayment)}</div>
+      </div>
+
+      <div className="mt-4 text-xs text-gray-500">
+        Inclusive of all taxes. Convenience fee is applied per order.
+      </div>
+
+      <button
+        onClick={handleOrder}
+        disabled={totalItem === 0}
+        className={`mt-6 w-full inline-flex items-center justify-center px-4 py-3 rounded-md text-sm font-semibold transition
+          ${totalItem === 0 ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-[#ff3f6c] text-white hover:bg-[#e13a66]"}`}
+        aria-disabled={totalItem === 0}
+        aria-label="Place order"
+      >
+        PLACE ORDER
       </button>
-    </div>
+
+      {totalItem === 0 && (
+        <div className="mt-3 text-center text-sm text-gray-500">
+          Your bag is empty — add items to place an order.
+        </div>
+      )}
+    </aside>
   );
 };
 
