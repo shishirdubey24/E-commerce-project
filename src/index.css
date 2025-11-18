@@ -1,4 +1,5 @@
 @import "tailwindcss";
+/*
 * {
   margin: 0;
   padding: 0;
@@ -6,13 +7,13 @@
   box-sizing: border-box;
 }
 
-/* Prevent horizontal scroll */
+ Prevent horizontal scroll 
 html, body {
   overflow-x: hidden;
   width: 100%;
 }
 
-/* Header Styles */
+ Header Styles 
 header {
   display: flex;
   background-color: #ffffff;
@@ -128,7 +129,7 @@ a.action_container:link {
   color: black;
 }
 
-/* Main Content */
+/* Main Content 
 .banner_container {
   margin: 40px 0;
   width: 100%;
@@ -151,7 +152,7 @@ a.action_container:link {
   padding-right: 30px;
 }
 
-/* Grid Containers */
+/* Grid Containers 
 .items-container,
 .filtered-items-container {
   width: 95%;
@@ -162,7 +163,7 @@ a.action_container:link {
   padding: 0 10px;
 }
 
-/* Item Cards */
+/* Item Cards 
 .item-container,
 .filtered-item-container {
   width: 100%;
@@ -304,7 +305,7 @@ a.action_container:link {
   z-index: 10; 
 }
 
-/* Bag Page Styles */
+/* Bag Page Styles 
 .bag-page {
   width: 90%;
   max-width: 1200px;
@@ -460,7 +461,7 @@ a.action_container:link {
   border-radius: 50%;
 }
 
-/* Form Styles */
+/* Form Styles 
 .form {
   max-width: 700px;
   width: 90%;
@@ -503,7 +504,7 @@ a.action_container:link {
   flex-wrap: wrap;
 }
 
-/* Footer */
+/* Footer 
 .footer_container {
   padding: 40px 20px;
   background: #FAFBFC;
@@ -544,9 +545,9 @@ a.action_container:link {
   margin-top: 20px;
 }
 
-/* Responsive Design */
+/* Responsive Design 
 
-/* Large desktops and above */
+/* Large desktops and above 
 @media (min-width: 1200px) {
   .items-container,
   .filtered-items-container {
@@ -570,7 +571,7 @@ a.action_container:link {
   }
 }
 
-/* Tablets and small desktops */
+/* Tablets and small desktops 
 @media (max-width: 1199px) and (min-width: 768px) {
   .nav_bar {
     min-width: auto;
@@ -603,7 +604,7 @@ a.action_container:link {
   }
 }
 
-/* Small tablets */
+/* Small tablets 
 @media (max-width: 767px) and (min-width: 577px) {
   header {
     flex-wrap: wrap;
@@ -674,7 +675,7 @@ a.action_container:link {
   }
 }
 
-/* Mobile phones */
+/* Mobile phones 
 @media (max-width: 576px) {
   header {
     flex-direction: column;
@@ -711,7 +712,7 @@ a.action_container:link {
   }
   
   .search_input {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px; /* Prevents zoom on iOS 
   }
   
   .items-container,
@@ -765,7 +766,7 @@ a.action_container:link {
   
   .form .form-control {
     max-width: 100%;
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px; /* Prevents zoom on iOS
   }
   
   .butn {
@@ -795,7 +796,7 @@ a.action_container:link {
   }
 }
 
-/* Extra small screens */
+/* Extra small screens 
 @media (max-width: 400px) {
   .myntra_home {
     height: 35px;
@@ -830,3 +831,4 @@ a.action_container:link {
     padding: 15px 10px;
   }
 }
+*/
