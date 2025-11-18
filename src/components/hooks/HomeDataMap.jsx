@@ -6,10 +6,10 @@ import { Fetchdata } from "./Fetchdata";
 import { itemsActions } from "../../store/itemsSlice";
 
 import ShimmerUI from "../UI/ShimmerUI";
-export const HomeDataMap = ({currentPage,itemsPerPage}) => {
+export const HomeDataMap = () => {
 
 
-  const { data, isLoading, error } = Fetchdata({currentPage,itemsPerPage});
+  const { data, isLoading, error } = Fetchdata();
   const dispatch = useDispatch();
       
   useEffect(() => {
