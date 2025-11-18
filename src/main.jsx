@@ -17,6 +17,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import useOnlineStatus from './components/useOnlineStatus.js' 
 import PaymentBtn from './components/Payment/PaymentBtn.jsx'
 import Success from './routes/Success.jsx'
+import CategoryPage from './routes/CategoryPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,8 @@ const router = createBrowserRouter([
       { path: 'Search', element: <Search /> },
       { path: '/checkout', element: <Checkout /> },
       { path: '/payment', element: <PaymentBtn /> },
-      {path:'/success',element:<Success/>}
+      {path:'/success',element:<Success/>},
+      {path:'/category/:name',element:<CategoryPage/>}
     ],
   },
 ])
