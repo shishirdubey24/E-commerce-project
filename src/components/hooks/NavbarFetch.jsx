@@ -1,3 +1,4 @@
+{/* 
 import { useDispatch } from "react-redux";
 import { Mendata } from "./Mendata";
 import ShimmerUI from "../UI/ShimmerUI";
@@ -14,3 +15,4 @@ export const NavbarFetch = () => {
 
   if (error) return <p> Error: Failed to fetch product data.</p>;
 };
+*/}
