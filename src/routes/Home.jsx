@@ -1,70 +1,39 @@
-// routes/Home.jsx - SIMPLE AND CLEAN
+// routes/Home.jsx - updated grid to show 4 products per row (responsive)
 import { useSelector } from "react-redux";
 import Homeitem from "../components/pages/HomePage/Homeitem";
 import { HomeDataMap } from "../components/hooks/HomeDataMap";
-//import {  useState } from "react";
 import HeroSection from "../components/pages/HomePage/HeroSection";
 import CategorySection from "../components/pages/HomePage/CategorySection";
 import BrandSection from "../components/pages/HomePage/BrandSection";
-const Home = () => {
-  const items = useSelector((store) => store.items);
-  const bagItems = useSelector(store => store.bag);
 
-    
- // const[CurrentPage,setCurrentPage]=useState(1);
- // const TotalPages=5;
-//  const itemsPerPage=20;
-  
- {/* const handlePage = (e) => {
-  e.preventDefault();
-  const li = e.target.closest(".page-item");
-  if (!li || !li.id) return; 
-  const page = Number(li.id);
-  if (page >= 1 && page <= TotalPages) setCurrentPage(page);
-}; */}
- 
+const Home = () => {
+  const items = useSelector((store) => store.items || []);
+  const bagItems = useSelector((store) => store.bag || []);
 
   return (
     <main>
-      <HeroSection/>
-      <BrandSection/>
-
+      <HeroSection />
+      <BrandSection />
       <CategorySection />
 
-      <HomeDataMap   /> 
-      
-      <div className="items-container">
+      <HomeDataMap />
+
+      {/* Products grid: 1 / 2 / 3 / 4 columns (mobile -> desktop) */}
+      <section className="w-[95%] mx-auto my-12">
         {items.length > 0 ? (
-          items.map((item) => {
-            const isInBag = bagItems.some(bagItem => bagItem.id === item.id);
-            return <Homeitem key={item.id} item={item} isInBag={isInBag} />;
-          })
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {items.map((item) => {
+              const isInBag = bagItems.some((bagItem) => bagItem.id === item.id);
+              return <Homeitem key={item.id} item={item} isInBag={isInBag} />;
+            })}
+          </div>
         ) : (
-          <div style={{ textAlign: 'center', padding: '50px' }}>
-            <h3>No products available</h3>
+          <div className="w-full py-20 flex flex-col items-center justify-center text-center text-gray-600">
+            <h3 className="text-xl font-medium mb-2">No products available</h3>
             <p>Loading from server...</p>
           </div>
         )}
-      </div>
-      {/* Added pagination feature
-      <nav aria-label="Page navigation example " onClick={handlePage}>
-  <ul className="pagination">
-    <li className="page-item">
-      <a className="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li className="page-item" id="1"><a className="page-link" href="#" >1</a></li>
-    <li className="page-item"id="2"><a className="page-link" href="#">2</a></li>
-    <li className="page-item" id="3"><a className="page-link" href="#">3</a></li>
-    <li className="page-item">
-      <a className="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
- */}
+      </section>
     </main>
   );
 };
