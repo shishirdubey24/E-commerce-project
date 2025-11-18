@@ -4,13 +4,14 @@ import itemsSlice from "./itemsSlice";
 import bagReducer from "./bagSlice";
 import MendataSlice from "./MendataSlice";
 import authSlice from "./authSlice";
-
+import categorySlice from "./categorySlice";
 const myntraStore = configureStore({
   reducer: {
     items: itemsSlice.reducer,
     bag: bagReducer,
     mendata: MendataSlice.reducer,
     auth: authSlice.reducer,
+    category: categorySlice.reducer,
   },
 });
 
