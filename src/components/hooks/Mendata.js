@@ -1,3 +1,5 @@
+{
+  /* 
 import { useQuery } from "@tanstack/react-query";
 export const Mendata = () => {
   return useQuery({
@@ -9,3 +11,5 @@ export const Mendata = () => {
     },
   });
 };
+*/
+}
