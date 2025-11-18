@@ -7,19 +7,19 @@ import Hero3 from "../../../assets/HeroImages/Hero3.jpg"
 import Hero4 from "../../../assets/HeroImages/Hero4.png"
 const slides = [
   {
-    image: Hero1,
+    image: Hero3,
     
+  },
+  {
+    image: Hero4,
+   
   },
   {
     image: Hero2,
    
   },
-  {
-    image: Hero3,
-   
-  },
    {
-    image: Hero4,
+    image: Hero1,
    
   },
 ];
