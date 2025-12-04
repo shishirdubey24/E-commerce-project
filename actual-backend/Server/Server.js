@@ -10,6 +10,7 @@ import AuthRouter from "../Router/AuthRouter.js";
 import PaymentRouter from "../Router/PaymentRouter.js";
 import OrderRouter from "../Router/OrderRouter.js";
 import WebhookRouter from "../Router/WebhookRouter.js";
+import AdminRouter from "../Router/AdminRouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -18,11 +19,9 @@ dotenv.config();
 const app = express();
 ConnectDb();
 
-// Generate __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//  1. CORS - Must be first for preflight requests
 const corsOptions = {
   origin: [
     "http://localhost:3000",
@@ -40,7 +39,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-//  2. Logging middleware - Before body parsing to see raw requests
 app.use((req, res, next) => {
   console.log(
     "[REQ]",
@@ -53,14 +51,11 @@ app.use((req, res, next) => {
   next();
 });
 
-//  3. Webhook routes with raw body parser - MUST come before express.json()
 app.use("/webhooks", express.raw({ type: "application/json" }), WebhookRouter);
 
-//  4. Body parsing for all other routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Add this for form data
 
-//  5. Static files middleware
 app.use(
   "/images",
   express.static(path.join(__dirname, "../images"), {
@@ -75,13 +70,11 @@ app.use(
   })
 );
 
-// ✅ 6. Application routes - After body parsing
 app.use("/fetch", FetchRouter);
 app.use("/payment", PaymentRouter);
 app.use("/auth", AuthRouter);
 app.use("/orders", OrderRouter);
-
-// ✅ 7. 404 handler - Should come after all routes
+app.use("/admin", AdminRouter);
 app.use((req, res) => {
   console.log("404 - Route not found:", req.method, req.path);
   res.status(404).json({
@@ -91,7 +84,6 @@ app.use((req, res) => {
   });
 });
 
-// ✅ 8. Error handling middleware - Must be last
 app.use((err, req, res) => {
   console.error("Server error:", err);
   res.status(500).json({
