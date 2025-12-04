@@ -15,7 +15,7 @@ export const AdminData = async (req, res) => {
     const Products = await Product.find({}).lean();
     const mapped = Products.map((p) => ({
       ...p,
-      image: ImageURL(p.ImageURL),
+      image: ImageURL(p.image),
     }));
     return res.json(mapped);
   } catch (error) {
