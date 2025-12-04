@@ -18,7 +18,11 @@ import useOnlineStatus from './components/useOnlineStatus.js'
 import PaymentBtn from './components/Payment/PaymentBtn.jsx'
 import Success from './routes/Success.jsx'
 import CategoryPage from './routes/CategoryPage.jsx'
-
+import Dashboard from './components/Admin/Dashboard/Dashboard.jsx'
+import AdminData from './components/Admin/Products/AdminData.jsx'
+import Categories from './components/Admin/Products/Categories.jsx'
+import Customers from './components/Admin/Products/Customers.jsx'
+import Settings from './components/Admin/Products/Settings.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -36,6 +40,21 @@ const router = createBrowserRouter([
       {path:'/category/:name',element:<CategoryPage/>}
     ],
   },
+   {
+    path: '/admin',
+    element: <Admin />,
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: 'products', element: <AdminData /> },
+      {path:"categories",element:<Categories/>},
+      {path:"customers",element:<Customers/>},
+      {path:"settings",element:<Settings/>}
+
+      // Add other nested routes here when needed
+      // { path: 'categories', element: <Categories /> },
+      // { path: 'customers', element: <Customers /> },
+    ]
+  }
 ])
 
 const queryClient = new QueryClient()
