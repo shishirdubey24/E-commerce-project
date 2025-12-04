@@ -1,23 +1,21 @@
-import { useState, useCallback } from "react";
 import Topbar from "../components/Admin/Topbar";
-import Sidebar from "../components/Admin/Sidebar";
-import Dashboard from "../components/Admin/Dashboard/Dashboard";
 import Products from "../components/Admin/Hook/Products";
+import { Outlet } from "react-router-dom";
+
 export default function Admin() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const toggleSidebar = useCallback(() => setIsSidebarOpen((s) => !s), []);
+  
+  
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
-      <Products/>
-      <Topbar onToggleSidebar={toggleSidebar} />
-      <div className="flex">
-        {/* Sidebar */}
-        <Sidebar isOpen={isSidebarOpen} onToggleSidebar={toggleSidebar} />
-
-        {/* Main content */}
-        <div className="flex-1 lg:pl-72 p-6 lg:p-10">
-          <Dashboard />
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <Products />
+      
+      <Topbar  />
+      
+      {/* Full width content - no sidebar */}
+      <div className="pt-14">
+        <div className="w-full p-6 lg:p-8">
+          <Outlet /> 
         </div>
       </div>
     </div>
