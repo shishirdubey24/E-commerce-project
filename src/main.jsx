@@ -19,10 +19,10 @@ import PaymentBtn from './components/Payment/PaymentBtn.jsx'
 import Success from './routes/Success.jsx'
 import CategoryPage from './routes/CategoryPage.jsx'
 import Dashboard from './components/Admin/Dashboard/Dashboard.jsx'
-import AdminData from './components/Admin/Products/AdminData.jsx'
-import Categories from './components/Admin/Products/Categories.jsx'
-import Customers from './components/Admin/Products/Customers.jsx'
-import Settings from './components/Admin/Products/Settings.jsx'
+import AdminData from './components/Admin/Dropdown/AdminData.jsx'
+import Categories from './components/Admin/Dropdown/Categories.jsx'
+import Customers from './components/Admin/Dropdown/Customers.jsx'
+import Settings from './components/Admin/Dropdown/Settings.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
