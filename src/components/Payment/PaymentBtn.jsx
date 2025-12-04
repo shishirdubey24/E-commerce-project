@@ -18,7 +18,6 @@ export default function PaymentBtn() {
     items = [],
   } = location.state || {};
 
-  // fallback to localStorage if userData not provided
   const [userData, setUserData] = useState(userFromState);
   useEffect(() => {
     if (!userFromState) {
