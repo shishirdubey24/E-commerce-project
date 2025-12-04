@@ -7,7 +7,7 @@ export const getData = async (req, res) => {
   try {
     const { category, page, limit } = req.query;
 
-    // Convert filename → full public Render URL
+    // Convert filename to  full public Render URL
     const toPublicImageUrl = (img) => {
       if (!img) return "";
       const s = String(img).trim();
