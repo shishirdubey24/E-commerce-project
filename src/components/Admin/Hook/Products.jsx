@@ -9,7 +9,7 @@ const Products=()=>{
         const fetching=async()=>{
 try{
     dispatch(adminPanelActions.setLoading(true))
-    const data =await fetch(`${BASE_URL}/admin`)
+    const data =await fetch(`${BASE_URL}/admin/products`)
    if (!data.ok) throw new Error(`HTTP error! status: ${data.status}`);  
     const res= await data.json();
       dispatch(adminPanelActions.setAdminProducts(res))
