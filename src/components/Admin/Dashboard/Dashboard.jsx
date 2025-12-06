@@ -423,7 +423,7 @@ export default function Dashboard() {
                 key={cat.category}
                 className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors group"
               >
-                <div className="shrink-0 w-12 h-12 bg-linear-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center text-white font-bold">
+                <div className="shrink-0 w-12 h-12 bg-linear-to-br from-amber-500 to-orange-400 rounded-xl flex items-center justify-center text-white font-bold">
                   #{idx + 1}
                 </div>
                 <div className="flex-1 min-w-0">
