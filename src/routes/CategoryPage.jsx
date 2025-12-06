@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Fetchdata } from "../components/hooks/Fetchdata";
 import { itemsActions } from "../store/itemsSlice";
-import Homeitem from "../components/pages/HomePage/Homeitem";
+import Homeitem from "../components/pages/HomePage/ProductCard";
 import ShimmerUI from "../components/UI/ShimmerUI";
 
 const CategoryPage = () => {
