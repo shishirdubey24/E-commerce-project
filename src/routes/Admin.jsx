@@ -1,9 +1,14 @@
 import Topbar from "../components/Admin/Topbar";
 import Products from "../components/Admin/Hook/Products";
-import { Outlet } from "react-router-dom";
-
+import { Navigate,Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function Admin() {
-  
+
+  const auth = useSelector((state) => state.auth || {});
+  const isAdmin = !!auth.isAdmin;
+  if (!isAdmin) {
+    return <Navigate to="/" replace />;
+  }
   
 
   return (
