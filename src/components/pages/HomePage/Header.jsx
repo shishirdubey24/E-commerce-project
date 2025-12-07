@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 export default function Header() {
   const bagItems = useSelector((store) => store.bag || []);
   const bagCount = bagItems.length;
-
+  const auth =useSelector((state)=>state.auth || [])
+  const isAdmin = !!auth.isAdmin;
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
@@ -73,40 +74,43 @@ export default function Header() {
 
         {/* ACTION ICONS */}
         <div className="flex items-center gap-6">
+  <Link
+    to="/Account"
+    className="flex flex-col items-center text-black hover:text-gray-700 no-underline"
+    style={{ textDecoration: "none" }}
+  >
+    <User size={20} />
+    <span className="text-xs hidden sm:block">Profile</span>
+  </Link>
 
-          <Link
-            to="/User"
-            className="flex flex-col items-center text-black hover:text-gray-700 no-underline"
-            style={{ textDecoration: "none" }}
-          >
-            <User size={20} />
-            <span className="text-xs hidden sm:block">Profile</span>
-          </Link>
+  {/* Admin panel icon – only visible when user is admin */}
+  {isAdmin && (
+    <Link
+      to="/admin"
+      className="flex flex-col items-center text-black hover:text-gray-700 no-underline"
+      style={{ textDecoration: "none" }}
+    >
+      <Heart size={20} />
+      <span className="text-xs hidden sm:block">Admin</span>
+    </Link>
+  )}
 
-          <Link
-            to="/admin"
-            className="flex flex-col items-center text-black hover:text-gray-700 no-underline"
-            style={{ textDecoration: "none" }}
-          >
-            <Heart size={20} />
-            <span className="text-xs hidden sm:block">Wishlist</span>
-          </Link>
+  <Link
+    to="/bag"
+    className="relative flex flex-col items-center text-black hover:text-gray-700 no-underline"
+    style={{ textDecoration: "none" }}
+  >
+    <ShoppingBag size={20} />
+    <span className="text-xs hidden sm:block">Bag</span>
 
-          <Link
-            to="/bag"
-            className="relative flex flex-col items-center text-black hover:text-gray-700 no-underline"
-            style={{ textDecoration: "none" }}
-          >
-            <ShoppingBag size={20} />
-            <span className="text-xs hidden sm:block">Bag</span>
+    {bagCount > 0 && (
+      <span className="absolute -top-1 -right-2 h-5 px-1 min-w-5 flex items-center justify-center bg-red-500 text-white text-xs rounded-full">
+        {bagCount}
+      </span>
+    )}
+  </Link>
+</div>
 
-            {bagCount > 0 && (
-              <span className="absolute -top-1 -right-2 h-5 px-1 min-w-[20px] flex items-center justify-center bg-red-500 text-white text-xs rounded-full">
-                {bagCount}
-              </span>
-            )}
-          </Link>
-        </div>
       </div>
 
       {/* MOBILE NAV */}
