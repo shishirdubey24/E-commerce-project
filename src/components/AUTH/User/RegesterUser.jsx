@@ -2,12 +2,9 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { account, ID, databases } from "../lib/appwrite";
-import { loginSuccess } from "../../../store/authSlice";
 
 const RegisterUser = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [fullName, setFullName] = useState("");
@@ -61,7 +58,7 @@ const RegisterUser = () => {
     try {
       setLoading(true);
 
-      // Create Appwrite account with name
+      // Create Appwrite user account
       const response = await account.create(
         ID.unique(),
         email,
@@ -69,8 +66,8 @@ const RegisterUser = () => {
         fullName
       );
 
-      // Optional: extra metadata document
-      const verificationToken = Math.random().toString(36).substr(2, 10);
+      // Extra user metadata document
+      const verificationToken = Math.random().toString(36).substring(2, 12);
       const documentId = ID.unique();
 
       await databases.createDocument(
@@ -80,26 +77,18 @@ const RegisterUser = () => {
         {
           userId: response?.$id || "fallback-user-id",
           email,
-          phone,
+          Phone: phone,     // MUST match Appwrite attribute EXACTLY
           name: fullName,
           isVerified: false,
           verificationToken,
         }
       );
 
-      // Auto-login after signup
-      await account.createEmailPasswordSession(email, password);
-      const userSession = await account.get();
+      // NO AUTO LOGIN → user must login manually
+      navigate("/User/login", {
+        state: { msg: "Account created successfully. Please log in." },
+      });
 
-      const authPayload = {
-        id: userSession.$id,
-        name: userSession.name || "",
-        email: userSession.email || "",
-      };
-
-      dispatch(loginSuccess(authPayload));
-
-      navigate("/");
     } catch (error) {
       console.error(error);
       setErrormsg(error.message || "Signup failed. Please try again.");
@@ -111,7 +100,8 @@ const RegisterUser = () => {
   return (
     <div className="min-h-screen flex justify-center bg-[#f5f5f6] px-4">
       <div className="mt-16 w-full max-w-md bg-white border border-gray-200 shadow-sm rounded-sm overflow-hidden">
-        {/* Offer strip similar to Myntra */}
+        
+        {/* Offer strip */}
         <div className="bg-[#fff3f6] border-b border-gray-200 px-6 py-3">
           <p className="text-sm font-semibold text-gray-800">
             JOIN & GET EXCLUSIVE OFFERS
@@ -122,7 +112,8 @@ const RegisterUser = () => {
         </div>
 
         <div className="px-6 py-6">
-          {/* Myntra logo + brand text */}
+
+          {/* Logo */}
           <div className="flex items-center gap-2 mb-4">
             <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-pink-500 via-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-lg">
               M
@@ -140,6 +131,8 @@ const RegisterUser = () => {
           </p>
 
           <form onSubmit={handleRegister} className="space-y-4">
+            
+            {/* FULL NAME */}
             <div>
               <label className="block text-xs font-semibold text-gray-800 mb-1">
                 Full name
@@ -153,9 +146,10 @@ const RegisterUser = () => {
               />
             </div>
 
+            {/* PHONE */}
             <div>
               <label className="block text-xs font-semibold text-gray-800 mb-1">
-                Mobile number
+                Phone
               </label>
               <input
                 type="tel"
@@ -166,6 +160,7 @@ const RegisterUser = () => {
               />
             </div>
 
+            {/* EMAIL */}
             <div>
               <label className="block text-xs font-semibold text-gray-800 mb-1">
                 Email address
@@ -179,6 +174,7 @@ const RegisterUser = () => {
               />
             </div>
 
+            {/* PASSWORD + CONFIRM */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold text-gray-800 mb-1">
@@ -210,6 +206,7 @@ const RegisterUser = () => {
               </div>
             </div>
 
+            {/* TERMS */}
             <div className="flex items-start gap-2">
               <input
                 type="checkbox"
@@ -219,33 +216,28 @@ const RegisterUser = () => {
               />
               <p className="text-[11px] text-gray-600 leading-snug">
                 By creating an account, you agree to Myntra&apos;s{" "}
-                <button
-                  type="button"
-                  className="text-pink-500 font-semibold hover:text-pink-600"
-                >
+                <button type="button" className="text-pink-500 font-semibold">
                   Terms of Use
                 </button>{" "}
                 and{" "}
-                <button
-                  type="button"
-                  className="text-pink-500 font-semibold hover:text-pink-600"
-                >
+                <button type="button" className="text-pink-500 font-semibold">
                   Privacy Policy
-                </button>
-                .
+                </button>.
               </p>
             </div>
 
+            {/* ERROR */}
             {errormsg && (
               <p className="text-[11px] text-red-600 text-center">
                 {errormsg}
               </p>
             )}
 
+            {/* SUBMIT */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#ff3f6c] hover:bg-[#ff1654] text-white text-sm font-semibold py-3 rounded-sm uppercase tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-[#ff3f6c] hover:bg-[#ff1654] text-white text-sm font-semibold py-3 rounded-sm uppercase tracking-wide disabled:opacity-60"
             >
               {loading ? "Creating account..." : "Create account"}
             </button>
@@ -255,13 +247,14 @@ const RegisterUser = () => {
             <p>
               Already have an account?{" "}
               <Link
-                to="/login"
+                to="/User/login"
                 className="text-pink-500 font-semibold hover:text-pink-600"
               >
                 Login
               </Link>
             </p>
           </div>
+
         </div>
       </div>
     </div>
