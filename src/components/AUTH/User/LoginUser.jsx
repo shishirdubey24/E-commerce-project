@@ -31,11 +31,12 @@ const LoginUser = () => {
       // Appwrite stores session in cookies
       await account.createEmailPasswordSession(email, password);
       const userSession = await account.get();
-
+      const isAdmin=userSession.labels.includes('admin') || userSession.prefs?.role === 'admin';
       const authPayload = {
         id: userSession.$id,
         name: userSession.name || "",
         email: userSession.email || "",
+        isAdmin
       };
 
       dispatch(loginSuccess(authPayload));
@@ -161,7 +162,7 @@ const LoginUser = () => {
             <p>
               New to Myntra?{" "}
               <Link
-                to="/register"
+                to="/User/register"
                 className="text-pink-500 font-semibold hover:text-pink-600"
               >
                 Create an account
