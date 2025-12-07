@@ -17,14 +17,14 @@ import Admin from "./routes/Admin.jsx";
 import Checkout from "./routes/Checkout.jsx";
 import Success from "./routes/Success.jsx";
 import CategoryPage from "./routes/CategoryPage.jsx";
-
+import Account from "./routes/Accounts.jsx";
 // Store
 import myntraStore from "./store/index.js";
 
 // Auth
 import RegisterUser from "./components/AUTH/User/RegesterUser.jsx";
 import LoginUser from "./components/AUTH/User/LoginUser.jsx";
-
+import AuthInit from "./components/AUTH/AuthInit.jsx";
 // Admin children
 import Dashboard from "./components/Admin/Dashboard/Dashboard.jsx";
 import AdminData from "./components/Admin/Dropdown/AdminData.jsx";
@@ -49,6 +49,7 @@ const router = createBrowserRouter([
       // { path: '/menProduct', element: <Men /> },
       { path: "/User/register", element: <RegisterUser /> },
       { path: "User/login", element: <LoginUser /> },
+       { path: "/Account", element: <Account /> },
       { path: "/admin", element: <Admin /> },
       { path: "Search", element: <Search /> },
       { path: "/checkout", element: <Checkout /> },
@@ -108,7 +109,9 @@ function RootApp() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={myntraStore}>
-        <RouterProvider router={router} />
+         <AuthInit>
+          <RouterProvider router={router} />
+        </AuthInit>
       </Provider>
     </QueryClientProvider>
   );
