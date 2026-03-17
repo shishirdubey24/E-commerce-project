@@ -23,18 +23,23 @@ export default function BrandSection() {
   const [activeBrand, setActiveBrand] = useState("");
 
   return (
-    <section className="bg-white pt-28 pb-20" aria-labelledby="top-brands-heading">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div className="text-center mb-8">
-          <h2 id="top-brands-heading" className="text-9xl sm:text-3xl font-extrabold text-gray-900">
-            Top Brands
+    <section className="bg-[#f5f5f6] py-16 lg:py-20" aria-labelledby="top-brands-heading">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Brand Banner Heading inside background or minimalist */}
+        <div className="mb-12 text-center flex flex-col items-center">
+          <h2
+            id="top-brands-heading"
+            className="text-[22px] sm:text-[28px] font-bold text-[#3e4152] tracking-[0.15em] uppercase"
+          >
+            GRAND GLOBAL BRANDS
           </h2>
-          <p className="mt-2 text-sm text-gray-600 max-w-[720px] mx-auto">
-            Curated from the best — trending and trusted names.
+          <div className="mt-3 w-16 h-1 bg-[#f1c40f] rounded-full shadow-sm"></div>
+          <p className="mt-5 text-[15px] text-[#696e79] font-medium max-w-[500px] mx-auto">
+            Some of the most loved brands to level up your style
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-6 justify-items-center">
           {brands.map((brand) => {
             const isActive = activeBrand.toLowerCase() === brand.name.toLowerCase();
 
@@ -44,26 +49,34 @@ export default function BrandSection() {
                 type="button"
                 onClick={() => setActiveBrand(brand.name)}
                 aria-pressed={isActive}
-                className={`group bg-white rounded-2xl  flex flex-col items-center justify-center gap-3
-                  transition-shadow duration-200 focus:outline-none
-                  ${isActive ? "ring-4 ring-indigo-500 shadow-md" : "hover:shadow-md"}`}
+                className={`group w-full max-w-[280px] bg-white rounded-md overflow-hidden 
+                  flex flex-col items-center border border-transparent shadow-sm hover:shadow-lg
+                  transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff3f6c]
+                  ${isActive ? "border-[#f1c40f] shadow-lg ring-1 ring-[#f1c40f]" : "hover:-translate-y-1 hover:border-gray-200"}
+                `}
               >
-                {/* Logo container: object-contain keeps full logo visible */}
-                <div className="w-full flex items-center justify-center">
-                  <div className="w-full h-28 sm:h-36 md:h-44 flex items-center justify-center">
+                {/* Image Container */}
+                <div className="w-full relative bg-white pb-[60%] sm:pb-[70%]">
+                  <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-8">
                     <img
                       src={brand.image}
                       alt={brand.name}
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                      className={`max-w-full max-h-full object-contain transition-transform duration-500 will-change-transform ease-out
+                        ${isActive ? "scale-105" : "group-hover:scale-110"}
+                      `}
                       loading="lazy"
                       draggable={false}
                     />
                   </div>
                 </div>
 
-                {/* Visible brand name below the logo */}
-                <div className="w-full text-center">
-                  <span className="text-sm font-medium text-gray-800">{brand.name}</span>
+                {/* Subtle Brand Strip */}
+                <div
+                  className={`w-full py-4 text-center border-t border-gray-100 transition-colors
+                    ${isActive ? "bg-[#fffaf0] font-bold text-[#b8860b]" : "bg-white font-semibold text-[#282c3f] group-hover:text-[#ff3f6c]"}
+                  `}
+                >
+                  <span className="text-[14px] uppercase tracking-wide">{brand.name}</span>
                 </div>
               </button>
             );
