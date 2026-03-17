@@ -12,9 +12,9 @@ export default function HeroSection() {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
 
-  const AUTOPLAY_MS = 3000;
+  const AUTOPLAY_MS = 3500;
 
-  // ✅ Continuous autoplay - never stops
+  // Continuous autoplay
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
@@ -41,56 +41,56 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-gray-100"
+      className="relative w-full overflow-hidden bg-[#f5f5f6] mt-4"
       aria-label="Hero carousel"
     >
-      {/* Height responsive */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[75vh]">
+      {/* Container: Myntra typically has minimal padding on large screens for hero banners */}
+      <div className="relative w-full h-[55vh] sm:h-[65vh] md:h-[70vh] lg:h-[75vh] 2xl:h-[80vh] cursor-pointer group">
         {slides.map((img, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               index === current ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
             <img
               src={img}
               alt={`Hero slide ${index + 1}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover sm:object-fill lg:object-cover"
               loading={index === 0 ? "eager" : "lazy"}
               draggable={false}
             />
           </div>
         ))}
 
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows (Visible mainly on hover on desktop) */}
         <button
           aria-label="Previous slide"
           onClick={goPrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-3 shadow-lg hover:bg-white hover:scale-110 transition-all duration-200 z-20"
+          className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-14 bg-white/50 backdrop-blur-sm group-hover:bg-white/90 shadow-sm border border-transparent hover:border-gray-200 transition-all duration-300 z-20 opacity-0 group-hover:opacity-100"
         >
-          <ChevronLeft className="h-6 w-6 text-gray-800" />
+          <ChevronLeft className="h-8 w-8 text-[#282c3f]" strokeWidth={1.5} />
         </button>
 
         <button
           aria-label="Next slide"
           onClick={goNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-3 shadow-lg hover:bg-white hover:scale-110 transition-all duration-200 z-20"
+          className="absolute right-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-14 bg-white/50 backdrop-blur-sm group-hover:bg-white/90 shadow-sm border border-transparent hover:border-gray-200 transition-all duration-300 z-20 opacity-0 group-hover:opacity-100"
         >
-          <ChevronRight className="h-6 w-6 text-gray-800" />
+          <ChevronRight className="h-8 w-8 text-[#282c3f]" strokeWidth={1.5} />
         </button>
 
         {/* Indicator Dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3 z-20">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => jumpTo(index)}
               aria-label={`Go to slide ${index + 1}`}
-              className={`rounded-full transition-all duration-300 ${
+              className={`rounded-full transition-all duration-500 ease-out ${
                 index === current
-                  ? "w-8 h-2 bg-white"
-                  : "w-2 h-2 bg-white/50 hover:bg-white/80"
+                  ? "w-3 h-3 bg-white border border-gray-300 shadow-md scale-110"
+                  : "w-2.5 h-2.5 bg-white/50 hover:bg-white/80"
               }`}
             />
           ))}
