@@ -12,7 +12,7 @@ const Bag = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 100);
-    console.log("Current bag items:", bagItems);
+   
     return () => clearTimeout(timer);
   }, [bagItems]);
 
