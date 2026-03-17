@@ -35,7 +35,9 @@ const AuthInit = ({ children }) => {
         if (!cancelled) {
           dispatch(logout());
         }
-        console.log(err)
+        if (err.code !== 401) {
+          console.error("AuthInit Error:", err);
+        }
       }
     })();
 
