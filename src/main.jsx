@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       // { path: '/menProduct', element: <Men /> },
       { path: "/User/register", element: <RegisterUser /> },
       { path: "User/login", element: <LoginUser /> },
-       { path: "/Account", element: <Account /> },
+      { path: "/Account", element: <Account /> },
       { path: "/admin", element: <Admin /> },
       { path: "Search", element: <Search /> },
       { path: "/checkout", element: <Checkout /> },
@@ -109,7 +109,7 @@ function RootApp() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={myntraStore}>
-         <AuthInit>
+        <AuthInit>
           <RouterProvider router={router} />
         </AuthInit>
       </Provider>
