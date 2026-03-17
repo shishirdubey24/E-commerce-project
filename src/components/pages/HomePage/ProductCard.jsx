@@ -42,12 +42,12 @@ const Homeitem = ({ item, isInBag }) => {
     <article
       className="bg-white border border-gray-200 rounded-sm overflow-hidden
                  hover:shadow-md transition-transform duration-150 hover:-translate-y-0.5
-                 flex flex-col text-left cursor-pointer"
+                 flex flex-col h-full w-full text-left cursor-pointer"
       role="article"
       aria-label={item_name || "product"}
     >
       {/* Image section */}
-      <div className="relative w-full bg-gray-50">
+      <div className="relative w-full bg-gray-50 flex-shrink-0">
         <div className="w-full h-0 pb-[135%] relative overflow-hidden">
           <img
             src={image}
@@ -70,64 +70,67 @@ const Homeitem = ({ item, isInBag }) => {
         )}
       </div>
 
-      {/* Product info */}
-      <div className="px-3 pt-2 pb-3 flex flex-col flex-1">
-        <div className="flex-1 min-w-0">
+      {/* Product info - justify-between to ensure buttons stick to bottom */}
+      <div className="px-3 pt-2 pb-3 flex flex-col flex-1 justify-between">
+        <div className="min-w-0">
           <div className="text-[13px] font-semibold text-gray-900 truncate">
             {company}
           </div>
           <div className="text-[11px] text-gray-500 truncate">
             {category}
           </div>
-          <div className="mt-1 text-[12px] text-gray-700 line-clamp-2 leading-snug">
+          {/* Give the item name a fixed min-height so 1 or 2 lines push the content equally */}
+          <div className="mt-1 text-[12px] text-gray-700 line-clamp-2 leading-snug min-h-[36px]">
             {item_name}
           </div>
         </div>
 
-        {/* Price block */}
-        <div className="mt-2 flex items-center justify-between">
-          <div className="flex items-baseline gap-1 min-w-0">
-            <span className="text-[13px] font-semibold text-gray-900">
-              ₹{current_price}
-            </span>
-            {original_price ? (
-              <span className="text-[11px] line-through text-gray-400">
-                ₹{original_price}
+        <div className="mt-auto">
+          {/* Price block */}
+          <div className="mt-2 flex items-center justify-between">
+            <div className="flex items-baseline gap-1 min-w-0 flex-wrap">
+              <span className="text-[13px] font-semibold text-gray-900">
+                ₹{current_price}
               </span>
-            ) : null}
-            {discount ? (
-              <span className="text-[11px] font-semibold text-[#ff905a]">
-                ({discount}% OFF)
-              </span>
-            ) : null}
+              {original_price ? (
+                <span className="text-[11px] line-through text-gray-400">
+                  ₹{original_price}
+                </span>
+              ) : null}
+              {discount ? (
+                <span className="text-[11px] font-semibold text-[#ff905a]">
+                  ({discount}% OFF)
+                </span>
+              ) : null}
+            </div>
           </div>
-        </div>
 
-        {/* Add / Remove bag – Myntra-style thin button */}
-        <div className="mt-2">
-          {isInBag ? (
-            <button
-              type="button"
-              onClick={handleRemove}
-              className="w-full flex items-center justify-center gap-1.5 border border-gray-300 text-[11px] font-semibold py-1.5 rounded-sm
-                         text-red-600 hover:border-red-500 hover:text-red-700 transition"
-              aria-label={`Remove ${item_name} from bag`}
-            >
-              <AiFillDelete className="text-xs" />
-              <span>REMOVE FROM BAG</span>
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={handleAddToBag}
-              className="w-full flex items-center justify-center gap-1.5 border border-gray-300 text-[11px] font-semibold py-1.5 rounded-sm
-                         text-[#ff3f6c] hover:border-[#ff3f6c] hover:text-[#ff1654] transition"
-              aria-label={`Add ${item_name} to bag`}
-            >
-              <GrAddCircle className="text-xs" />
-              <span>ADD TO BAG</span>
-            </button>
-          )}
+          {/* Add / Remove bag – Myntra-style thin button */}
+          <div className="mt-2">
+            {isInBag ? (
+              <button
+                type="button"
+                onClick={handleRemove}
+                className="w-full flex items-center justify-center gap-1.5 border border-gray-300 text-[11px] font-semibold py-1.5 rounded-sm
+                           text-red-600 hover:border-red-500 hover:text-red-700 transition"
+                aria-label={`Remove ${item_name} from bag`}
+              >
+                <AiFillDelete className="text-xs" />
+                <span>REMOVE FROM BAG</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleAddToBag}
+                className="w-full flex items-center justify-center gap-1.5 border border-gray-300 text-[11px] font-semibold py-1.5 rounded-sm
+                           text-[#ff3f6c] hover:border-[#ff3f6c] hover:text-[#ff1654] transition"
+                aria-label={`Add ${item_name} to bag`}
+              >
+                <GrAddCircle className="text-xs" />
+                <span>ADD TO BAG</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </article>
