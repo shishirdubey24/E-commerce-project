@@ -79,6 +79,80 @@ Date==>19-10-2025
 1. Performace improvment,it has many parts in frontend ,backend,network,browser
 2. in frontend part, we have paggination so that browser does not get overvhlemed with products..
 3. we also have lazy loading technique which loads the content as per scroll.
-4. now there comes the backend part issue can be
-   1. express is slow,2. images are being served one by one . 3. caching headers are missing.
+4. now there comes the backend part issue can be following -->
+   1,express is slow,2. images are being served one by one . 3. caching headers are missing.
 5. now we will move to the backend part issues
+
+date 16/11/2025==>
+You said:
+1 more question why we place the dta fetching logic at layout level not at child index level ?
+Concrete example in your project
+NavbarFetch
+You fetch navbar/category info.
+The navbar lives in App.jsx (layout).
+If you fetch that inside Home.jsx, then go to:
+
+/men → navbar loses data
+
+/bag → navbar loses data
+
+/admin → navbar loses data
+
+React Query will re-run or refetch on every page load.
+Waste of time, network, and UX.
+Layout-level fetch solves it:
+
+Fetch categories ONCE
+
+Navbar always has them
+
+Child pages don’t care
+
+The mental model
+If the component lives in the layout, then its data must also be fetched at the layout level.
+If the component lives in the page, then its data must be fetched at the page level.
+Simple rule:
+
+Fetch where the UI lives.
+
+Navbar lives in layout → fetch at layout.
+HeroSection lives in Home → fetch in Home.
+Checkout details live in Checkout → fetch in Checkout.
+
+Your mistake earlier
+You were thinking:
+
+“HeroSection is UI, so it should be in App layout.”
+
+Wrong.
+HeroSection is homepage content, not global layout.
+That’s why moving it into Home.jsx fixed the logic.
+
+If you want, tell me which components in your app need layout-level data and which should be page-only, and I’ll map them cleanly so you never mix them up again.
+App at / = layout wrapper for all pages.
+
+Home at / inside children = the page rendered inside that layout.
+
+They are not duplicates, they serve different purposes.
+
+If you want the simplest mental model:
+
+The first / is the outer shell (header/footer).
+The second / is the actual Home page content that goes inside the shell.
+
+date 04/12/2025
+
+1. image conversion for admin pannel route has not been written there
+2. now admin pannel is completed
+
+date 06/12/2025
+
+1. i want persistant login behaviour for our users
+2. for that i need to request the appwrite with hte user info fo verification
+   3.before that i want to store the user inof inot jwt token.
+   ==>>>>
+3. thr appwrite SDK have full control about saving the session ID of the logged in user , as in backend we generate the JWT for appwrite its Session ID works very similar way
+   ==> appwrite takes the decisoin where it needs to store the session ID ,it stores it into localHOst if req is comign form local it stores it into the cookie if its production .
+   this is the fundamental concept about the appwrite we as developer only can extract this session and work upon it
+   ==>>
+   5.Now we will extract the user data from appwrite response and send it into the store

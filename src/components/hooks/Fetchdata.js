@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const BASE_URL = "https://e-commerce-project-76em.onrender.com";
 export const Fetchdata = ({ categoryOverride } = {}) => {
   const reduxCategory = useSelector(
-    (state) => state.category?.selected || "featured"
+    (state) => state.category?.selected || "featured",
   );
   const category = categoryOverride ?? reduxCategory;
   return useQuery({
@@ -23,13 +23,6 @@ export const Fetchdata = ({ categoryOverride } = {}) => {
       if (!res.ok)
         throw new Error(`Failed to fetch data from server (${res.status})`);
       const data = await res.json();
-
-      console.log(
-        "[Fetchdata] response items:",
-        (data?.items || []).length,
-        "category:",
-        category
-      );
 
       return data; // { items, totalCount? }
     },

@@ -239,7 +239,7 @@ const CategoryPage = () => {
             <div className="w-full py-24 flex flex-col items-center justify-center text-center text-gray-600 bg-gray-50 rounded-sm">
               <h3 className="text-[18px] font-bold text-[#282c3f] mb-2">No matches found</h3>
               <p className="text-[13px] text-gray-500 max-w-sm">
-                We couldn't find any products matching your selected filters. Try clearing some options to see more items.
+                We couldn`t find any products matching your selected filters. Try clearing some options to see more items.
               </p>
               <button
                 onClick={clearAllFilters}

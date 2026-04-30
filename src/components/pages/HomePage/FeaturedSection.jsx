@@ -47,7 +47,7 @@ const FeaturedSection = ({ items = [] }) => {
               Loading the freshest styles
             </h3>
             <p className="text-[14px] text-[#696e79]">
-              Hang tight, we're fetching your fashionable picks...
+              Hang tight, we`re fetching your fashionable picks...
             </p>
           </div>
         )}

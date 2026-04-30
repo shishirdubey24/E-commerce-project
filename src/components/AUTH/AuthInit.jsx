@@ -1,8 +1,6 @@
-// src/components/AUTH/AuthInit.jsx
-
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { account } from "./lib/appwrite"; // path is from /components/AUTH
+import { account } from "./lib/appwrite";
 import { loginSuccess, logout } from "../../store/authSlice";
 
 const AuthInit = ({ children }) => {
@@ -13,9 +11,7 @@ const AuthInit = ({ children }) => {
 
     (async () => {
       try {
-        // Will succeed if session cookie exists, throw if not authenticated
         const userSession = await account.get();
-
         if (cancelled) return;
 
         const isAdmin =
@@ -32,18 +28,12 @@ const AuthInit = ({ children }) => {
           })
         );
       } catch (err) {
-        if (!cancelled) {
-          dispatch(logout());
-        }
-        if (err.code !== 401) {
-          console.error("AuthInit Error:", err);
-        }
+        if (!cancelled) dispatch(logout());
+        if (err.code !== 401) console.error("AuthInit Error:", err);
       }
     })();
 
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [dispatch]);
 
   return children;

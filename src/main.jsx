@@ -107,13 +107,13 @@ function RootApp() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={myntraStore}>
+    <Provider store={myntraStore}>
+      <QueryClientProvider client={queryClient}>
         <AuthInit>
           <RouterProvider router={router} />
         </AuthInit>
-      </Provider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 

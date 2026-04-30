@@ -1,11 +1,8 @@
-// src/features/auth/pages/LoginUser.jsx
-
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { account } from "../lib/appwrite"; // adjust path if needed
 import { loginSuccess } from "../../../store/authSlice";
-
+import { account } from "../lib/appwrite";
 const LoginUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,18 +25,22 @@ const LoginUser = () => {
     try {
       setLoading(true);
 
-      // Appwrite stores session in cookies
       await account.createEmailPasswordSession(email, password);
       const userSession = await account.get();
-      const isAdmin=userSession.labels.includes('admin') || userSession.prefs?.role === 'admin';
-      const authPayload = {
-        id: userSession.$id,
-        name: userSession.name || "",
-        email: userSession.email || "",
-        isAdmin
-      };
 
-      dispatch(loginSuccess(authPayload));
+      const isAdmin =
+        (Array.isArray(userSession.labels) &&
+          userSession.labels.includes("admin")) ||
+        userSession.prefs?.role === "admin";
+
+      dispatch(
+        loginSuccess({
+          id: userSession.$id,
+          name: userSession.name || "",
+          email: userSession.email || "",
+          isAdmin,
+        })
+      );
 
       const redirectPath = location.state?.from || "/";
       navigate(redirectPath);
@@ -54,7 +55,6 @@ const LoginUser = () => {
   return (
     <div className="min-h-screen flex justify-center bg-[#f5f5f6] px-4">
       <div className="mt-16 w-full max-w-md bg-white border border-gray-200 shadow-sm rounded-sm overflow-hidden">
-        {/* Offer strip like Myntra */}
         <div className="bg-[#fff3f6] border-b border-gray-200 px-6 py-3">
           <p className="text-sm font-semibold text-gray-800">
             FLAT ₹200 OFF + FREE SHIPPING
@@ -66,7 +66,6 @@ const LoginUser = () => {
         </div>
 
         <div className="px-6 py-6">
-          {/* Myntra logo + brand text */}
           <div className="flex items-center gap-2 mb-4">
             <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-pink-500 via-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-lg">
               M
@@ -127,26 +126,17 @@ const LoginUser = () => {
 
             <p className="text-[11px] leading-snug text-gray-600">
               By continuing, you agree to Myntra&apos;s{" "}
-              <button
-                type="button"
-                className="text-pink-500 font-semibold hover:text-pink-600"
-              >
+              <button type="button" className="text-pink-500 font-semibold hover:text-pink-600">
                 Terms of Use
               </button>{" "}
               and{" "}
-              <button
-                type="button"
-                className="text-pink-500 font-semibold hover:text-pink-600"
-              >
+              <button type="button" className="text-pink-500 font-semibold hover:text-pink-600">
                 Privacy Policy
-              </button>
-              .
+              </button>.
             </p>
 
             {errormsg && (
-              <p className="text-[11px] text-red-600 text-center">
-                {errormsg}
-              </p>
+              <p className="text-[11px] text-red-600 text-center">{errormsg}</p>
             )}
 
             <button
@@ -161,19 +151,13 @@ const LoginUser = () => {
           <div className="mt-4 text-[11px] text-gray-600">
             <p>
               New to Myntra?{" "}
-              <Link
-                to="/User/register"
-                className="text-pink-500 font-semibold hover:text-pink-600"
-              >
+              <Link to="/User/register" className="text-pink-500 font-semibold hover:text-pink-600">
                 Create an account
               </Link>
             </p>
             <p className="mt-1">
               Having trouble logging in?{" "}
-              <button
-                type="button"
-                className="text-pink-500 font-semibold hover:text-pink-600"
-              >
+              <button type="button" className="text-pink-500 font-semibold hover:text-pink-600">
                 Get help
               </button>
             </p>
