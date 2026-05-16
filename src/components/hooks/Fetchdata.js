@@ -27,7 +27,9 @@ export const Fetchdata = ({ categoryOverride } = {}) => {
       return data; // { items, totalCount? }
     },
     keepPreviousData: true,
-    staleTime: 30_000,
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    retry: 1,
     onError: (err) => {
       console.error("[Fetchdata] fetch error:", err);
     },
