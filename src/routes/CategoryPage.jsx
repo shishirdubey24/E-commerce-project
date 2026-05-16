@@ -142,7 +142,7 @@ const CategoryPage = () => {
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 flex flex-col md:flex-row gap-6 mt-6">
         {/* LEFT SIDEBAR: FILTERS */}
         {reduxItems.length > 0 && (
-          <aside className="w-full md:w-[250px] flex-shrink-0">
+          <aside className="w-full md:w-[250px] shrink-0">
             <div className="flex items-center justify-between pb-4 border-b border-gray-200">
               <h2 className="text-[15px] font-bold text-[#282c3f] uppercase tracking-wide">Filters</h2>
               {(selectedBrands.length > 0 || selectedPriceRanges.length > 0 || selectedDiscount !== null) && (
