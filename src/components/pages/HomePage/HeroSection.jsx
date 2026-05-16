@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import Hero1 from "../../../assets/HeroImages/Hero1.jpg";
-import Hero2 from "../../../assets/HeroImages/Hero2.jpg";
-import Hero3 from "../../../assets/HeroImages/Hero3.jpg";
-import Hero4 from "../../../assets/HeroImages/Hero4.png";
-
+import Hero1 from "../../../assets/HeroImages/Hero1.webp";
+import Hero2 from "../../../assets/HeroImages/Hero2.webp";
+import Hero3 from "../../../assets/HeroImages/Hero3.webp";
+import Hero4 from "../../../assets/HeroImages/Hero4.webp";
 const slides = [Hero3, Hero4, Hero2, Hero1];
 
 export default function HeroSection() {
