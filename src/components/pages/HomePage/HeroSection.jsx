@@ -5,15 +5,17 @@ import Hero1 from "../../../assets/HeroImages/Hero1.webp";
 import Hero2 from "../../../assets/HeroImages/Hero2.webp";
 import Hero3 from "../../../assets/HeroImages/Hero3.webp";
 import Hero4 from "../../../assets/HeroImages/Hero4.webp";
+
 const slides = [Hero3, Hero4, Hero2, Hero1];
+
+const AUTOPLAY_MS = 3500;
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
+
   const timerRef = useRef(null);
 
-  const AUTOPLAY_MS = 3500;
-
-  // Continuous autoplay
+  // Stable autoplay interval
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
@@ -24,7 +26,7 @@ export default function HeroSection() {
         clearInterval(timerRef.current);
       }
     };
-  }, [current]);
+  }, []);
 
   const goPrev = () => {
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
@@ -43,12 +45,12 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden bg-[#f5f5f6] mt-4"
       aria-label="Hero carousel"
     >
-      {/* Container: Myntra typically has minimal padding on large screens for hero banners */}
       <div className="relative w-full h-[55vh] sm:h-[65vh] md:h-[70vh] lg:h-[75vh] 2xl:h-[80vh] cursor-pointer group">
+        {/* Slides */}
         {slides.map((img, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
               index === current ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
@@ -56,13 +58,16 @@ export default function HeroSection() {
               src={img}
               alt={`Hero slide ${index + 1}`}
               className="w-full h-full object-cover sm:object-fill lg:object-cover"
-              loading={index === 0 ? "eager" : "lazy"}
+              loading={index === current ? "eager" : "lazy"}
+              fetchPriority={index === current ? "high" : "low"}
+              decoding="async"
               draggable={false}
+              sizes="100vw"
             />
           </div>
         ))}
 
-        {/* Navigation Arrows (Visible mainly on hover on desktop) */}
+        {/* Previous Button */}
         <button
           aria-label="Previous slide"
           onClick={goPrev}
@@ -71,6 +76,7 @@ export default function HeroSection() {
           <ChevronLeft className="h-8 w-8 text-[#282c3f]" strokeWidth={1.5} />
         </button>
 
+        {/* Next Button */}
         <button
           aria-label="Next slide"
           onClick={goNext}
