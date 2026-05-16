@@ -26,6 +26,7 @@ const corsOptions = {
   origin: [
     "http://localhost:3000",
     "http://localhost:5173",
+    "http://localhost:4173",
     "http://localhost:8080",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
@@ -46,7 +47,7 @@ app.use((req, res, next) => {
     req.method,
     req.originalUrl,
     "Origin:",
-    req.get("origin")
+    req.get("origin"),
   );
   next();
 });
@@ -67,7 +68,7 @@ app.use(
       res.setHeader("Cache-Control", "public, max-age=2592000, immutable");
       res.setHeader("X-Content-Type-Options", "nosniff");
     },
-  })
+  }),
 );
 
 app.use("/fetch", FetchRouter);
