@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-// main.jsx
 
-import { StrictMode } from "react";
+import { StrictMode, lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -9,95 +8,271 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./index.css";
 
-// Root layout + routes
-import App from "./routes/App.jsx";
-import Home from "./routes/Home.jsx";
-import Bag from "./routes/Bag.jsx";
-import Admin from "./routes/Admin.jsx";
-import Checkout from "./routes/Checkout.jsx";
-import Success from "./routes/Success.jsx";
-import CategoryPage from "./routes/CategoryPage.jsx";
-import Account from "./routes/Accounts.jsx";
-// Store
 import myntraStore from "./store/index.js";
 
-// Auth
-import RegisterUser from "./components/AUTH/User/RegesterUser.jsx";
-import LoginUser from "./components/AUTH/User/LoginUser.jsx";
 import AuthInit from "./components/AUTH/AuthInit.jsx";
-// Admin children
-import Dashboard from "./components/Admin/Dashboard/Dashboard.jsx";
-import AdminData from "./components/Admin/Dropdown/AdminData.jsx";
-import Categories from "./components/Admin/Dropdown/Categories.jsx";
-import Customers from "./components/Admin/Dropdown/Customers.jsx";
-import Settings from "./components/Admin/Dropdown/Settings.jsx";
-
-// Other components
-import Search from "./components/SearchBar/Search_Input.jsx";
-import PaymentBtn from "./components/Payment/PaymentBtn.jsx";
 import useOnlineStatus from "./components/useOnlineStatus.js";
 
-// Router configuration
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/bag", element: <Bag /> },
-      // { path: '/menProduct', element: <Men /> },
-      { path: "/User/register", element: <RegisterUser /> },
-      { path: "User/login", element: <LoginUser /> },
-      { path: "/Account", element: <Account /> },
-      { path: "/admin", element: <Admin /> },
-      { path: "Search", element: <Search /> },
-      { path: "/checkout", element: <Checkout /> },
-      { path: "/payment", element: <PaymentBtn /> },
-      { path: "/success", element: <Success /> },
-      { path: "/category/:name", element: <CategoryPage /> },
-    ],
+
+const App = lazy(() => import("./routes/App.jsx"));
+const Home = lazy(() => import("./routes/Home.jsx"));
+const Bag = lazy(() => import("./routes/Bag.jsx"));
+const Admin = lazy(() => import("./routes/Admin.jsx"));
+const Checkout = lazy(() => import("./routes/Checkout.jsx"));
+const Success = lazy(() => import("./routes/Success.jsx"));
+const CategoryPage = lazy(() => import("./routes/CategoryPage.jsx"));
+const Account = lazy(() => import("./routes/Accounts.jsx"));
+
+/* AUTH */
+
+const RegisterUser = lazy(() =>
+  import("./components/AUTH/User/RegesterUser.jsx"),
+);
+
+const LoginUser = lazy(() =>
+  import("./components/AUTH/User/LoginUser.jsx"),
+);
+
+/* ADMIN */
+
+const Dashboard = lazy(() =>
+  import("./components/Admin/Dashboard/Dashboard.jsx"),
+);
+
+const AdminData = lazy(() =>
+  import("./components/Admin/Dropdown/AdminData.jsx"),
+);
+
+const Categories = lazy(() =>
+  import("./components/Admin/Dropdown/Categories.jsx"),
+);
+
+const Customers = lazy(() =>
+  import("./components/Admin/Dropdown/Customers.jsx"),
+);
+
+const Settings = lazy(() =>
+  import("./components/Admin/Dropdown/Settings.jsx"),
+);
+
+/* OTHER */
+
+const Search = lazy(() =>
+  import("./components/SearchBar/Search_Input.jsx"),
+);
+
+const PaymentBtn = lazy(() =>
+  import("./components/Payment/PaymentBtn.jsx"),
+);
+
+/* QUERY CLIENT */
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 30_000,
+    },
   },
-  {
-    path: "/admin",
-    element: <Admin />,
-    children: [
-      { index: true, element: <Dashboard /> },
-      { path: "products", element: <AdminData /> },
-      { path: "categories", element: <Categories /> },
-      { path: "customers", element: <Customers /> },
-      { path: "settings", element: <Settings /> },
-    ],
-  },
-]);
+});
 
-// Query client
+/* LOADER */
 
-const queryClient = new QueryClient();
-
-
-// Offline screen
-
-
-function OfflineScreen() {
+function PageLoader() {
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "sans-serif",
-      }}
-    >
-      <h1>🛜 You re Offline</h1>
-      <p>Please check your internet connection.</p>
+    <div className="h-screen w-full flex items-center justify-center bg-white">
+      <p className="text-sm font-medium text-gray-600">Loading...</p>
     </div>
   );
 }
 
-// Root app
+/* ROUTER */
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <App />
+      </Suspense>
+    ),
+
+    children: [
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Home />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/bag",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Bag />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/User/register",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <RegisterUser />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "User/login",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <LoginUser />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/Account",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Account />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/admin",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Admin />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "Search",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Search />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/checkout",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Checkout />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/payment",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <PaymentBtn />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/success",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Success />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "/category/:name",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <CategoryPage />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+
+  {
+    path: "/admin",
+
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <Admin />
+      </Suspense>
+    ),
+
+    children: [
+      {
+        index: true,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Dashboard />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "products",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AdminData />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "categories",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Categories />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "customers",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Customers />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "settings",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Settings />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+]);
+
+/* OFFLINE SCREEN */
+
+function OfflineScreen() {
+  return (
+    <div className="h-screen flex flex-col items-center justify-center font-sans">
+      <h1 className="text-2xl font-bold">🛜 You are Offline</h1>
+      <p className="mt-2 text-gray-600">
+        Please check your internet connection.
+      </p>
+    </div>
+  );
+}
+
+/* ROOT APP */
 
 function RootApp() {
   const isOnline = useOnlineStatus();
@@ -117,15 +292,15 @@ function RootApp() {
   );
 }
 
-// Render
+/* RENDER */
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RootApp />
-  </StrictMode>
+  </StrictMode>,
 );
 
-// Service worker
+/* SERVICE WORKER */
 
 if (import.meta.env.PROD && "serviceWorker" in navigator) {
   window.addEventListener("load", () => {
