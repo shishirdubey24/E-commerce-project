@@ -58,11 +58,13 @@ export default function HeroSection() {
               src={img}
               alt={`Hero slide ${index + 1}`}
               className="w-full h-full object-cover sm:object-fill lg:object-cover"
-              loading={index === current ? "eager" : "lazy"}
-              fetchPriority={index === current ? "high" : "low"}
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "low"}
               decoding="async"
               draggable={false}
               sizes="100vw"
+              width="1920"
+              height="900"
             />
           </div>
         ))}
