@@ -47,7 +47,7 @@ const Homeitem = ({ item, isInBag }) => {
       aria-label={item_name || "product"}
     >
       {/* Image section */}
-      <div className="relative w-full bg-gray-50 flex-shrink-0">
+      <div className="relative w-full bg-gray-50 shrink-0">
         <div className="w-full h-0 pb-[135%] relative overflow-hidden">
           <img
             src={image}
