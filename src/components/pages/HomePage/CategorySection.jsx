@@ -7,9 +7,7 @@ import Tshirt from "../../../assets/Category/Tshirt.webp";
 import Chinos from "../../../assets/Category/Chnos.webp";
 import Ethnic from "../../../assets/Category/Ehenic.webp";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../../../store/categorySlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 
 const categories = [
   { name: "Saree", image: Saree },
@@ -23,12 +21,11 @@ const categories = [
 ];
 
 const CategorySection = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const selected = useSelector((state) => state.category.selected);
+   const {name:selected}=useParams();
+
 
   const handleSelect = (name) => {
-    dispatch(setCategory(name));
     navigate(`/category/${encodeURIComponent(name)}`);
   };
 
