@@ -26,8 +26,8 @@ const Account = lazy(() => import("./routes/Accounts.jsx"));
 
 /* AUTH */
 
-const RegisterUser = lazy(() =>
-  import("./components/AUTH/User/RegesterUser.jsx"),
+const SignUp = lazy(() =>
+  import("./components/AUTH/User/SignUp.jsx"),
 );
 
 const LoginUser = lazy(() =>
@@ -119,16 +119,16 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/User/register",
+        path: "/User/SignUp",
         element: (
           <Suspense fallback={<PageLoader />}>
-            <RegisterUser />
+            <SignUp />
           </Suspense>
         ),
       },
 
       {
-        path: "User/login",
+        path: "User/SignIn",
         element: (
           <Suspense fallback={<PageLoader />}>
             <LoginUser />
@@ -303,7 +303,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 /* SERVICE WORKER */
 
 if (import.meta.env.PROD && "serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
+window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")
       .then(() => console.log("SW registered"))
