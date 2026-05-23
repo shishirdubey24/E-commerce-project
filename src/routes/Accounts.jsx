@@ -232,7 +232,7 @@ const Account = () => {
                           </p>
                         </div>
                         <Link
-                          to="/User/register"
+                          to="/User/SignUp"
                           className="inline-flex items-center justify-center w-full bg-white border border-[#ff3f6c] text-[#ff3f6c] hover:bg-[#ff3f6c]/5 hover:text-[#ff1654] text-[13px] font-bold py-3 px-4 rounded-sm uppercase tracking-wide transition-colors"
                         >
                           Create Account
