@@ -17,7 +17,7 @@ export const Fetchdata = ({ categoryOverride } = {}) => {
         ? `${BASE_URL}/fetch/data?${params.toString()}`
         : `${BASE_URL}/fetch/data`;
 
-      console.log("[Fetchdata] requesting:", url, "category:", category);
+      // console.log("[Fetchdata] requesting:", url, "category:", category);
 
       const res = await fetch(url);
       if (!res.ok)
