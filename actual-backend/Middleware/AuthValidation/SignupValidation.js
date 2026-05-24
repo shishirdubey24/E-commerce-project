@@ -4,6 +4,7 @@ export const SignupValidation = (req, res, next) => {
     username: Joi.string().min(3).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(3).required(),
+    phone: Joi.string().min(10),
   });
   const { error } = schema.validate(req.body);
   if (error) {
