@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { signupSchema } from "./SignupValiadtion";
+import axios from "axios";
+const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
 
 const SignUp = () => {
   const {
@@ -13,9 +15,14 @@ const SignUp = () => {
   });
 
   const handleRegister = async (data) => {
-    console.log(data);
-
-    // API call here
+    try{
+    const userInput=await axios.post (`${HOST_BASE}/auth/signup`,data)
+     console.log("userInput",userInput)
+    }
+     catch(error){
+        console.log(error.message)
+     }     
+    
   };
 
   return (
@@ -41,7 +48,7 @@ const SignUp = () => {
           {/* Logo */}
 
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-pink-500 via-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-lg">
+            <div className="h-8 w-8 rounded-full bg-linear-to-tr from-pink-500 via-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-lg">
               M
             </div>
 
