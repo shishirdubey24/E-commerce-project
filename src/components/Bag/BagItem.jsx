@@ -36,7 +36,7 @@ const BagItem = ({ item }) => {
       aria-label={displayName}
     >
       {/* Image column */}
-      <div className="item-left-part flex-shrink-0 w-full md:w-[140px] lg:w-[160px] bg-gray-50 rounded-md overflow-hidden">
+      <div className="item-left-part shrink-0 w-full md:w-[140px] lg:w-40 bg-gray-50 rounded-md overflow-hidden">
         <div className="w-full h-44 md:h-full flex items-center justify-center bg-white">
           <img
             src={displayImage}
