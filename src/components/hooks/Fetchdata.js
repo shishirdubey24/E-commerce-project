@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 
-const BASE_URL = "https://e-commerce-project-76em.onrender.com";
+const BASE_URL = "https://e-commerce-project-51z6.onrender.com";
 export const Fetchdata = ({ categoryOverride } = {}) => {
   const reduxCategory = useSelector(
     (state) => state.category?.selected || "featured",
