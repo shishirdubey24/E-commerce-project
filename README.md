@@ -165,6 +165,7 @@ console.error("Logout error:", error);
 };
 
 return (
+
 <div style={styles.loginContainer}>
 <h2 style={styles.heading}>User {isSignedIn ? "Login" : "Registration"}</h2>
 <form onSubmit={handleBtnClick} style={styles.formContainer}>
@@ -214,3 +215,10 @@ logoutBtn: { width: "100%", padding: "10px", backgroundColor: "#007bff", color: 
 };
 
 export default RegisterUser;
+
+date 19/05/2026
+
+1. data FLow kaisa hai
+1. for homepage we are fetching the data by default and sendign it to featured section via prop homedataMap -->(uses fetch hook) -->home route(sending to the featured section via prop)
+
+1. for every category section we are directly using the fetching function

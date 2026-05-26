@@ -156,3 +156,24 @@ date 06/12/2025
    this is the fundamental concept about the appwrite we as developer only can extract this session and work upon it
    ==>>
    5.Now we will extract the user data from appwrite response and send it into the store
+
+date 20-05-2026
+1.How category data is being fetched and its complete data flow???
+
+1. DyNamic Routing ?? >>How it works
+1. Navigate(`/route/${encodeURIComponent(name)}`) // this line will inject the dynamic part into the Router`s memory with uaing varaible =name
+1. Now any file with the useParam can use this value (as it`s visible inot the address bar)
+1. to open this route file the manager of these routes would need dynamic routing setup
+   ==> see becasue now route is like this /rrrrr/dynamic which we can`t predict so we would write it in specific manner
+   when navigate line is hit router open that specifi route only after comparing it with the all available routes, that is why we have to include the dynamic part into our main.jsx file
+
+1. How data is being fetched ?? for ctegory page
+1. category is sent into params via page(category)\
+1. backned is doing 2 things 1, fetching hte text,number data from DB 2, image fileName
+1. our server is constructing the full image url based on the fileNmae it received from DB
+   ........................................................
+   ===> real learning is that ON DB we don`t store the media files it`s not ment for that ,to stor ethe media files we use Cloud service. on beginning level we store the images on the server and these images gets push inot our codebase,once product scales and user starts using phtos it won`t make sense for us to keep them in our codebase ,we use cloud and it would store the media files and our codebase would be cleaner
+
+1. Schema design code structure
+   here we would use mongoose.schema ,mongoose.model methods
+   mongoose.schema for making teh schema and model method is for injecting this into mongoDB

@@ -1,54 +1,31 @@
-import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+/* eslint-disable no-unused-vars */
+import { Link, useNavigate, } from "react-router-dom";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 import { loginSuccess } from "../../../store/authSlice";
-import { account } from "../lib/appwrite";
+import { useDispatch } from "react-redux";
+const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
+
+
+
+
 const LoginUser = () => {
-  const dispatch = useDispatch();
+  const dispatch=useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errormsg, setErrormsg] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setErrormsg(null);
-
-    if (!email || !password) {
-      setErrormsg("Email and password are required.");
-      return;
-    }
-
+ const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
+ 
+  const handleLogin = async (data) => {
     try {
-      setLoading(true);
-
-      await account.createEmailPasswordSession(email, password);
-      const userSession = await account.get();
-
-      const isAdmin =
-        (Array.isArray(userSession.labels) &&
-          userSession.labels.includes("admin")) ||
-        userSession.prefs?.role === "admin";
-
-      dispatch(
-        loginSuccess({
-          id: userSession.$id,
-          name: userSession.name || "",
-          email: userSession.email || "",
-          isAdmin,
-        })
-      );
-
-      const redirectPath = location.state?.from || "/";
-      navigate(redirectPath);
+      const LoginData=await axios.post(`${HOST_BASE}/auth/signin`,data)
+    dispatch(loginSuccess(LoginData.data))
+      navigate('/')
+      
     } catch (error) {
-      console.error(error);
-      setErrormsg("Invalid email or password.");
-    } finally {
-      setLoading(false);
+      console.log(error.message)
     }
   };
 
@@ -67,7 +44,7 @@ const LoginUser = () => {
 
         <div className="px-6 py-6">
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-pink-500 via-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-lg">
+            <div className="h-8 w-8 rounded-full bg-linear-to-tr from-pink-500 via-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-lg">
               M
             </div>
             <span className="text-lg font-semibold tracking-wide text-gray-900">
@@ -82,7 +59,7 @@ const LoginUser = () => {
             Welcome to India&apos;s largest fashion store.
           </p>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
             <div>
               <label className="block text-xs font-semibold text-gray-800 mb-1">
                 Email address
@@ -91,9 +68,13 @@ const LoginUser = () => {
                 type="email"
                 className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm outline-none focus:border-gray-600"
                 placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value.trim())}
+                {...register("email")}
               />
+                {errors.email && (
+                <p className="text-red-500 text-[11px] mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             <div>
@@ -104,9 +85,13 @@ const LoginUser = () => {
                 type="password"
                 className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm outline-none focus:border-gray-600"
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password")}
               />
+                {errors.password && (
+                <p className="text-red-500 text-[11px] mt-1">
+                  {errors.password.message}
+                </p>
+              )}
               <div className="flex items-center justify-between mt-1">
                 <label className="flex items-center gap-1 text-xs text-gray-600">
                   <input
@@ -135,23 +120,21 @@ const LoginUser = () => {
               </button>.
             </p>
 
-            {errormsg && (
-              <p className="text-[11px] text-red-600 text-center">{errormsg}</p>
-            )}
+           
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={isSubmitting}
               className="w-full mt-1 bg-[#ff3f6c] hover:bg-[#ff1654] text-white text-sm font-semibold py-3 rounded-sm uppercase tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? "Signing in..." : "Login"}
+              {isSubmitting ? "Signing in..." : "Login"}
             </button>
           </form>
 
           <div className="mt-4 text-[11px] text-gray-600">
             <p>
               New to Myntra?{" "}
-              <Link to="/User/register" className="text-pink-500 font-semibold hover:text-pink-600">
+              <Link to="/User/SignUp" className="text-pink-500 font-semibold hover:text-pink-600">
                 Create an account
               </Link>
             </p>
