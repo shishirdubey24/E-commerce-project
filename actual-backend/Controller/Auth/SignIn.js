@@ -1,11 +1,6 @@
 import UserModel from "../../Model/UserSchema.js";
 import bcrypt from "bcrypt";
 export const signIn = async (req, res) => {
-  //1. data nikalo
-  // model call + compare
-  // Qstn email is easy to compare , but password kaise ??
-  // 1. hash karke then compare 2. direct compre
-  // res send
   const { email, password } = req.body;
   try {
     const data = await UserModel.findOne({ email });
