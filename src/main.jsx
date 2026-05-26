@@ -128,7 +128,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "User/SignIn",
+        path: "/User/SignIn",
         element: (
           <Suspense fallback={<PageLoader />}>
             <LoginUser />
