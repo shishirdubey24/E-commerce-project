@@ -1,13 +1,13 @@
 import express from "express";
 import { SignupValidation } from "../Middleware/AuthValidation/SignupValidation.js";
-// import { SignInValidation } from "../Middleware/AuthValidation/SignInValidation.js"; // Uncomment when ready
+import { SignInValidation } from "../Middleware/AuthValidation/SignInValidation.js"; // Uncomment when ready
 import { SignUp } from "../Controller/Auth/SignUp.js";
-const router = express.Router(); //  This is correct
+import { signIn } from "../Controller/Auth/SignIn.js";
+const router = express.Router();
 
 //  Register signup route
 router.post("/signup", SignupValidation, SignUp);
 
-//  Register signin route (when implemented)
-// router.post("/signin", SignInValidation);
+router.post("/signin", SignInValidation, signIn);
 
 export default router;
