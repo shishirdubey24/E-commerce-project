@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { signupSchema } from "./SignupValiadtion";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
 
 const SignUp = () => {
+  const navigate=useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ const SignUp = () => {
     try{
     const userInput=await axios.post (`${HOST_BASE}/auth/signup`,data)
      console.log("userInput",userInput)
+     navigate('/User/SignIn')
     }
      catch(error){
         console.log(error.message)
