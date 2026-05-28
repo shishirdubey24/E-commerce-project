@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
 // @ts-nocheck
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import ConnectDb from "../Model/MongoDB.js";
 
@@ -17,6 +17,7 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
+app.use(cookieParser());
 ConnectDb();
 
 const __filename = fileURLToPath(import.meta.url);
