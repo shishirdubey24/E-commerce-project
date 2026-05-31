@@ -12,7 +12,6 @@ const AuthInit = ({ children }) => {
 
   useEffect(() => {
     // Inside AuthInit.jsx
-
 const syncActiveSession = async () => {
   try {
     // EXPLICITLY pass withCredentials: true right here in the config object
