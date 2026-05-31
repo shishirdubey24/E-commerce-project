@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 export const JwtValiadtion = (req, res, next) => {
-  const token = req?.cookie?.token;
+  const token = req?.cookies?.token;
   if (!token) {
     return res.status(400).json({
       isAuthenticated: false,

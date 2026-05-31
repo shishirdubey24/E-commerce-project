@@ -1,20 +1,21 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { StrictMode, lazy, Suspense } from "react";
+import { StrictMode, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./index.css";
-
+import axios from "axios";
 import myntraStore from "./store/index.js";
 
 import AuthInit from "./components/AUTH/AuthInit.jsx";
 import useOnlineStatus from "./components/useOnlineStatus.js";
+import ProtectedRoute from "./components/AUTH/ProtectedRoute.jsx";
 
 
-
+axios.defaults.withCredentials = true;
 const App = lazy(() => import("./routes/App.jsx"));
 const Home = lazy(() => import("./routes/Home.jsx"));
 const Bag = lazy(() => import("./routes/Bag.jsx"));
@@ -78,182 +79,98 @@ const queryClient = new QueryClient({
   },
 });
 
-/* LOADER */
 
-function PageLoader() {
-  return (
-    <div className="h-screen w-full flex items-center justify-center bg-white">
-      <p className="text-sm font-medium text-gray-600">Loading...</p>
-    </div>
-  );
-}
+
+
 
 /* ROUTER */
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Suspense fallback={<PageLoader />}>
-        <App />
-      </Suspense>
-    ),
-
+    element: <App />, // Global Layout handles primary loading Suspense boundary
     children: [
+      // ==========================================
+      // PUBLIC CONSUMER VIEWPORTS
+      // ==========================================
       {
         path: "/",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Home />
-          </Suspense>
-        ),
+        element: <Home />,
       },
-
       {
         path: "/bag",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Bag />
-          </Suspense>
-        ),
+        element: <Bag />,
       },
-
       {
         path: "/User/SignUp",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <SignUp />
-          </Suspense>
-        ),
+        element: <SignUp />,
       },
-
       {
         path: "/User/SignIn",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <LoginUser />
-          </Suspense>
-        ),
+        element: <LoginUser />,
       },
-
-      {
-        path: "/Account",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Account />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: "/admin",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Admin />
-          </Suspense>
-        ),
-      },
-
       {
         path: "Search",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Search />
-          </Suspense>
-        ),
+        element: <Search />,
       },
-
-      {
-        path: "/checkout",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Checkout />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: "/payment",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <PaymentBtn />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: "/success",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Success />
-          </Suspense>
-        ),
-      },
-
       {
         path: "/category/:name",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <CategoryPage />
-          </Suspense>
-        ),
+        element: <CategoryPage />,
+      },
+
+      // ==========================================
+      // PROTECTED CUSTOMER CHECKOUT FUNNEL
+      // ==========================================
+      {
+        element: <ProtectedRoute />, // Validates core context authentication state
+        children: [
+          {
+            path: "/Account",
+            element: <Account />,
+          },
+          {
+            path: "/checkout",
+            element: <Checkout />,
+          },
+          {
+            path: "/payment",
+            element: <PaymentBtn />,
+          },
+          {
+            path: "/success",
+            element: <Success />,
+          },
+        ],
       },
     ],
   },
 
-  {
+  // ==========================================
+  // SECURE ADMINISTRATIVE ARCHITECTURE BRANCH
+  // ==========================================
+ {
     path: "/admin",
-
-    element: (
-      <Suspense fallback={<PageLoader />}>
-        <Admin />
-      </Suspense>
-    ),
-
+    element: <Admin />, // This handles BOTH security and layout
     children: [
       {
         index: true,
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Dashboard />
-          </Suspense>
-        ),
+        element: <Dashboard />,
       },
-
       {
         path: "products",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <AdminData />
-          </Suspense>
-        ),
+        element: <AdminData />,
       },
-
       {
         path: "categories",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Categories />
-          </Suspense>
-        ),
+        element: <Categories />,
       },
-
       {
         path: "customers",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Customers />
-          </Suspense>
-        ),
+        element: <Customers />,
       },
-
       {
         path: "settings",
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Settings />
-          </Suspense>
-        ),
+        element: <Settings />,
       },
     ],
   },
