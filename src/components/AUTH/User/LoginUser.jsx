@@ -1,13 +1,17 @@
-/* eslint-disable no-unused-vars */
+
 import { Link, useNavigate, } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { loginSuccess } from "../../../store/authSlice";
 import { useDispatch } from "react-redux";
-const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
+import { useMutation } from "@tanstack/react-query";
+const HOST_BASE = "http://localhost:5000";
 
-
-
+//make seprate USerApi
+const LoginUserApi=async(data)=>{
+   const response=await axios.post(`${HOST_BASE}/auth/signin`,data,{withCredentials:true})
+   return response.data
+}
 
 const LoginUser = () => {
   const dispatch=useDispatch();
@@ -15,18 +19,24 @@ const LoginUser = () => {
  const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm();
- 
-  const handleLogin = async (data) => {
-    try {
-      const LoginData=await axios.post(`${HOST_BASE}/auth/signin`,data)
-    dispatch(loginSuccess(LoginData.data))
-      navigate('/')
-      
-    } catch (error) {
-      console.log(error.message)
+
+  
+  const loginMutation = useMutation({
+    mutationFn: LoginUserApi,
+    onSuccess: (responseData) => {
+      dispatch(loginSuccess(responseData));
+      navigate('/');
+    },
+    onError: (error) => {
+       console.log("Server login error:", error.message);
     }
+  });
+
+ 
+  const handleLogin = (formData) => {
+    loginMutation.mutate(formData);
   };
 
   return (
@@ -58,7 +68,11 @@ const LoginUser = () => {
           <p className="text-xs text-gray-600 mb-4">
             Welcome to India&apos;s largest fashion store.
           </p>
-
+         {loginMutation.isError && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-sm text-xs text-red-600">
+              {loginMutation.error?.response?.data?.message || "Invalid email or password. Please try again."}
+            </div>
+          )}
           <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
             <div>
               <label className="block text-xs font-semibold text-gray-800 mb-1">
@@ -124,10 +138,10 @@ const LoginUser = () => {
 
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={loginMutation.isPending}
               className="w-full mt-1 bg-[#ff3f6c] hover:bg-[#ff1654] text-white text-sm font-semibold py-3 rounded-sm uppercase tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Signing in..." : "Login"}
+             {loginMutation.isPending ? "Signing in..." : "Login"}
             </button>
           </form>
 

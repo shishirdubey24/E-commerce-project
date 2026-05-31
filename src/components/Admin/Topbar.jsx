@@ -17,7 +17,7 @@ function Topbar() {
   const location = useLocation();
 
   const auth = useSelector((state) => state.auth || {});
-  const adminName = auth.name || "Admin";
+  const adminName = auth.username || "Admin";
   const adminEmail = auth.email || "";
 
   const currentPage =

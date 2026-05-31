@@ -4,6 +4,8 @@ const initialState = {
   id: null,
   username: "",
   email: "",
+  role: "",
+  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
@@ -13,17 +15,20 @@ const authSlice = createSlice({
 
   reducers: {
     loginSuccess(state, action) {
-      const { id, username, email } = action.payload;
-
-      state.id = id || null;
-      state.username = username || "";
-      state.email = email || "";
+      const { token, user } = action.payload || {};
+      state.id = user?.id || user?._id || null;
+      state.token = token || null;
+      state.username = user?.username || "";
+      state.email = user?.email || "";
+      state.role = user?.role || "";
+      state.isAuthenticated = true;
     },
 
     logout(state) {
       state.id = null;
       state.username = "";
       state.email = "";
+      state.isAuthenticated = false;
     },
   },
 });

@@ -31,7 +31,7 @@ const BagSummary = () => {
     const userEmail = localStorage.getItem("userEmail");
 
     if (!isAuthenticated || !userEmail) {
-      navigate("/User");
+      navigate("/User/SignIn");
     } else {
       navigate("/checkout");
     }
