@@ -4,12 +4,12 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { signupSchema } from "./SignupValiadtion";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-
-const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
+import { API_BASE_URL } from "../../../config/Api";
+//const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
 
 // 1. Separate API transport logic from the UI layer
 const registerUserApi = async (userData) => {
-  const response = await axios.post(`${HOST_BASE}/auth/signup`, userData);
+  const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
   return response.data;
 };
 

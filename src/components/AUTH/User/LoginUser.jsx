@@ -5,11 +5,12 @@ import { useForm } from "react-hook-form";
 import { loginSuccess } from "../../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
-const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
+import { API_BASE_URL } from "../../../config/Api";
+//const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
 
 //make seprate USerApi
 const LoginUserApi=async(data)=>{
-   const response=await axios.post(`${HOST_BASE}/auth/signin`,data,{withCredentials:true})
+   const response=await axios.post(`${API_BASE_URL}/auth/signin`,data,{withCredentials:true})
    return response.data
 }
 

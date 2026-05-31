@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-
-const BASE_URL = "https://e-commerce-project-51z6.onrender.com";
+import { API_BASE_URL } from "../../config/Api";
+//const BASE_URL = "https://e-commerce-project-51z6.onrender.com";
 export const Fetchdata = ({ categoryOverride } = {}) => {
   const reduxCategory = useSelector(
     (state) => state.category?.selected || "featured",
@@ -14,8 +14,8 @@ export const Fetchdata = ({ categoryOverride } = {}) => {
       if (category && category !== "featured") params.set("category", category);
 
       const url = params.toString()
-        ? `${BASE_URL}/fetch/data?${params.toString()}`
-        : `${BASE_URL}/fetch/data`;
+        ? `${API_BASE_URL}/fetch/data?${params.toString()}`
+        : `${API_BASE_URL}/fetch/data`;
 
       const res = await fetch(url);
       if (!res.ok)

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../store/authSlice";
 import axios from "axios";
-
-const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
+import { API_BASE_URL } from "../../config/Api";
+//const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
 
 const AuthInit = ({ children }) => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const AuthInit = ({ children }) => {
 const syncActiveSession = async () => {
   try {
     // EXPLICITLY pass withCredentials: true right here in the config object
-    const response = await axios.get(`${HOST_BASE}/auth/jwt`, {
+    const response = await axios.get(`${API_BASE_URL}/auth/jwt`, {
       withCredentials: true, 
     });
     
