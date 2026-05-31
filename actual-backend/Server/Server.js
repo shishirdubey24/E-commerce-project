@@ -37,7 +37,8 @@ const corsOptions = {
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-
+console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
+console.log("MONGO_URL exists:", !!process.env.MONGO_URL);
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
