@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { loginSuccess } from "../../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
-const HOST_BASE = "http://localhost:5000";
+const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
 
 //make seprate USerApi
 const LoginUserApi=async(data)=>{
