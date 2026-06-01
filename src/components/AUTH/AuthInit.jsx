@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../store/authSlice";
 import axios from "axios";
 import { API_BASE_URL } from "../../config/Api";
+//import { LOCAL_API_URL } from "../../config/Api";
 //const HOST_BASE = "https://e-commerce-project-51z6.onrender.com";
 
 const AuthInit = ({ children }) => {
