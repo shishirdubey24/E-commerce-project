@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect  } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../store/authSlice";
