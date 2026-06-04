@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import Footer from "../components/UI/Footer"
 import Header from "../components/pages/HomePage/Header";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Suspense } from "react";
 function PageBodyLoader() {
   return (
