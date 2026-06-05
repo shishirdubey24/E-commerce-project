@@ -25,7 +25,8 @@ export const signIn = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      maxAge: 60 * 60 * 1000,
+      path: "/", // ADD THIS! It tells the browser the cookie is valid for ALL routes
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res.status(200).json({
       message: "User Data",
