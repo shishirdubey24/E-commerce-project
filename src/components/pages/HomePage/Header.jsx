@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 export default function Header() {
   const bagItems = useSelector((store) => store.bag || []);
   const bagCount = bagItems.length;
-  const auth =useSelector((state)=>state.auth || [])
-  const isAdmin = !!auth.isAdmin;
+  const auth =useSelector((state)=>state.auth || {})
+  const isAdmin = auth.role==="admin";
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
