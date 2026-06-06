@@ -13,5 +13,5 @@ router.post("/signup", SignupValidation, SignUp);
 
 router.post("/signin", SignInValidation, signIn);
 router.get("/jwt", JwtValiadtion, JwtLogin);
-router.get("/logout", JwtLogout);
+router.post("/logout", JwtLogout);
 export default router;
