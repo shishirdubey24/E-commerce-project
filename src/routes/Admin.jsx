@@ -14,10 +14,12 @@ function AdminLoader() {
 export default function Admin() {
 
   const auth = useSelector((state) => state.auth || {});
+  console.log("the user detail",auth)
   const isAdmin = auth.role==="admin";
   if (!isAdmin) {
     return <Navigate to="/" replace />;
   }
+  
  return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50">
       <Products />
