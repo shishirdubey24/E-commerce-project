@@ -2,7 +2,7 @@ import UserModel from "../../Model/UserSchema.js";
 import bcrypt from "bcrypt";
 export const SignUp = async (req, res) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password, email, phone } = req.body;
     if (!username || !password) {
       return res.status(400).json({ message: "input UserName and Password" });
     }
@@ -14,12 +14,11 @@ export const SignUp = async (req, res) => {
     const saltRounds = 10;
     const hashPassword = await bcrypt.hash(password, saltRounds);
 
-    //call the moedl and save it
-    //first create the user tehn save it
     await UserModel.create({
       username,
       password: hashPassword,
       email,
+      phone,
     });
 
     res.status(201).json({ message: "user saved successfully" });
