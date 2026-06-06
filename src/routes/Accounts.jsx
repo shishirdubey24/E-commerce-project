@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useCallback } from "react";
+
+//import { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/authSlice";
 import { LogOut, ShoppingBag, Heart, User, MapPin, CreditCard, HelpCircle } from "lucide-react";
-
+import { API_BASE_URL } from "../config/Api";
+import axios from "axios";
 const NAV_ITEMS = [
   { label: "Orders & Returns", icon: ShoppingBag },
   { label: "Profile", icon: User },
@@ -33,11 +35,18 @@ const Account = () => {
   const authData = useSelector((state) => state.auth);
   const isAuthenticated = !!authData.email;
 
-  const handleLogout = useCallback(async () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    try {
+       await axios.post(`${API_BASE_URL}/auth/logout`,{},{withCredentials:true})
+       
+       dispatch(logout());
     navigate("/");
-  }, [dispatch, navigate]);
-
+  
+    } catch (error) {
+      console.log("logout Failed",error)
+    }
+   
+  }
   return (
     <main className="bg-[#f5f5f6] min-h-screen py-8 sm:py-12 px-4">
       <div className="max-w-[1100px] mx-auto space-y-4">
