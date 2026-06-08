@@ -16,8 +16,8 @@ import ProtectedRoute from "./components/AUTH/ProtectedRoute.jsx";
 
 
 axios.defaults.withCredentials = true;
-const App = lazy(() => import("./routes/App.jsx"));
-const Home = lazy(() => import("./routes/Home.jsx"));
+import App from "./routes/App.jsx";
+import Home from "./routes/Home.jsx";
 const Bag = lazy(() => import("./routes/Bag.jsx"));
 const Admin = lazy(() => import("./routes/Admin.jsx"));
 const Checkout = lazy(() => import("./routes/Checkout.jsx"));
@@ -41,14 +41,12 @@ const Dashboard = lazy(() =>
   import("./components/Admin/Dashboard/Dashboard.jsx"),
 );
 
-const AdminData = lazy(() =>
-  import("./components/Admin/Dropdown/AdminData.jsx"),
-);
-
 const Categories = lazy(() =>
   import("./components/Admin/Dropdown/Categories.jsx"),
 );
-
+const ProductsData=lazy(()=>
+  import ("./components/Admin/Dropdown/Products.jsx"),
+); 
 const Customers = lazy(() =>
   import("./components/Admin/Dropdown/Customers.jsx"),
 );
@@ -88,7 +86,7 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // Global Layout handles primary loading Suspense boundary
+    element: <App />, 
     children: [
       // ==========================================
       // PUBLIC CONSUMER VIEWPORTS
@@ -158,7 +156,7 @@ const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <AdminData />,
+        element: <ProductsData />,
       },
       {
         path: "categories",
@@ -174,7 +172,12 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+],{
+  future:{
+    v7_startTransition: true,
+  },
+}
+);
 
 /* OFFLINE SCREEN */
 
