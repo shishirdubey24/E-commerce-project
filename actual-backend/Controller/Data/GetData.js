@@ -1,8 +1,9 @@
 import Product from "../../Model/ProductSchema.js";
-
+import "dotenv/config";
 // Hard-coded production backend URL
-const HOST_BASE = "https://e-commerce-project-76em.onrender.com";
 
+//const HOST_BASE = "https://e-commerce-project-76em.onrender.com";
+const HOST_BASE = process.env.PUBLIC_HOST;
 export const getData = async (req, res) => {
   try {
     const { category, page, limit } = req.query;
