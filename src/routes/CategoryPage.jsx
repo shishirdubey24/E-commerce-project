@@ -1,25 +1,24 @@
 // src/routes/CategoryPage.jsx
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux"; // Only kept for the Shopping Bag!
 import { Fetchdata } from "../components/hooks/Fetchdata";
-import { itemsActions } from "../store/itemsSlice";
 import Homeitem from "../components/pages/HomePage/ProductCard";
 import ShimmerUI from "../components/UI/ShimmerUI";
 
 const CategoryPage = () => {
   const { name } = useParams();
-  const dispatch = useDispatch();
-  const reduxItems = useSelector((state) => state.items || []);
-  const bagItems = useSelector((s) => s.bag || []);
-
+  
+  // 1. Fetch data directly from React Query
   const { data, isLoading, error } = Fetchdata({ categoryOverride: name });
-
-  useEffect(() => {
-    if (data?.items) {
-      dispatch(itemsActions.addInitialItems(data.items));
-    }
-  }, [data, dispatch, name]);
+  
+  // 2. Extract items directly from the query response (Bypassing Redux completely)
+ const fetchedItems = useMemo(() => {
+  return data?.items || [];
+}, [data?.items]);
+  
+  // 3. Get the user's local shopping bag from Redux
+  const bagItems = useSelector((s) => s.bag || []);
 
   // Robust attribute extractors
   const getBrand = (item) => item.company || "Other";
@@ -32,6 +31,7 @@ const CategoryPage = () => {
   const [selectedDiscount, setSelectedDiscount] = useState(null);
 
   // Clear filters when category changes
+  // We use `name` in the dependency array so if a user clicks "Shirts" then "Sarees", filters reset.
   useEffect(() => {
     setSelectedBrands([]);
     setSelectedPriceRanges([]);
@@ -44,7 +44,7 @@ const CategoryPage = () => {
     let minPrice = Infinity;
     let maxPrice = 0;
 
-    reduxItems.forEach((item) => {
+    fetchedItems.forEach((item) => {
       brandsSet.add(getBrand(item));
       const p = getPrice(item);
       if (p < minPrice) minPrice = p;
@@ -56,7 +56,7 @@ const CategoryPage = () => {
     // Generate dynamic price ranges
     const rangeStep = 500;
     const ranges = [];
-    if (reduxItems.length > 0) {
+    if (fetchedItems.length > 0) {
       const start = Math.floor(minPrice / rangeStep) * rangeStep;
       const end = Math.ceil(maxPrice / rangeStep) * rangeStep;
       for (let i = start; i < end; i += rangeStep) {
@@ -64,11 +64,11 @@ const CategoryPage = () => {
       }
     }
 
-    // Default discounts (Myntra style)
+    // Default discounts
     const discounts = [10, 20, 30, 40, 50, 60, 70];
 
     return { allBrands: sortedBrands, priceRangesOptions: ranges, discountOptions: discounts };
-  }, [reduxItems]);
+  }, [fetchedItems]); // Dependency changed from reduxItems to fetchedItems
 
   // Handlers
   const toggleBrand = (brand) => {
@@ -93,36 +93,32 @@ const CategoryPage = () => {
 
   // Compute final filtered items
   const filteredItems = useMemo(() => {
-    return reduxItems.filter((item) => {
+    return fetchedItems.filter((item) => {
       const brand = getBrand(item);
       const price = getPrice(item);
       const discount = getDiscount(item);
 
-      // Brand Filter
       if (selectedBrands.length > 0 && !selectedBrands.includes(brand)) return false;
-
-      // Price Range Filter
+      
       if (selectedPriceRanges.length > 0) {
         const matchesPrice = selectedPriceRanges.some((r) => price >= r.min && price < r.max);
         if (!matchesPrice) return false;
       }
 
-      // Discount Filter 
       if (selectedDiscount !== null && discount < selectedDiscount) return false;
 
       return true;
     });
-  }, [reduxItems, selectedBrands, selectedPriceRanges, selectedDiscount]);
+  }, [fetchedItems, selectedBrands, selectedPriceRanges, selectedDiscount]);
 
   if (isLoading) return <ShimmerUI />;
   if (error) return <p className="text-center py-8 text-red-600">Failed to load category.</p>;
 
-  // Count text
   const resultCountText = `${filteredItems.length} items`;
 
   return (
     <main className="min-h-screen bg-white pb-10">
-      {/* Breadcrumbs / Header area */}
+      {/* Header area */}
       <div className="pt-6 pb-4 border-b border-gray-200">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="text-[12px] text-gray-500 mb-3 flex items-center gap-1">
@@ -140,8 +136,9 @@ const CategoryPage = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 flex flex-col md:flex-row gap-6 mt-6">
+        
         {/* LEFT SIDEBAR: FILTERS */}
-        {reduxItems.length > 0 && (
+        {fetchedItems.length > 0 && (
           <aside className="w-full md:w-[250px] shrink-0">
             <div className="flex items-center justify-between pb-4 border-b border-gray-200">
               <h2 className="text-[15px] font-bold text-[#282c3f] uppercase tracking-wide">Filters</h2>
@@ -156,6 +153,7 @@ const CategoryPage = () => {
             </div>
 
             <div className="flex flex-col gap-6 py-6">
+              
               {/* Brand Filter */}
               {allBrands.length > 0 && (
                 <div className="border-b border-gray-200 pb-5">
@@ -239,7 +237,7 @@ const CategoryPage = () => {
             <div className="w-full py-24 flex flex-col items-center justify-center text-center text-gray-600 bg-gray-50 rounded-sm">
               <h3 className="text-[18px] font-bold text-[#282c3f] mb-2">No matches found</h3>
               <p className="text-[13px] text-gray-500 max-w-sm">
-                We couldn`t find any products matching your selected filters. Try clearing some options to see more items.
+                We couldnt find any products matching your selected filters. Try clearing some options to see more items.
               </p>
               <button
                 onClick={clearAllFilters}
