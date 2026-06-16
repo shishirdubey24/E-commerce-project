@@ -1,6 +1,6 @@
 import axios from "axios";
-//import { API_BASE_URL } from "../../../config/Api";
-import { LOCAL_API_URL } from "../../../config/Api";
+import { API_BASE_URL } from "../../../config/Api";
+//import { LOCAL_API_URL } from "../../../config/Api";
 import { useInfiniteQuery } from "@tanstack/react-query";
 export const useAdminProducts = () => {
   return useInfiniteQuery({
@@ -10,8 +10,8 @@ export const useAdminProducts = () => {
     queryFn: async ({ pageParam = null }) => {
       // Build the URL based on whether we have a cursor or not
       const url = pageParam 
-        ? `${LOCAL_API_URL}/admin/products?cursor=${pageParam}&limit=20` 
-        : `${LOCAL_API_URL}/admin/products?limit=20`;
+        ? `${API_BASE_URL}/admin/products?cursor=${pageParam}&limit=20` 
+        : `${API_BASE_URL}/admin/products?limit=20`;
 
      
       const response = await axios.get(url, {
