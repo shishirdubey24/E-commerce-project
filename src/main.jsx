@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { StrictMode, lazy } from "react";
+import { StrictMode,Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -77,7 +77,13 @@ const queryClient = new QueryClient({
   },
 });
 
-
+function FullPageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
+}
 
 
 
@@ -148,7 +154,11 @@ const router = createBrowserRouter([
   // ==========================================
  {
     path: "/admin",
-    element: <Admin />, // This handles BOTH security and layout
+   element: (
+      <Suspense fallback={<FullPageLoader />}>
+        <Admin />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
