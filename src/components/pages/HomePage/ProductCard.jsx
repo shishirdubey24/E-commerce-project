@@ -5,7 +5,7 @@ import { bagActions } from "../../../store/bagSlice";
 import { GrAddCircle } from "react-icons/gr";
 import { AiFillDelete, AiFillStar } from "react-icons/ai";
 
-const Homeitem = ({ item, isInBag }) => {
+const ProductCard = ({ item, isInBag }) => {
   const dispatch = useDispatch();
 
   const handleAddToBag = () => {
@@ -137,7 +137,7 @@ const Homeitem = ({ item, isInBag }) => {
   );
 };
 
-export default React.memo(Homeitem, (prev, next) => {
+export default React.memo(ProductCard, (prev, next) => {
   const prevId = prev.item?.id;
   const nextId = next.item?.id;
   if (prevId !== nextId) return false;
