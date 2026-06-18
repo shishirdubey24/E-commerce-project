@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useSelector } from "react-redux";
-import Homeitem from "./ProductCard";
 
+import { useSelector } from "react-redux";
+//import Homeitem from "./ProductCard";
+import ProductCard from "./ProductCard";
 const FeaturedSection = ({ items = [] }) => {
   const bagItems = useSelector((state) => state.bag || []);
 
@@ -33,7 +34,7 @@ const FeaturedSection = ({ items = [] }) => {
                 (bagItem) => bagItem.id === item.id
               );
               return (
-                <Homeitem
+                <ProductCard
                   key={item.id || item._id}
                   item={item}
                   isInBag={isInBag}
