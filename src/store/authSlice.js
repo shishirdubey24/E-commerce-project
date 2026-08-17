@@ -6,6 +6,7 @@ const initialState = {
   email: "",
   role: "",
   isAuthenticated: false,
+  isSessionInitialized: false,
 };
 
 const authSlice = createSlice({
@@ -26,13 +27,19 @@ const authSlice = createSlice({
 
     logout(state) {
       state.id = null;
+      state.token = null;
       state.username = "";
       state.email = "";
+      state.role = "";
       state.isAuthenticated = false;
+    },
+
+    sessionInitializationComplete(state) {
+      state.isSessionInitialized = true;
     },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, logout, sessionInitializationComplete } = authSlice.actions;
 
 export default authSlice;

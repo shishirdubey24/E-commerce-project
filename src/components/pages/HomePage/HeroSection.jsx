@@ -59,7 +59,7 @@ export default function HeroSection() {
               alt={`Hero slide ${index + 1}`}
               className="w-full h-full object-cover sm:object-fill lg:object-cover"
               loading={index === 0 ? "eager" : "lazy"}
-              fetchPriority={index === 0 ? "high" : "low"}
+              {...{ fetchpriority: index === 0 ? "high" : "low" }}
               decoding="async"
               draggable={false}
               sizes="100vw"
