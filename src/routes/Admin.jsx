@@ -16,6 +16,9 @@ export default function Admin() {
 
   const auth = useSelector((state) => state.auth || {});
   console.log("the user detail",auth)
+  if (!auth.isSessionInitialized) {
+    return <AdminLoader />;
+  }
   const isAdmin = auth.role==="admin";
   if (!isAdmin) {
     return <Navigate to="/" replace />;

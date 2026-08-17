@@ -1,25 +1,21 @@
 // pages/Checkout.jsx
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const bagItems = useSelector((state) => state.bag || []);
-
-  // Read user info directly from localStorage (no Redux dependency)
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("userData");
-      const parsed = raw ? JSON.parse(raw) : null;
-      setUserData(parsed);
-    } catch (e) {
-      console.error("Failed to parse userData from localStorage", e);
-      setUserData(null);
-    }
-  }, []);
+  const auth = useSelector((state) => state.auth);
+  const userData = auth.isAuthenticated
+    ? {
+        id: auth.id,
+        name: auth.username,
+        username: auth.username,
+        email: auth.email,
+        role: auth.role,
+      }
+    : null;
 
   const CONVENIENCE_FEES = 99;
 
@@ -43,24 +39,20 @@ export default function Checkout() {
   const fmt = (n) => n.toLocaleString("en-IN");
 
   const handleProceedToPay = () => {
-    const auth = localStorage.getItem("isAuthenticated") === "true";
-    const localUserRaw = localStorage.getItem("userData");
-    const localUser = localUserRaw ? JSON.parse(localUserRaw) : null;
-
-    if (!auth || !localUser) {
+    if (!auth.isAuthenticated || !userData) {
       // Not authenticated — send to login / account page
-      navigate("/User", { state: { from: "/checkout" } });
+      navigate("/User/SignIn", { state: { from: "/checkout" } });
       return;
     }
 
     // Attach user info to each item copy and navigate to payment
-    const itemsWithUser = bagItems.map((it) => ({ ...it, buyer: localUser }));
+    const itemsWithUser = bagItems.map((it) => ({ ...it, buyer: userData }));
 
     navigate("/payment", {
       state: {
         amount: totals.finalPayment,
         items: itemsWithUser,
-        userData: localUser,
+        userData,
         totalItems: totals.itemCount,
         totalMRP: totals.totalMRP,
         discount: totals.totalDiscount,
@@ -76,7 +68,7 @@ export default function Checkout() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left column: user + items */}
         <section className="md:col-span-2 space-y-6">
-          {/* User info (from localStorage) */}
+          {/* User info from the authenticated Redux session */}
           <div>
             <h2 className="text-sm font-semibold text-gray-800 mb-2">Shipping / Contact</h2>
 
@@ -91,7 +83,7 @@ export default function Checkout() {
               </div>
             ) : (
               <div className="bg-yellow-50 rounded-lg border border-yellow-100 p-4 text-sm text-yellow-800">
-                No user details found in localStorage. Please complete your profile or login to proceed.
+                No authenticated user details found. Please sign in to proceed.
               </div>
             )}
           </div>
