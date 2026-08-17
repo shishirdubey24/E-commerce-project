@@ -5,7 +5,7 @@ const BagSummary = () => {
   const navigate = useNavigate();
 
   // Get authentication state from Redux
-  const user = useSelector((state) => state.auth?.user);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const bagItems = useSelector((state) => state.bag || []);
 
   const CONVENIENCE_FEES = 99;
@@ -27,10 +27,7 @@ const BagSummary = () => {
   const fmt = (n) => n.toLocaleString("en-IN");
 
   const handleOrder = () => {
-    const isAuthenticated = Boolean(user) || localStorage.getItem("isAuthenticated") === "true";
-    const userEmail = localStorage.getItem("userEmail");
-
-    if (!isAuthenticated || !userEmail) {
+    if (!isAuthenticated) {
       navigate("/User/SignIn");
     } else {
       navigate("/checkout");
